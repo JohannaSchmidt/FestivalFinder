@@ -17,7 +17,7 @@ public interface BandService extends RemoteService {
   
   ArrayList<Band> getBands(String name) throws Exception;
   
-  ArrayList<Band> getAllFestivalBands(Festival festival) throws Exception;
+  ArrayList<String> getAllFestivalBands(Festival festival) throws Exception;
   
   void onAddBand(Band band) throws Exception;
   

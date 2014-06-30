@@ -17,6 +17,8 @@ import com.de.client.event.SearchBandClickedEvent;
 import com.de.client.event.SearchBandClickedEventHandler;
 import com.de.client.event.SearchedBandClickedEvent;
 import com.de.client.event.SearchedBandClickedEventHandler;
+import com.de.client.event.ZurueckEvent;
+import com.de.client.event.ZurueckEventHandler;
 import com.de.client.presenter.FestivalInfoPresenter;
 import com.de.client.presenter.LoggedInPresenter;
 import com.de.client.presenter.LoginPresenter;
@@ -57,7 +59,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	  private User currentUser = null;
 	  private Festival currentFestival = null;
 	  private final HandlerManager eventBus;
-	  private ArrayList<Band> bands = null;
 	  private final FestivalServiceAsync rpcService; 
 	  private final FestivalServiceAsync festivalService = GWT.create(FestivalService.class);
 	  private final BandServiceAsync bandService = GWT.create(BandService.class);
@@ -77,6 +78,16 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
   private void bind() {
     History.addValueChangeHandler(this);
 
+    //Auf zurueck geklickt
+    eventBus.addHandler(ZurueckEvent.TYPE,
+            new ZurueckEventHandler() {
+
+    		public void onZurueckClicked(ZurueckEvent event) {
+    			doChangeBack();
+    			
+    		}
+         });
+    
     // Registrieren im LoginView geklickt
     eventBus.addHandler(RegisterClickedEvent.TYPE,
         new RegisterClickedEventHandler() {
@@ -92,8 +103,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
         new SearchedBandClickedEventHandler() {
 
 		public void onSearchBandClicked(SearchedBandClickedEvent event) {
-			bands = event.getSearchedBands();
-			doChangeSearchedBand();
+			doChangeSearchedBand(event.getSearchedBands());
 			
 		}
      });
@@ -195,7 +205,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
         new FestivalClickedEventHandler() {
 
 		public void onFestivalClicked(FestivalClickedEvent event) {
-			doChangeFestivalView();
+			doChangeFestivalView(event.getCurrentFestival());
 			
 		}
 
@@ -216,8 +226,11 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	  History.newItem("home");
   }
   
-  private void doChangeFestivalView() {
-    History.newItem("festival");
+  private void doChangeFestivalView(Festival clickedFestival) {
+    History.newItem("festival", false);
+	Presenter festival = new FestivalInfoPresenter(bandService, eventBus, new FestivalInfoView(clickedFestival), clickedFestival);
+	festival.go(centerPanel);
+    
   }
   
   private void doChangeRegister() {
@@ -228,19 +241,20 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	    History.newItem("registered");
 }
   
-  private void doChangeSearchedBand(){
-	  	History.newItem("searchedBand");
+  private void doChangeSearchedBand(ArrayList<Band> bands){
+	  	History.newItem("searchedBand", false);
+	    Presenter searchedBand = new MainSearchedBandPresenter(bandService, eventBus, new MainSearchedBandView(), bands);
+	    searchedBand.go(centerPanel);
+	  	
   }
   
   private void doChangeSearchBand(){
 	    History.newItem("searchBand");
   }
  
-//  private void doEditContact(String id) {
-//    History.newItem("edit", false);
-//    Presenter presenter = new MenuPresenter(rpcService, eventBus, new MenuView());
-//    presenter.go(container);
-//  }
+  private void doChangeBack() {
+    History.newItem("main");
+  }
 //  
 //  private void doEditContactCancelled() {
 //    History.newItem("list");
@@ -285,16 +299,14 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		      logo.go(northPanel);
 		      Presenter loggedIn = new LoggedInPresenter(userService, eventBus, new LoggedInView(currentUser));
 		      loggedIn.go(northPanel);      
-      } else if (token.equals("festival")) {
-		    Presenter festival = new FestivalInfoPresenter(bandService, eventBus, new FestivalInfoView(currentFestival));
-		    festival.go(centerPanel);
       } else if (token.equals("searchBand")){
     	  	Presenter searchBand = new MenuSearchBandPresenter(rpcService, bandService, eventBus, new MenuSearchBandView());
     	  	searchBand.go(westPanel);
-      } else if (token.equals("searchedBand")){
-    	    Presenter searchedBand = new MainSearchedBandPresenter(bandService, eventBus, new MainSearchedBandView(), bands);
-    	    searchedBand.go(centerPanel);
-      }
+      } else if (token.equals("main")){
+          Presenter presenter = new MainPresenter(rpcService, eventBus, new MainTextView());
+          presenter.go(centerPanel);
+      } 
+      
     }
   }
 

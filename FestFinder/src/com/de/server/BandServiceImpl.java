@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import com.de.client.BandService;
 import com.de.shared.Band;
 import com.de.shared.Festival;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
@@ -48,6 +47,22 @@ public class BandServiceImpl extends RemoteServiceServlet implements
 				   System.out.println("Gründungsjahr: " + gJahr);
 				   System.out.println("Website: " + website);
 				   System.out.println("Nutzer: " + nutzer);
+
+			   }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  return bands;
+	  }
+	
+	private ArrayList<String> writeFestivalBandResultSet(ResultSet resultSet){
+		ArrayList<String> bands = new ArrayList<String>();
+		  try {
+			while (resultSet.next()) {
+				   String bName = resultSet.getString("bName");
+
+				   bands.add(bName);
 
 			   }
 		} catch (Exception e) {
@@ -119,13 +134,13 @@ public class BandServiceImpl extends RemoteServiceServlet implements
 		
 	}
 
-	public ArrayList<Band> getAllFestivalBands(Festival festival) throws Exception {
-		ArrayList<Band> bandListe = null;
+	public ArrayList<String> getAllFestivalBands(Festival festival) throws Exception {
+		ArrayList<String> bandListe = null;
 		ResultSet resultSet = null;
 		try {
 			connectDataBase();
 			resultSet = statement.executeQuery("Select bName from FestivalBandListe where festivalID = '" + festival.getfestId() + "'");
-			bandListe = writeResultSet(resultSet);
+			bandListe = writeFestivalBandResultSet(resultSet);
 		} catch (Exception ex){
 			System.out.println("Keine Verbindung");
 		}

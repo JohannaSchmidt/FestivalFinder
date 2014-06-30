@@ -50,7 +50,7 @@ public class MainSearchedBandPresenter implements Presenter{
 	  
 	  public void bind() {
 		  
-		  display.getBandsTable().addClickHandler(new ClickHandler() {
+		/*  display.getBandsTable().addClickHandler(new ClickHandler() {
 		        public void onClick(ClickEvent event) {
 		          int selectedRow = display.getSelectedRow(event);
 		          
@@ -60,7 +60,7 @@ public class MainSearchedBandPresenter implements Presenter{
 		          }
 		        }
 
-		      });
+		      });*/
 		  
 		  if(!bandList.isEmpty()){
 			  display.setData(bandList);

@@ -35,7 +35,7 @@ public class MenuSearchBandPresenter implements Presenter {
   private final BandServiceAsync bandService;
   private final HandlerManager eventBus;
   private final Display display;
-  private ArrayList<Band> bandList = null;
+  private ArrayList<Band> bandList;
   
   
   public MenuSearchBandPresenter(FestivalServiceAsync rpcService, BandServiceAsync bandService, HandlerManager eventBus, Display view) {
@@ -67,7 +67,7 @@ public class MenuSearchBandPresenter implements Presenter {
     		
     	}); 
     	
-    	if(bandList != null){
+    	if(!bandList.isEmpty()){
     		eventBus.fireEvent(new SearchedBandClickedEvent(bandList));
     	}
       }

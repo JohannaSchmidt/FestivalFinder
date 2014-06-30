@@ -18,7 +18,7 @@ public interface BandServiceAsync {
   	  throws IllegalArgumentException;
   
   
-  void getAllFestivalBands(Festival festival, AsyncCallback<ArrayList<Band>> callback)
+  void getAllFestivalBands(Festival festival, AsyncCallback<ArrayList<String>> callback)
 	      throws IllegalArgumentException;
   
   void onAddBand(Band band, AsyncCallback<Void> callback);

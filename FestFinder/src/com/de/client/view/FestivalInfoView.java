@@ -25,7 +25,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 	
 	private Button zurueck;
 	
-	private Festival festival;
+
 		
 	public FestivalInfoView(Object object){
 		VerticalPanel vPanel = new VerticalPanel();
@@ -34,7 +34,6 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			
 		if(object instanceof Festival){
 			
-			festival = festival;
 			
 			name = new Label(((Festival) object).getfName());
 			ort = new Label(((Festival) object).getOrt());
@@ -74,11 +73,11 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			
 	}
 	
-	 public void setData(ArrayList<Band> data) {
+	 public void setData(ArrayList<String> data) {
 		   bands.removeAllRows();
 		    
 		    for (int i = 0; i < data.size(); ++i) {
-		      bands.setText(i, 0, data.get(i).getName());
+		      bands.setText(i, 0, data.get(i));
 		    }
 		  }
 	 
@@ -86,9 +85,6 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 		  return zurueck;
 	}
 	 
-	 public Festival getFestival(){
-		 return festival;
-	 }
 
 	
 	public Widget asWidget(){

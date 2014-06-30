@@ -19,7 +19,6 @@ import com.google.gwt.user.client.ui.Widget;
 public class MainPresenter  implements Presenter {  
 
 	  ArrayList<Festival> festivalList;
-	  Festival currentFestival;
 	
 	  public interface Display {
 	    HasClickHandlers getFestivalTable();
@@ -46,8 +45,7 @@ public class MainPresenter  implements Presenter {
 		          int selectedRow = display.getSelectedRow(event);
 		          
 		          if (selectedRow >= 0) {
-		           setCurrentFestival(festivalList.get(selectedRow));
-			        eventBus.fireEvent(new FestivalClickedEvent());
+			        eventBus.fireEvent(new FestivalClickedEvent(festivalList.get(selectedRow)));
 		          }
 		        }
 
@@ -73,16 +71,7 @@ public class MainPresenter  implements Presenter {
 		});
 		
 	}
-	  
 
-		private void setCurrentFestival(Festival festival) {
-			currentFestival = festival;
-			
-		}
-	  
-	 public Festival getCurrentFestival(){
-		 return currentFestival;
-	 }
 	
 	public void go(final HasWidgets container) {
 		   bind();

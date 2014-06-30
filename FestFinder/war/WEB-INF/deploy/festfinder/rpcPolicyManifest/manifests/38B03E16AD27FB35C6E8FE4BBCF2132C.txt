@@ -1,2 +1,0 @@
-serviceClass: com.de.client.BandService
-path: 7391D6F61FE938D9FF176208F5BEA27C.gwt.rpc
