@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>userServlet</servlet-name>
+    <servlet-class>com.de.server.UserServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>bandServlet</servlet-name>
+    <servlet-class>com.de.server.BandServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>festivalServlet</servlet-name>     
+    <servlet-class>com.de.server.FestivalServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>userServlet</servlet-name>
+    <url-pattern>/festfinder/users</url-pattern>
+  </servlet-mapping> 
+  
+  <servlet-mapping>
+    <servlet-name>bandServlet</servlet-name>
+    <url-pattern>/festfinder/bands</url-pattern>
+  </servlet-mapping> 
+  
+  <servlet-mapping>   
+        <servlet-name>festivalServlet</servlet-name>
+    <url-pattern>/festfinder/festivals</url-pattern>
+  </servlet-mapping>
+
+  
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>FestFinder.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>

@@ -1,0 +1,2 @@
+serviceClass: com.de.client.FestivalService
+path: 7324798266812D8F64C411E8060EAEA5.gwt.rpc

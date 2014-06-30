@@ -1,0 +1,2 @@
+serviceClass: com.de.client.ContactsService
+path: A8B14A1041FE7CD12897562F36200701.gwt.rpc
