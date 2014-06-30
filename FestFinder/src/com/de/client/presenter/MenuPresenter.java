@@ -13,7 +13,6 @@ import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class MenuPresenter implements Presenter {  
@@ -52,27 +51,27 @@ public class MenuPresenter implements Presenter {
     
     display.getFestivalButton().addClickHandler(new ClickHandler() {   
         public void onClick(ClickEvent event) {    
-          eventBus.fireEvent(new SearchEvent());
+       //   eventBus.fireEvent(new SearchEvent());
         }
       });
     
     display.getGenreButton().addClickHandler(new ClickHandler() {   
         public void onClick(ClickEvent event) {    
-          eventBus.fireEvent(new SearchEvent());
+       //   eventBus.fireEvent(new SearchEvent());
         }
       });
 
     display.getFestivalsButton().addClickHandler(new ClickHandler() {   
-      public void onClick(ClickEvent event) {
-        getAllFestivals();
-      }
-    });
+        public void onClick(ClickEvent event) {    
+            eventBus.fireEvent(new SearchEvent("Festival"));
+          }
+        });
     
     display.getBandButton().addClickHandler(new ClickHandler() {
       public void onClick(ClickEvent event) {
-        //nothing to do
-      }
-    });
+          eventBus.fireEvent(new SearchEvent("Band"));
+        }
+      });
   
   }
   

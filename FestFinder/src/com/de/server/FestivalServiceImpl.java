@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
-
 import com.de.client.FestivalService;
 import com.de.shared.Festival;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;

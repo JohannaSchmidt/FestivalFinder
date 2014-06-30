@@ -15,6 +15,8 @@ import com.de.client.event.RegisterEvent;
 import com.de.client.event.RegisterEventHandler;
 import com.de.client.event.SearchBandClickedEvent;
 import com.de.client.event.SearchBandClickedEventHandler;
+import com.de.client.event.SearchEvent;
+import com.de.client.event.SearchEventHandler;
 import com.de.client.event.SearchedBandClickedEvent;
 import com.de.client.event.SearchedBandClickedEventHandler;
 import com.de.client.event.ZurueckEvent;
@@ -205,7 +207,18 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
         new FestivalClickedEventHandler() {
 
 		public void onFestivalClicked(FestivalClickedEvent event) {
-			doChangeFestivalView(event.getCurrentFestival());
+				doChangeFestivalView(event.getCurrent());
+			
+		}
+
+     });
+    
+    // Auf ein Festival in der Festivalliste geklickt
+    eventBus.addHandler(SearchEvent.TYPE,
+        new SearchEventHandler() {
+
+		public void onSearchClicked(SearchEvent searchEvent) {
+			doCahngeMain(searchEvent.getToken());
 			
 		}
 
@@ -226,10 +239,16 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	  History.newItem("home");
   }
   
-  private void doChangeFestivalView(Festival clickedFestival) {
-    History.newItem("festival", false);
-	Presenter festival = new FestivalInfoPresenter(bandService, eventBus, new FestivalInfoView(clickedFestival), clickedFestival);
-	festival.go(centerPanel);
+  private void doChangeFestivalView(Object clickedObject) {
+	  if(clickedObject instanceof Festival){
+	    History.newItem("festival", false);
+		Presenter festival = new FestivalInfoPresenter(bandService, eventBus, new FestivalInfoView(clickedObject), (Festival) clickedObject);
+		festival.go(centerPanel);
+	  } else if(clickedObject instanceof Band){
+		   History.newItem("band", false);
+		Presenter band = new FestivalInfoPresenter(bandService, eventBus, new FestivalInfoView(clickedObject));
+			band.go(centerPanel);
+	  }
     
   }
   
@@ -253,12 +272,15 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
   }
  
   private void doChangeBack() {
-    History.newItem("main");
+    History.back();
   }
-//  
-//  private void doEditContactCancelled() {
-//    History.newItem("list");
-//  }
+  
+  private void doCahngeMain(String token) {
+    History.newItem("main");
+        Presenter presenter = new MainPresenter(rpcService, bandService, eventBus, new MainTextView(), token);
+        presenter.go(centerPanel);
+    } 
+ 
 //  
 //  private void doContactUpdated() {
 //    History.newItem("list");
@@ -281,7 +303,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
       //Presenter presenter = null;
 
       if (token.equals("home")) {
-	          Presenter presenter = new MainPresenter(rpcService, eventBus, new MainTextView());
+	          Presenter presenter = new MainPresenter(rpcService, bandService, eventBus, new MainTextView(), "Festival");
 	          presenter.go(centerPanel);
 	          Presenter menu = new MenuPresenter(rpcService, eventBus, new MenuView());
 	          menu.go(westPanel);
@@ -293,7 +315,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	          Presenter main = new MainRegisterPresenter(userService, eventBus, new MainRegisterView());
 	          main.go(centerPanel);
       } else if (token.equals("registered")) {
-		      Presenter main = new MainPresenter(rpcService, eventBus, new MainTextView());
+		      Presenter main = new MainPresenter(rpcService, bandService, eventBus, new MainTextView(), "Festival");
 		      main.go(centerPanel);
 		      Presenter logo = new LogoPresenter(rpcService, eventBus, new LogoView());
 		      logo.go(northPanel);
@@ -302,9 +324,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
       } else if (token.equals("searchBand")){
     	  	Presenter searchBand = new MenuSearchBandPresenter(rpcService, bandService, eventBus, new MenuSearchBandView());
     	  	searchBand.go(westPanel);
-      } else if (token.equals("main")){
-          Presenter presenter = new MainPresenter(rpcService, eventBus, new MainTextView());
-          presenter.go(centerPanel);
       } 
       
     }

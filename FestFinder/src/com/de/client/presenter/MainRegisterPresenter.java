@@ -2,11 +2,8 @@ package com.de.client.presenter;
 
 import java.util.ArrayList;
 
-import com.de.client.FestivalServiceAsync;
 import com.de.client.UserServiceAsync;
 import com.de.client.event.RegisterEvent;
-import com.de.client.event.SearchEvent;
-import com.de.client.presenter.MainPresenter.Display;
 import com.de.shared.Festival;
 import com.de.shared.User;
 import com.google.gwt.event.dom.client.ClickEvent;

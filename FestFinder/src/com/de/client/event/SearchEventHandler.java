@@ -4,6 +4,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 public interface SearchEventHandler extends EventHandler {
 
-	public void onSearchFestivals(SearchEvent searchEvent);
+	public void onSearchClicked(SearchEvent searchEvent);
 
 }

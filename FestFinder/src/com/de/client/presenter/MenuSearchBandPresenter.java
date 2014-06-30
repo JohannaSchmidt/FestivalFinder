@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import com.de.client.BandServiceAsync;
 import com.de.client.FestivalServiceAsync;
-import com.de.client.event.SearchEvent;
 import com.de.client.event.SearchedBandClickedEvent;
 import com.de.shared.Band;
 import com.de.shared.Festival;

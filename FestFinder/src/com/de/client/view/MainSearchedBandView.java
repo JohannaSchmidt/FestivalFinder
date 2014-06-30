@@ -2,6 +2,7 @@ package com.de.client.view;
 
 import java.util.ArrayList;
 
+import com.de.client.presenter.MainSearchedBandPresenter;
 import com.de.shared.Band;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -9,10 +10,8 @@ import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTMLTable;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.de.client.presenter.MainSearchedBandPresenter;
 
 public class MainSearchedBandView extends Composite implements MainSearchedBandPresenter.Display {
 	private FlexTable bandsTable;

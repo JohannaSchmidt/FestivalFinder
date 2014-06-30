@@ -3,16 +3,13 @@ package com.de.client.presenter;
 import java.util.ArrayList;
 
 import com.de.client.BandServiceAsync;
-import com.de.client.event.FestivalClickedEvent;
 import com.de.shared.Band;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 

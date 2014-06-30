@@ -3,10 +3,7 @@ package com.de.client.presenter;
 import java.util.ArrayList;
 
 import com.de.client.BandServiceAsync;
-import com.de.client.FestivalServiceAsync;
 import com.de.client.event.ZurueckEvent;
-import com.de.client.presenter.MenuPresenter.Display;
-import com.de.shared.Band;
 import com.de.shared.Festival;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -52,6 +49,10 @@ public class FestivalInfoPresenter implements Presenter {
         eventBus.fireEvent(new ZurueckEvent());
       }
     });
+    
+    if(current != null){
+		getAllFestivalsBands();
+    }
   
   }
   
@@ -72,7 +73,6 @@ public class FestivalInfoPresenter implements Presenter {
 
 	public void go(final HasWidgets container) {
 	    bind();
-		getAllFestivalsBands();
 	    container.clear();
 	    container.add(display.asWidget());
 	  }
