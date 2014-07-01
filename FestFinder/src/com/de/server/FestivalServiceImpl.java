@@ -72,10 +72,10 @@ public class FestivalServiceImpl extends RemoteServiceServlet implements
 	public void onAddFestival(Festival festival) throws Exception {
 		ArrayList<Festival> festivals = getAllFestivals();
 		for(Festival f : festivals){
-			if(festival.getfName().equals(f.getfName())){
+			if(festival.getName().equals(f.getName())){
 				try {
 					connectDataBase();
-					statement.executeUpdate("Update Bands Set festivalId= '" + festival.getfestId() + "', fName= '" + festival.getfName() + "', startDatum='" + festival.getsDatum().toString()
+					statement.executeUpdate("Update Bands Set festivalId= '" + festival.getfestId() + "', fName= '" + festival.getName() + "', startDatum='" + festival.getsDatum().toString()
 					+ "', endDatum= '" + festival.geteDatum().toString() + "',ort ='" + festival.getOrt() + "',website = '" + festival.getWebsite() + "' where festivalId = '" + festival.getfestId() + "';");
 					statement.close();
 					connect.close();
@@ -88,7 +88,7 @@ public class FestivalServiceImpl extends RemoteServiceServlet implements
 		}
 		try {
 			connectDataBase();
-			statement.executeUpdate("Insert into Festivals values('" + festival.getfestId() + "','" + festival.getfName() + "','" + festival.getsDatum().toString()
+			statement.executeUpdate("Insert into Festivals values('" + festival.getfestId() + "','" + festival.getName() + "','" + festival.getsDatum().toString()
 					+ "','" + festival.geteDatum().toString() + "','" + festival.getOrt() + "','" + festival.getWebsite() + "');");
 		} catch (Exception e) {
 			System.out.println("Keine Verbindung");

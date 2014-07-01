@@ -40,7 +40,7 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 		    
 		    for (int i = 0; i < data.size(); ++i) {
 		        festivalsTable.setWidget(i, 0, new CheckBox());
-		        festivalsTable.setText(i, 1, data.get(i).getfName());
+		        festivalsTable.setText(i, 1, data.get(i).getName());
 		    }
 		  }
 	 

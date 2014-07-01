@@ -24,4 +24,6 @@ public interface BandServiceAsync {
   void onAddBand(Band band, AsyncCallback<Void> callback);
   
   void onDeleteBand(String name, AsyncCallback<Void> callback);
+
+  void getGenreBands(String name, AsyncCallback<ArrayList<Band>> asyncCallback);
 }

@@ -35,7 +35,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 		if(object instanceof Festival){
 			
 			
-			name = new Label(((Festival) object).getfName());
+			name = new Label(((Festival) object).getName());
 			ort = new Label(((Festival) object).getOrt());
 			von = new Label(((Festival) object).getsDatum().toString());
 			bis = new Label(((Festival) object).geteDatum().toString());

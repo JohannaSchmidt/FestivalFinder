@@ -169,6 +169,23 @@ public class BandServiceImpl extends RemoteServiceServlet implements
 		return bandListe;
 	}
 
+	public ArrayList<Band> getGenreBands(String genre) throws Exception {
+		ArrayList<Band> bandListe = null;
+		ResultSet resultSet = null;
+		try {
+			connectDataBase();
+			resultSet = statement.executeQuery("Select * from Bands where genre = '" + genre + "'");
+			bandListe = writeResultSet(resultSet);
+		} catch (Exception ex){
+			System.out.println("Keine Verbindung");
+		}
+		resultSet.close();
+		statement.close();
+		connect.close();
+		
+		return bandListe;
+	}
+
 
 	
 }

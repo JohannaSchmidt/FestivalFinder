@@ -3,18 +3,28 @@ package com.de.client.event;
 import java.util.ArrayList;
 
 import com.de.shared.Band;
+import com.de.shared.Festival;
 import com.google.gwt.event.shared.GwtEvent;
 
 public class SearchedBandClickedEvent extends GwtEvent<SearchedBandClickedEventHandler>{
 	  public static Type<SearchedBandClickedEventHandler> TYPE = new Type<SearchedBandClickedEventHandler>();
-	  private final ArrayList <Band> bands;
+	  private ArrayList <Band> bands = null;
+	  private ArrayList <Festival> festivals = null;
 	  
-	 public SearchedBandClickedEvent(ArrayList<Band> bandlist) {
+	 public SearchedBandClickedEvent(ArrayList<Band> bandlist, String token) {
 		    this.bands = bandlist;
+	}
+	 
+	 public SearchedBandClickedEvent(ArrayList<Festival> festivallist) {
+		    this.festivals = festivallist;
 	}
 		  
     public ArrayList<Band> getSearchedBands() { 
     	return bands; 
+    }
+    
+    public ArrayList<Festival> getSearchedFestivals() { 
+    	return festivals; 
     }
 	  
 	  @Override

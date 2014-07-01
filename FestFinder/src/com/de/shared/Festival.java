@@ -37,7 +37,7 @@ public class Festival implements Serializable{
 		return fId;
 	}
 	
-	public String getfName(){
+	public String getName(){
 		return fName;
 	}
 	

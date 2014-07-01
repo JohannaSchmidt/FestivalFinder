@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.de.client.presenter.MainSearchedBandPresenter;
 import com.de.shared.Band;
+import com.de.shared.Festival;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.CheckBox;
@@ -33,14 +34,23 @@ public class MainSearchedBandView extends Composite implements MainSearchedBandP
 			
 	}
 	
-	 public void setData(ArrayList<Band> data) {
+	 public void setFestivalData(ArrayList<Festival> data) {
 		   bandsTable.removeAllRows();
 		    
 		    for (int i = 0; i < data.size(); ++i) {
-		    	bandsTable.setWidget(i, 0, new CheckBox());
-		    	bandsTable.setText(i, 1, data.get(i).getName());
+		        bandsTable.setWidget(i, 0, new CheckBox());
+		        bandsTable.setText(i, 1, data.get(i).getName());
 		    }
 		  }
+	 
+		public void setBandData(ArrayList<Band> data) {
+			   bandsTable.removeAllRows();
+			    
+			    for (int i = 0; i < data.size(); ++i) {
+			        bandsTable.setWidget(i, 0, new CheckBox());
+			        bandsTable.setText(i, 1, data.get(i).getName());
+			    }
+			 }
 
 	 
 	  public int getSelectedRow(ClickEvent event) {
@@ -67,6 +77,7 @@ public class MainSearchedBandView extends Composite implements MainSearchedBandP
 	public HasClickHandlers getBandsTable() {
 		return bandsTable;
 	}
+
 
 
 

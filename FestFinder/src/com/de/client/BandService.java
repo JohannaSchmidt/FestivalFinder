@@ -22,7 +22,7 @@ public interface BandService extends RemoteService {
   void onAddBand(Band band) throws Exception;
   
   void onDeleteBand (String name) throws Exception;
-
-
   
+  ArrayList<Band> getGenreBands(String genre) throws Exception;
+ 
 }

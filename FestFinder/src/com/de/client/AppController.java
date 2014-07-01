@@ -31,6 +31,7 @@ import com.de.client.presenter.MainSearchedBandPresenter;
 import com.de.client.presenter.MenuPresenter;
 import com.de.client.presenter.MenuSearchPresenter;
 import com.de.client.presenter.Presenter;
+import com.de.client.presenter.MainSearchedBandPresenter.Display;
 import com.de.client.view.FestivalInfoView;
 import com.de.client.view.LoggedInView;
 import com.de.client.view.LoginView;
@@ -59,7 +60,6 @@ import com.google.gwt.user.client.ui.SimplePanel;
 public class AppController implements Presenter, ValueChangeHandler<String> {
 	
 	  private User currentUser = null;
-	  private Festival currentFestival = null;
 	  private final HandlerManager eventBus;
 	  private final FestivalServiceAsync rpcService; 
 	  private final FestivalServiceAsync festivalService = GWT.create(FestivalService.class);
@@ -105,8 +105,11 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
         new SearchedBandClickedEventHandler() {
 
 		public void onSearchBandClicked(SearchedBandClickedEvent event) {
-			doChangeSearchedBand(event.getSearchedBands());
-			
+			if (event.getSearchedFestivals() != null){
+				doChangeSearchedFestival(event.getSearchedFestivals());
+			}
+			if(event.getSearchedBands() != null)
+				doChangeSearchedBand(event.getSearchedBands());		
 		}
      });
     
@@ -262,6 +265,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	  	
   }
   
+  private void doChangeSearchedFestival(ArrayList<Festival> festivals){
+	  	History.newItem("searchedFestival", false);
+	    Presenter searchedFestival = new MainSearchedBandPresenter(bandService, eventBus, festivals, new MainSearchedBandView());
+	    searchedFestival.go(centerPanel);
+	  	
+}
+  
   private void doChangeSearch(String token){
 	  if(token =="Band"){
 	    History.newItem("searchBand");
@@ -324,13 +334,13 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		      Presenter loggedIn = new LoggedInPresenter(userService, eventBus, new LoggedInView(currentUser));
 		      loggedIn.go(northPanel);      
       } else if (token.equals("searchBand")){
-    	  	Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Band"));
+    	  	Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Band"), "Band");
     	  	searchBand.go(westPanel);
       } else if (token.equals("searchFestival")){
-  	  	Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Festival"));
+  	  	Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Festival"), "Festival");
   	  	searchBand.go(westPanel);
      } else if (token.equals("searchGenre")){
-	  	Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Genre"));
+	  	Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Genre"), "Genre");
 	  	searchBand.go(westPanel);
   } 
       

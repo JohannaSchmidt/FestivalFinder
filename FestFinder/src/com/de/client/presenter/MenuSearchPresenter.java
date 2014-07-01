@@ -35,14 +35,17 @@ public class MenuSearchPresenter implements Presenter {
   private final BandServiceAsync bandService;
   private final HandlerManager eventBus;
   private final Display display;
+  private final String token;
   private ArrayList<Band> bandList;
   
   
-  public MenuSearchPresenter(FestivalServiceAsync rpcService, BandServiceAsync bandService, HandlerManager eventBus, Display view) {
+  public MenuSearchPresenter(FestivalServiceAsync rpcService, BandServiceAsync bandService, HandlerManager eventBus, Display view, String token) {
     this.rpcService = rpcService;
     this.bandService = bandService;
     this.eventBus = eventBus;
     this.display = view;
+    this.token = token;
+   
   }
   
   
@@ -53,7 +56,8 @@ public class MenuSearchPresenter implements Presenter {
       public void onClick(ClickEvent event) {   
     	final String name = display.getName().getText();
     	System.out.println("Klick auf Search");
-    	bandService.getBands(name, new AsyncCallback<ArrayList<Band>>(){
+    	if(token == "Band"){
+    		bandService.getBands(name, new AsyncCallback<ArrayList<Band>>(){
 
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
@@ -62,14 +66,43 @@ public class MenuSearchPresenter implements Presenter {
 
 			public void onSuccess(ArrayList<Band> result) {
 				bandList = result;
-				
+	    		eventBus.fireEvent(new SearchedBandClickedEvent(bandList, "Band"));
 			}
     		
     	}); 
     	
-    	if(!bandList.isEmpty()){
-    		eventBus.fireEvent(new SearchedBandClickedEvent(bandList));
-    	}
+      } else if (token == "Festival"){
+      	rpcService.getFestivals(name, new AsyncCallback<ArrayList<Festival>>(){
+
+			public void onSuccess(ArrayList<Festival> result) {
+  				festivalList = result;
+  	      		eventBus.fireEvent(new SearchedBandClickedEvent(festivalList));
+			}
+
+			public void onFailure(Throwable caught) {
+				caught.printStackTrace();
+				
+			}
+      		
+      	}); 
+
+      } else if (token == "Genre"){
+      	bandService.getGenreBands(name, new AsyncCallback<ArrayList<Band>>(){
+
+  			public void onFailure(Throwable caught) {
+  				caught.printStackTrace();
+  				
+  			}
+
+  			public void onSuccess(ArrayList<Band> result) {
+  				bandList = result;
+  	      		eventBus.fireEvent(new SearchedBandClickedEvent(bandList, "Band"));
+  				
+  			}
+      		
+      	}); 
+
+      }
       }
     });
     
