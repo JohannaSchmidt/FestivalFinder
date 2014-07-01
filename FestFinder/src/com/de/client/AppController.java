@@ -13,8 +13,8 @@ import com.de.client.event.RegisterClickedEvent;
 import com.de.client.event.RegisterClickedEventHandler;
 import com.de.client.event.RegisterEvent;
 import com.de.client.event.RegisterEventHandler;
-import com.de.client.event.SearchBandClickedEvent;
-import com.de.client.event.SearchBandClickedEventHandler;
+import com.de.client.event.SearchClickedEvent;
+import com.de.client.event.SearchClickedEventHandler;
 import com.de.client.event.SearchEvent;
 import com.de.client.event.SearchEventHandler;
 import com.de.client.event.SearchedBandClickedEvent;
@@ -29,8 +29,8 @@ import com.de.client.presenter.MainPresenter;
 import com.de.client.presenter.MainRegisterPresenter;
 import com.de.client.presenter.MainSearchedBandPresenter;
 import com.de.client.presenter.MenuPresenter;
+import com.de.client.presenter.MenuSearchPresenter;
 import com.de.client.presenter.Presenter;
-import com.de.client.presenter.MenuSearchBandPresenter;
 import com.de.client.view.FestivalInfoView;
 import com.de.client.view.LoggedInView;
 import com.de.client.view.LoginView;
@@ -38,8 +38,8 @@ import com.de.client.view.LogoView;
 import com.de.client.view.MainRegisterView;
 import com.de.client.view.MainSearchedBandView;
 import com.de.client.view.MainTextView;
+import com.de.client.view.MenuSearchView;
 import com.de.client.view.MenuView;
-import com.de.client.view.MenuSearchBandView;
 import com.de.shared.Band;
 import com.de.shared.Festival;
 import com.de.shared.User;
@@ -133,26 +133,21 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		}
      });
     
-    //Auf Suchen nach Band gedrückt
-    eventBus.addHandler(SearchBandClickedEvent.TYPE,
-            new SearchBandClickedEventHandler() {
+    //Auf Suchen gedrückt
+    eventBus.addHandler(SearchClickedEvent.TYPE,
+            new SearchClickedEventHandler() {
 
-    		public void onSearchBandClicked(SearchBandClickedEvent event) {
-    			userService.getCurrentUser(new AsyncCallback<User>(){
+			public void onSearchClicked(SearchClickedEvent event) {
+				if(event.getToken() == "Band"){
+					doChangeSearch("Band");
+				}else if(event.getToken() == "Festival"){
+					doChangeSearch("Festival");
+				}else if(event.getToken() == "Genre"){
+					doChangeSearch("Genre");
+				}
 
-    				public void onFailure(Throwable caught) {
-    					Window.alert("Nicht möglich");
-    					
-    				}
-
-    				public void onSuccess(User result) {
-    					doChangeSearchBand();
-    					
-    				}
-    				
-    			});
-
-    		}
+				
+			}
          });
         
     
@@ -267,12 +262,19 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	  	
   }
   
-  private void doChangeSearchBand(){
+  private void doChangeSearch(String token){
+	  if(token =="Band"){
 	    History.newItem("searchBand");
+	  }	 else if(token =="Festival"){
+		    History.newItem("searchFestival");
+	  }	else if(token =="Genre"){
+			 History.newItem("searchGenre");
+	  }
   }
  
   private void doChangeBack() {
     History.back();
+    History.fireCurrentHistoryState();
   }
   
   private void doCahngeMain(String token) {
@@ -322,9 +324,15 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		      Presenter loggedIn = new LoggedInPresenter(userService, eventBus, new LoggedInView(currentUser));
 		      loggedIn.go(northPanel);      
       } else if (token.equals("searchBand")){
-    	  	Presenter searchBand = new MenuSearchBandPresenter(rpcService, bandService, eventBus, new MenuSearchBandView());
+    	  	Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Band"));
     	  	searchBand.go(westPanel);
-      } 
+      } else if (token.equals("searchFestival")){
+  	  	Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Festival"));
+  	  	searchBand.go(westPanel);
+     } else if (token.equals("searchGenre")){
+	  	Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Genre"));
+	  	searchBand.go(westPanel);
+  } 
       
     }
   }

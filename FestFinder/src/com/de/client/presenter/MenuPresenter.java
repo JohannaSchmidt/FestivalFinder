@@ -3,7 +3,7 @@ package com.de.client.presenter;
 import java.util.ArrayList;
 
 import com.de.client.FestivalServiceAsync;
-import com.de.client.event.SearchBandClickedEvent;
+import com.de.client.event.SearchClickedEvent;
 import com.de.client.event.SearchEvent;
 import com.de.shared.Festival;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -44,20 +44,20 @@ public class MenuPresenter implements Presenter {
   
   public void bind() {
     display.getNameButton().addClickHandler(new ClickHandler() {   
-      public void onClick(ClickEvent event) {    
-        eventBus.fireEvent(new SearchBandClickedEvent());
+      public void onClick(ClickEvent event) { 
+        eventBus.fireEvent(new SearchClickedEvent("Band"));
       }
     });
     
     display.getFestivalButton().addClickHandler(new ClickHandler() {   
         public void onClick(ClickEvent event) {    
-       //   eventBus.fireEvent(new SearchEvent());
+            eventBus.fireEvent(new SearchClickedEvent("Festival"));
         }
       });
     
     display.getGenreButton().addClickHandler(new ClickHandler() {   
         public void onClick(ClickEvent event) {    
-       //   eventBus.fireEvent(new SearchEvent());
+            eventBus.fireEvent(new SearchClickedEvent("Genre"));
         }
       });
 
