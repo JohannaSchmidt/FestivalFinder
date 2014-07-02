@@ -25,6 +25,8 @@ public class FestivalInfoPresenter implements Presenter {
   public interface Display {
     HasClickHandlers getZurueck();
     HasClickHandlers getAddButton();
+    HasClickHandlers getTable();
+    int getSelectedRow(ClickEvent event);
     Band getcurrentBand();
     void setData(ArrayList<String> bands);
     Widget asWidget();
@@ -62,6 +64,19 @@ public class FestivalInfoPresenter implements Presenter {
           eventBus.fireEvent(new AddBandToBandListEvent(display.getcurrentBand()));
         }
       });
+
+    display.getTable().addClickHandler(new ClickHandler() {   
+        public void onClick(ClickEvent event) {
+	          int selectedRow = display.getSelectedRow(event);
+	          
+	          if (selectedRow >= 0) {
+	        		 eventBus.fireEvent(new FestivalClickedEvent(bandList.get(selectedRow)));
+	        	 
+	          }
+
+	      }
+
+	  });
     
     if(current != null){
 		getAllFestivalsBands();

@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import com.de.client.presenter.FestivalInfoPresenter;
 import com.de.shared.Band;
 import com.de.shared.Festival;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -19,12 +23,12 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 	private Label ort;
 	private Label von;
 	private Label bis;
-	private Label web;
+	private Anchor web;
 	private Band currentBand;
 	
 	private FlexTable bands;
 	
-	private Button add;
+	private Button add = new Button();
 	private Button zurueck;
 	
 
@@ -41,7 +45,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			ort = new Label(((Festival) object).getOrt());
 			von = new Label(((Festival) object).getsDatum().toString());
 			bis = new Label(((Festival) object).geteDatum().toString());
-			web = new Label(((Festival) object).getWebsite());
+			web = new Anchor(((Festival) object).getWebsite());
 		
 			bands = new FlexTable();
 			bands.setBorderWidth(1);
@@ -59,7 +63,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			name = new Label(((Band) object).getName());
 			ort = new Label(((Band) object).getGenre());
 			von = new Label(String.valueOf(((Band) object).getJahr()));
-			web = new Label(((Band) object).getWebsite());
+			web = new Anchor(((Band) object).getWebsite());
 		
 			bands = new FlexTable();
 			bands.setBorderWidth(1);
@@ -89,6 +93,23 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 		      bands.setText(i, 0, data.get(i));
 		    }
 		  }
+	  public int getSelectedRow(ClickEvent event) {
+		    int selectedRow = -1;
+		    HTMLTable.Cell cell = bands.getCellForEvent(event);
+		    
+		    if (cell != null) {
+		      // Suppress clicks if the user is actually selecting the 
+		      //  check box
+		      //
+		      if (cell.getCellIndex() > 0) {
+		        selectedRow = cell.getRowIndex();
+		      }
+		    }
+		    
+		    return selectedRow;
+		  }
+
+
 	 
 	 public HasClickHandlers getZurueck() {
 		  return zurueck;

@@ -3,9 +3,11 @@ package com.de.client.presenter;
 import java.util.ArrayList;
 
 import com.de.client.BandServiceAsync;
+import com.de.client.event.FestivalClickedEvent;
 import com.de.shared.Band;
 import com.de.shared.Festival;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
@@ -69,6 +71,23 @@ public class MainSearchedBandPresenter implements Presenter{
 			  display.setBandData(bandList);
 		  }
 
+		  display.getBandsTable().addClickHandler(new ClickHandler() {
+		        public void onClick(ClickEvent event) {
+		          int selectedRow = display.getSelectedRow(event);
+		          
+		          if (selectedRow >= 0) {
+		        	 if(token == "Festival"){
+		        		 eventBus.fireEvent(new FestivalClickedEvent(festivalList.get(selectedRow)));
+		        	 } else if(token == "Band"){
+		        		 eventBus.fireEvent(new FestivalClickedEvent(bandList.get(selectedRow)));
+		        	 }
+		        }
+
+		      }
+		  
+
+	  
+		  });
 	  
 	  }
 	
