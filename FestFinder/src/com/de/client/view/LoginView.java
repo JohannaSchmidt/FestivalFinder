@@ -41,6 +41,7 @@ public class LoginView extends Composite implements LoginPresenter.Display{
 		vPanel.add(pwd);
 		
 		login = new Button("Einloggen");
+		login.setStyleName("buttons");
 		vPanel.add(login);
 		
 		reg = new Button("Registrieren");

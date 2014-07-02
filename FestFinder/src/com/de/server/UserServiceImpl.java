@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.de.client.UserService;
+import com.de.shared.Band;
 import com.de.shared.User;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -104,11 +105,59 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 		
 	}
 	
+	public ArrayList<String> getBandList(User user) throws Exception {
+		ArrayList<String> userBands = null;
+		ResultSet resultSet = null;
+		try {
+			connectDataBase();
+			resultSet = statement.executeQuery("Select bName from BandListe where benutzerName = '"+ user.getName() + "'");
+			userBands = writeBandResultSet(resultSet);
+		} catch (Exception ex){
+			System.out.println("Keine Verbindung");
+		}
+		System.out.println("Jooo");
+		resultSet.close();
+		statement.close();
+		connect.close();
+		
+		return userBands;  
+	}
+	
+	
+	private ArrayList<String> writeBandResultSet(ResultSet resultSet) {
+		ArrayList<String> bands = new ArrayList<String>();
+		  try {
+			while (resultSet.next()) {
+				   String name = resultSet.getString("bName");
+				   bands.add(name);
+
+			   }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  return bands;
+	  }
+
 	public User getCurrentUser(){
 		return currentUser;
 	}
 	
 	public void setCurrentUser(User user){
 		this.currentUser = user;
+	}
+	
+	
+	public void addToBandList(User user, Band band) throws Exception {
+		try {
+			connectDataBase();
+			statement.executeUpdate("Insert into BandListe values('" + user.getName() + "','" + band.getName() + "')");
+		} catch (Exception ex){
+			ex.printStackTrace();
+		}
+		System.out.println("Jooo");
+		statement.close();
+		connect.close();
+		
 	}
 }

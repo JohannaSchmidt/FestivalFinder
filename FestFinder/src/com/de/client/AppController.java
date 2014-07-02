@@ -3,6 +3,10 @@ package com.de.client;
 
 import java.util.ArrayList;
 
+import com.de.client.event.AddBandToBandListEvent;
+import com.de.client.event.AddBandToBandListEventHandler;
+import com.de.client.event.BandListEvent;
+import com.de.client.event.BandListEventHandler;
 import com.de.client.event.FestivalClickedEvent;
 import com.de.client.event.FestivalClickedEventHandler;
 import com.de.client.event.LoginEvent;
@@ -44,6 +48,7 @@ import com.de.client.view.MenuView;
 import com.de.shared.Band;
 import com.de.shared.Festival;
 import com.de.shared.User;
+import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -211,16 +216,57 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
      });
     
-    // Auf ein Festival in der Festivalliste geklickt
+    // Auf Suchen geklickt
     eventBus.addHandler(SearchEvent.TYPE,
         new SearchEventHandler() {
 
 		public void onSearchClicked(SearchEvent searchEvent) {
-			doCahngeMain(searchEvent.getToken());
+			doChangeMain(searchEvent.getToken());
 			
 		}
 
      });
+    
+    eventBus.addHandler(BandListEvent.TYPE,
+            new BandListEventHandler() {
+
+			public void onBandListClicked(BandListEvent event) {
+				doChangeMain("BandList");
+				
+			}
+
+         });
+    
+    
+    
+    // Auf hinzufügen in der Bandview geklickt
+    eventBus.addHandler(AddBandToBandListEvent.TYPE,
+        new AddBandToBandListEventHandler() {
+
+		public void onBandToBandListAdded(AddBandToBandListEvent event) {
+
+			if(currentUser == null){
+				Window.alert("Bitte logge dich zuerst ein!");
+			}
+			if(currentUser != null){
+				userService.addToBandList(currentUser, event.getBand(), new AsyncCallback<Void>(){
+
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					public void onSuccess(Void result) {
+						Window.alert("Das hat geklappt");
+						
+					}					
+				});
+			}
+			
+		}
+
+     });
+  
   
     
     dockLayoutPanel.add(northPanel, DockPanel.NORTH);
@@ -287,11 +333,18 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     History.fireCurrentHistoryState();
   }
   
-  private void doCahngeMain(String token) {
-    History.newItem("main");
+  private void doChangeMain(String token) {
+	if(token == "BandList"){
+	    History.newItem("bandList");
+        Presenter presenter = new MainPresenter(rpcService, bandService, userService, eventBus, new MainTextView(), token, currentUser);
+        presenter.go(centerPanel);
+	} else {
+		
+		History.newItem("main");
         Presenter presenter = new MainPresenter(rpcService, bandService, eventBus, new MainTextView(), token);
         presenter.go(centerPanel);
     } 
+  }
  
 //  
 //  private void doContactUpdated() {

@@ -14,6 +14,7 @@ public class LoggedInView extends Composite implements LoggedInPresenter.Display
 	Button logout;
 	Label userName;
 	Label email;
+	Button bandList;
 		
 	public LoggedInView(User user){
 		VerticalPanel vPanel = new VerticalPanel();
@@ -30,17 +31,26 @@ public class LoggedInView extends Composite implements LoggedInPresenter.Display
 		logout = new Button("ausloggen");
 		vPanel.add(logout);
 		
+		
+		bandList = new Button("persönliche Bandliste");
+		vPanel.add(bandList);
+		
 			
 	}
 	
 	 public HasClickHandlers getLogoutButton() {
 		  return  logout;
 	}
+	 		
+	 public HasClickHandlers getBandListButton() {
+		  return  bandList;
+	}
 
 	
 	public Widget asWidget(){
 		return this;		
 	}
+
 
 		
 }

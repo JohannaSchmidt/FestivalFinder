@@ -3,6 +3,7 @@ package com.de.client.presenter;
 import java.util.ArrayList;
 
 import com.de.client.UserServiceAsync;
+import com.de.client.event.BandListEvent;
 import com.de.client.event.LogoutEvent;
 import com.de.shared.Festival;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,6 +19,7 @@ public class LoggedInPresenter implements Presenter {
 
   public interface Display {
     HasClickHandlers getLogoutButton();
+    HasClickHandlers getBandListButton();
     Widget asWidget();
   }
   
@@ -37,6 +39,12 @@ public class LoggedInPresenter implements Presenter {
         eventBus.fireEvent(new LogoutEvent());
       }
     });   
+    
+    display.getBandListButton().addClickHandler(new ClickHandler() {   
+        public void onClick(ClickEvent event) {
+          eventBus.fireEvent(new BandListEvent("BandList"));
+        }
+      }); 
   
   }
 

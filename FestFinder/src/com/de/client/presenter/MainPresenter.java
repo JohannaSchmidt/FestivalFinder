@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import com.de.client.BandServiceAsync;
 import com.de.client.FestivalServiceAsync;
+import com.de.client.UserServiceAsync;
 import com.de.client.event.FestivalClickedEvent;
 import com.de.shared.Band;
 import com.de.shared.Festival;
+import com.de.shared.User;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -21,6 +23,8 @@ public class MainPresenter  implements Presenter {
 
 	  ArrayList<Festival> festivalList;
 	  ArrayList<Band> bandList;
+	  ArrayList<String> userbands;
+	  User current;
 	
 	  public interface Display {
 	    HasClickHandlers getFestivalTable();
@@ -35,6 +39,7 @@ public class MainPresenter  implements Presenter {
 	  private final Display display;
 	  String token;
 	  BandServiceAsync bandService;
+	  UserServiceAsync userService;
 	  
 	  public MainPresenter(FestivalServiceAsync rpcService, HandlerManager eventBus, Display view) {
 	    this.rpcService = rpcService;
@@ -48,6 +53,16 @@ public class MainPresenter  implements Presenter {
 		    this.eventBus = eventBus;
 		    this.display = view;
 		    this.token = token;
+	  }
+	  
+	  public MainPresenter(FestivalServiceAsync rpcService, BandServiceAsync bandService, UserServiceAsync userService, HandlerManager eventBus, Display view, String token, User current) {
+		    this.rpcService = rpcService;
+		    this.bandService = bandService;
+		    this.eventBus = eventBus;
+		    this.display = view;
+		    this.token = token;
+		    this.userService = userService;
+		    this.current = current;
 	  }
 	  
 	  public void bind() {
@@ -104,7 +119,46 @@ public class MainPresenter  implements Presenter {
 					}
 				
 				});
-		  }
+				
+		  } else if( token == "BandList"){
+
+			  userService.getBandList(current, new AsyncCallback<ArrayList<String>>(){
+				public void onFailure(Throwable caught) {
+					caught.printStackTrace();
+					
+				}
+
+				public void onSuccess(ArrayList<String> result) {
+					bandList = new ArrayList<Band>();
+					userbands = result;
+					for(String bands : userbands){
+						bandService.getBands(bands, new AsyncCallback<ArrayList<Band>>(){
+
+							public void onFailure(Throwable caught) {
+								caught.printStackTrace();
+								
+							}
+
+							public void onSuccess(ArrayList<Band> result) {
+								bandList.add(result.get(0));
+								display.setBandData(bandList);
+								
+							}						
+							
+							
+							
+						});
+					}
+
+					
+				}				  
+					  
+					  
+			  });
+			  }
+			  
+			  
+		  
 		
 	}
 

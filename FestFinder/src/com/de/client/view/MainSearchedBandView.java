@@ -7,6 +7,7 @@ import com.de.shared.Band;
 import com.de.shared.Festival;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -25,6 +26,7 @@ public class MainSearchedBandView extends Composite implements MainSearchedBandP
 	    bandsTable = new FlexTable();
 	    bandsTable.setCellSpacing(0);
 	    bandsTable.setCellPadding(0);
+	    bandsTable.setBorderWidth(1);
 	    bandsTable.setWidth("100%");
 	    bandsTable.addStyleName("contacts-ListContents");
 	    bandsTable.getColumnFormatter().setWidth(0, "15px");

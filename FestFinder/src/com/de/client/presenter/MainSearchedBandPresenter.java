@@ -62,18 +62,6 @@ public class MainSearchedBandPresenter implements Presenter{
 	  
 	  public void bind() {
 		  
-		/*  display.getBandsTable().addClickHandler(new ClickHandler() {
-		        public void onClick(ClickEvent event) {
-		          int selectedRow = display.getSelectedRow(event);
-		          
-		          if (selectedRow >= 0) {
-		           setCurrentBand(bandList.get(selectedRow));
-			        eventBus.fireEvent(new FestivalClickedEvent());
-		          }
-		        }
-
-		      });*/
-		  
 		  if(token == "Festival"){
 			  display.setFestivalData(festivalList);
 		  }
@@ -83,25 +71,6 @@ public class MainSearchedBandPresenter implements Presenter{
 
 	  
 	  }
-	  
-	/*  protected void getBands(String name) {
-		rpcService.getBands(name, new AsyncCallback<ArrayList<Band>>() {
-	
-			public void onSuccess(ArrayList<Band> result) {
-				bandList = result;
-				display.setBandData(bandList);
-				
-			}
-	
-			public void onFailure(Throwable caught) {
-		        Window.alert("Error fetching band details");
-				
-			}
-			
-		});
-		
-	}
-	  */
 	
 	public void go(final HasWidgets container) {
 		    bind();

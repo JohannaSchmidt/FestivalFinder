@@ -7,6 +7,7 @@ import com.de.shared.Band;
 import com.de.shared.Festival;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -26,6 +27,7 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	    festivalsTable = new FlexTable();
 	    festivalsTable.setCellSpacing(0);
 	    festivalsTable.setCellPadding(0);
+	    festivalsTable.setBorderWidth(1);
 	    festivalsTable.setWidth("100%");
 	    festivalsTable.addStyleName("contacts-ListContents");
 	    festivalsTable.getColumnFormatter().setWidth(0, "15px");
@@ -53,21 +55,23 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 			    }
 			 }
 	 
-	  public int getSelectedRow(ClickEvent event) {
-		    int selectedRow = -1;
-		    HTMLTable.Cell cell = festivalsTable.getCellForEvent(event);
-		    
-		    if (cell != null) {
-		      // Suppress clicks if the user is actually selecting the 
-		      //  check box
-		      //
-		      if (cell.getCellIndex() > 0) {
-		        selectedRow = cell.getRowIndex();
-		      }
-		    }
-		    
-		    return selectedRow;
-		  }
+		  public int getSelectedRow(ClickEvent event) {
+			    int selectedRow = -1;
+			    HTMLTable.Cell cell = festivalsTable.getCellForEvent(event);
+			    
+			    if (cell != null) {
+			      // Suppress clicks if the user is actually selecting the 
+			      //  check box
+			      //
+			      if (cell.getCellIndex() > 0) {
+			        selectedRow = cell.getRowIndex();
+			      }
+			    }
+			    
+			    return selectedRow;
+			  }
+	  
+
 
 	
 	public Widget asWidget(){
@@ -77,6 +81,7 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	public HasClickHandlers getFestivalTable() {
 		return festivalsTable;
 	}
+
 
 
 

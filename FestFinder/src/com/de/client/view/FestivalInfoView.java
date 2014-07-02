@@ -20,9 +20,11 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 	private Label von;
 	private Label bis;
 	private Label web;
+	private Band currentBand;
 	
 	private FlexTable bands;
 	
+	private Button add;
 	private Button zurueck;
 	
 
@@ -42,6 +44,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			web = new Label(((Festival) object).getWebsite());
 		
 			bands = new FlexTable();
+			bands.setBorderWidth(1);
 			
 			vPanel.add(name);
 			vPanel.add(ort);
@@ -52,17 +55,23 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			vPanel.add(bands);
 			
 		} else if(object instanceof Band){
+			currentBand = (Band)object;
 			name = new Label(((Band) object).getName());
 			ort = new Label(((Band) object).getGenre());
 			von = new Label(String.valueOf(((Band) object).getJahr()));
 			web = new Label(((Band) object).getWebsite());
 		
 			bands = new FlexTable();
+			bands.setBorderWidth(1);
 			
 			vPanel.add(name);
 			vPanel.add(ort);
 			vPanel.add(von);
-			vPanel.add(web);		
+			vPanel.add(web);	
+			
+			add = new Button("Zur Bandliste hinzufuegen");
+			vPanel.add(add);
+			
 		}
 		
 		zurueck = new Button("Zurück");
@@ -83,6 +92,19 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 	 
 	 public HasClickHandlers getZurueck() {
 		  return zurueck;
+	}
+	 
+	 
+	 public HasClickHandlers getTable() {
+		  return bands;
+	}
+	 
+	 public HasClickHandlers getAddButton(){
+		 return add;
+	}
+	 
+	public Band getcurrentBand(){
+		return currentBand;
 	}
 	 
 
