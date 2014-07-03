@@ -227,10 +227,12 @@ public class MainPresenter  implements Presenter {
 	  
 
 	  private void deleteSelectedBands() {
-	    List<Integer> selectedRows = display.getSelectedRows();
+	List<Integer> selectedRows = display.getSelectedRows();
 	    
 	    for (int i = 0; i < selectedRows.size(); ++i) {
-	    userService.removeFromBandList(current, bandList.get(selectedRows.get(i)), new AsyncCallback<Void>(){
+	    	Band band = bandList.get(selectedRows.get(i));
+	    	bandList.remove(band);
+	    	userService.removeFromBandList(current, band, new AsyncCallback<Void>(){
 
 			public void onFailure(Throwable caught) {
 				caught.printStackTrace();
@@ -238,7 +240,7 @@ public class MainPresenter  implements Presenter {
 			}
 
 			public void onSuccess(Void result) {
-				getAllFestivals();
+				display.setBandData(bandList);
 				
 			}
 	    	
