@@ -1,12 +1,14 @@
 package com.de.client.view;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.de.client.presenter.MainPresenter;
 import com.de.shared.Band;
 import com.de.shared.Festival;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -19,6 +21,7 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 
 	private FlexTable festivalsTable;
 	VerticalPanel vPanel;
+	private Button delete;
 		
 	public MainTextView(){
 		vPanel = new VerticalPanel();
@@ -32,7 +35,8 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	    festivalsTable.setWidth("100%");
 	    festivalsTable.addStyleName("contacts-ListContents");
 	    festivalsTable.getColumnFormatter().setWidth(0, "15px");
-
+	    delete = new Button("Bands aus Bandliste loeschen");
+	    
 	    vPanel.add(festivalsTable);
 		
 			
@@ -41,8 +45,7 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	 public void setFestivalData(ArrayList<Festival> data) {
 		   festivalsTable.removeAllRows();
 		    if(data.isEmpty()){
-		    	Label lbl = new Label("Du hast noch gar keine Bands in deiner Bandliste!");
-		    	vPanel.add(lbl);
+
 		    } else {
 			    for (int i = 0; i < data.size(); ++i) {
 			        festivalsTable.setWidget(i, 0, new CheckBox());
@@ -57,6 +60,7 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 				    for (int i = 0; i < data.size(); ++i) {
 				        festivalsTable.setWidget(i, 0, new CheckBox());
 				        festivalsTable.setText(i, 1, data.get(i).getName());
+				        vPanel.add(delete);
 				    }
 			    
 			 }
@@ -76,6 +80,19 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 			    
 			    return selectedRow;
 			  }
+		  
+		public List<Integer> getSelectedRows() {
+			    List<Integer> selectedRows = new ArrayList<Integer>();
+			    
+			    for (int i = 0; i < festivalsTable.getRowCount(); ++i) {
+			      CheckBox checkBox = (CheckBox)festivalsTable.getWidget(i, 0);
+				      if (checkBox.getValue()) {
+				          selectedRows.add(i);
+				      }
+			    }
+			    
+			 return selectedRows;
+		 }
 	  
 
 
@@ -88,9 +105,8 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 		return festivalsTable;
 	}
 
-
-
-
-
+	public HasClickHandlers getDeleteButton() {
+		return delete;
+	}
 		
 }

@@ -152,6 +152,18 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 		connect.close();
 		
 	}
+	
+	public void removeFromBandList(User user, Band band) throws Exception {
+		try {
+			connectDataBase();
+			statement.executeUpdate("Delete from BandListe where benutzerName ='" + user.getName() + "' and bName ='" + band.getName() + "'");
+		} catch (Exception ex){
+			ex.printStackTrace();
+		}
+		statement.close();
+		connect.close();
+		
+	}
 
 	public void onAddBand(Band band) throws Exception {
 		System.out.println("Jooop");

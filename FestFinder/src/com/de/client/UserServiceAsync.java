@@ -20,6 +20,8 @@ public interface UserServiceAsync {
   	
   	void addToBandList(User user, Band band, AsyncCallback<Void> callback);
   	
+  	void removeFromBandList(User user, Band band, AsyncCallback<Void> callback);
+  	
   	void getCurrentUser(AsyncCallback<User> callback);
   	
   	void setCurrentUser(User user, AsyncCallback<Void> callback);

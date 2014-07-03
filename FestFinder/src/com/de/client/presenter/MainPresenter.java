@@ -1,6 +1,7 @@
 package com.de.client.presenter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.de.client.BandServiceAsync;
 import com.de.client.FestivalServiceAsync;
@@ -28,9 +29,11 @@ public class MainPresenter  implements Presenter {
 	
 	  public interface Display {
 	    HasClickHandlers getFestivalTable();
+	    HasClickHandlers getDeleteButton();
 	    int getSelectedRow(ClickEvent event);
 	    void setFestivalData(ArrayList<Festival> festivals);
 	    void setBandData(ArrayList<Band> bands);
+	    List<Integer> getSelectedRows();
 	    Widget asWidget();
 	  }
 	  
@@ -87,6 +90,12 @@ public class MainPresenter  implements Presenter {
 
 	  
 		  });
+		  
+		    display.getDeleteButton().addClickHandler(new ClickHandler() {   
+		        public void onClick(ClickEvent event) {
+		          deleteSelectedBands();
+		        }
+		    });
 	  }
 	  
 	  protected void getAllFestivals() {
@@ -215,6 +224,29 @@ public class MainPresenter  implements Presenter {
 		  
 		
 	}
+	  
+
+	  private void deleteSelectedBands() {
+	    List<Integer> selectedRows = display.getSelectedRows();
+	    
+	    for (int i = 0; i < selectedRows.size(); ++i) {
+	    userService.removeFromBandList(current, bandList.get(selectedRows.get(i)), new AsyncCallback<Void>(){
+
+			public void onFailure(Throwable caught) {
+				caught.printStackTrace();
+				
+			}
+
+			public void onSuccess(Void result) {
+				getAllFestivals();
+				
+			}
+	    	
+	    });
+	        
+	      }
+	    
+	  }
 
 	
 	public void go(final HasWidgets container) {
@@ -223,5 +255,5 @@ public class MainPresenter  implements Presenter {
 		   container.add(display.asWidget());
 	}
 	
-	}
+}
 	

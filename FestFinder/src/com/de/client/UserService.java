@@ -21,6 +21,8 @@ public interface UserService extends RemoteService {
   
   void addToBandList(User user, Band band) throws Exception;
   
+  void removeFromBandList(User user, Band band) throws Exception;
+  
   User getCurrentUser() throws Exception;
   
   void setCurrentUser(User user) throws Exception;
