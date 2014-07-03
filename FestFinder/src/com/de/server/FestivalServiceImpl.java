@@ -129,4 +129,55 @@ public class FestivalServiceImpl extends RemoteServiceServlet implements
 		return festivalListe;	  
 	}
 	
+	public ArrayList<Festival> getFestivalById(String id) throws Exception {
+		ArrayList<Festival> festivalListe = null;
+		ResultSet resultSet = null;
+		try {
+			connectDataBase();
+			resultSet = statement.executeQuery("Select * from Festivals where festivalId = '" + id + "'");
+			festivalListe = writeResultSet(resultSet);
+		} catch (Exception ex){
+			System.out.println("Keine Verbindung");
+		}
+		resultSet.close();
+		statement.close();
+		connect.close();
+		
+		return festivalListe;	  
+	}
+	
+	public ArrayList<String> getAllFestivalsBands(String bName) throws Exception {
+		ArrayList<String> festivalListe = null;
+		ResultSet resultSet = null;
+		try {
+			connectDataBase();
+			resultSet = statement.executeQuery("Select festivalID from FestivalBandListe where bName = '" + bName + "'");
+			festivalListe = writeFestivalBandResultSet(resultSet);
+		} catch (Exception ex){
+			System.out.println("Keine Verbindung");
+		}
+		resultSet.close();
+		statement.close();
+		connect.close();
+		
+		return festivalListe;
+		  
+	}
+
+	private ArrayList<String> writeFestivalBandResultSet(ResultSet resultSet) {
+			ArrayList<String> festivals = new ArrayList<String>();
+			  try {
+				while (resultSet.next()) {
+					   String bName = resultSet.getString("festivalID");
+
+					   festivals.add(bName);
+
+				   }
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			  return festivals;
+		  
+	}
+	
 }

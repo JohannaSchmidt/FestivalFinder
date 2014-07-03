@@ -77,6 +77,8 @@ public class MainPresenter  implements Presenter {
 		        		 eventBus.fireEvent(new FestivalClickedEvent(festivalList.get(selectedRow)));
 		        	 } else if(token == "Band"){
 		        		 eventBus.fireEvent(new FestivalClickedEvent(bandList.get(selectedRow)));
+		        	 } else if(token == "PFestival"){
+		        		 eventBus.fireEvent(new FestivalClickedEvent(festivalList.get(selectedRow)));
 		        	 }
 		        }
 
@@ -155,6 +157,58 @@ public class MainPresenter  implements Presenter {
 					  
 					  
 			  });
+			  } else if (token == "PFestival") {
+				  festivalList = new ArrayList<Festival>();
+				  userService.getBandList(current, new AsyncCallback<ArrayList<String>>(){
+
+					public void onFailure(Throwable caught) {
+						caught.printStackTrace();
+						
+					}
+
+					public void onSuccess(ArrayList<String> result) {
+						userbands = result;
+						for(String band : userbands){
+							rpcService.getAllFestivalsBands(band, new AsyncCallback<ArrayList<String>>(){
+
+								public void onFailure(Throwable caught) {
+									caught.printStackTrace();
+									
+								}
+
+								public void onSuccess(ArrayList<String> result) {
+									if(!result.isEmpty()){
+										for(String festival : result){
+											rpcService.getFestivalById(festival, new AsyncCallback<ArrayList<Festival>>(){
+										
+												public void onFailure(Throwable caught) {
+													caught.printStackTrace();
+												
+												}
+	
+												public void onSuccess(ArrayList<Festival> result) {
+													Festival festival = result.get(0);
+														festivalList.add(festival);
+														//festivalList = sortList(festivalList);
+														display.setFestivalData(festivalList);
+												}
+																							
+											});
+										}
+									} else {
+										display.setFestivalData(festivalList);
+									}
+								}
+								
+							});
+
+						}
+					} 				  
+				  });
+				  
+				  
+			 
+			  
 			  }
 			  
 			  

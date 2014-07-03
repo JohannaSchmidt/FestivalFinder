@@ -43,7 +43,7 @@ public class MainRegisterPresenter implements Presenter {
 	    	  String name = display.getName();
 	    	  String email = display.getMail();
 	    	  String pwd = display.getPwd();
-	    	  final User user = new User(name, email, pwd, 1, "user");
+	    	  final User user = new User(name, pwd, email, 1, "user");
 	    	  
 	    	  rpcService.onAddUser(user, new AsyncCallback<Void>(){
 

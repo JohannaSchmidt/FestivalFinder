@@ -60,7 +60,7 @@ public class MenuSearchPresenter implements Presenter {
     		bandService.getBands(name, new AsyncCallback<ArrayList<Band>>(){
 
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
+				caught.printStackTrace();
 				
 			}
 

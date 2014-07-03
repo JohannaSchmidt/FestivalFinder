@@ -16,6 +16,10 @@ public interface FestivalService extends RemoteService {
   
   ArrayList<Festival> getFestivals(String name) throws Exception;
   
+  ArrayList<String> getAllFestivalsBands(String bName) throws Exception;
+  
+  ArrayList<Festival> getFestivalById(String id) throws Exception;
+  
   void onAddFestival(Festival festival) throws Exception;
   
   void onDeleteFestival (String name) throws Exception;

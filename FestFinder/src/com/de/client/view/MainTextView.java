@@ -11,15 +11,17 @@ import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTMLTable;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class MainTextView extends Composite  implements MainPresenter.Display{
 
 	private FlexTable festivalsTable;
+	VerticalPanel vPanel;
 		
 	public MainTextView(){
-		VerticalPanel vPanel = new VerticalPanel();
+		vPanel = new VerticalPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
 			
@@ -38,20 +40,25 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	
 	 public void setFestivalData(ArrayList<Festival> data) {
 		   festivalsTable.removeAllRows();
-		    
-		    for (int i = 0; i < data.size(); ++i) {
-		        festivalsTable.setWidget(i, 0, new CheckBox());
-		        festivalsTable.setText(i, 1, data.get(i).getName());
+		    if(data.isEmpty()){
+		    	Label lbl = new Label("Du hast noch gar keine Bands in deiner Bandliste!");
+		    	vPanel.add(lbl);
+		    } else {
+			    for (int i = 0; i < data.size(); ++i) {
+			        festivalsTable.setWidget(i, 0, new CheckBox());
+			        festivalsTable.setText(i, 1, data.get(i).getName());
+			    }
 		    }
 		  }
 	 
 		public void setBandData(ArrayList<Band> data) {
 			   festivalsTable.removeAllRows();
+
+				    for (int i = 0; i < data.size(); ++i) {
+				        festivalsTable.setWidget(i, 0, new CheckBox());
+				        festivalsTable.setText(i, 1, data.get(i).getName());
+				    }
 			    
-			    for (int i = 0; i < data.size(); ++i) {
-			        festivalsTable.setWidget(i, 0, new CheckBox());
-			        festivalsTable.setText(i, 1, data.get(i).getName());
-			    }
 			 }
 	 
 		  public int getSelectedRow(ClickEvent event) {

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import com.de.client.UserService;
 import com.de.shared.Band;
 import com.de.shared.User;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
@@ -41,12 +40,6 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 				   
 				   User user = new User(name, pw, email, loggedIn, role);
 				   users.add(user);
-				   
-				   System.out.println("Name: " + name);
-				   System.out.println("Passwort: " + pw);
-				   System.out.println("E-Mail: " + email);
-				   System.out.println("Eingeloggt?:" + loggedIn);
-				   System.out.println("Userstatus:" + role);
 
 			   }
 		} catch (Exception e) {
@@ -134,7 +127,6 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 
 			   }
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		  return bands;
@@ -156,22 +148,23 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 		} catch (Exception ex){
 			ex.printStackTrace();
 		}
-		System.out.println("Jooo");
 		statement.close();
 		connect.close();
 		
 	}
 
 	public void onAddBand(Band band) throws Exception {
+		System.out.println("Jooop");
 		try {
 			connectDataBase();
 			statement.executeUpdate("Insert into Bands values('" + band.getName() + "','" + band.getGenre() + "','" + band.getJahr() + "','" + band.getWebsite() + "','" + "Marlena')");
-			Window.alert("Band erfolgreich hinzugefügt");
-			statement.close();
-			connect.close();
+
 		} catch (Exception ex){
 			ex.printStackTrace();
 		}
+
+		statement.close();
+		connect.close();
 	}
 
 }

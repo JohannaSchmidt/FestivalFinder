@@ -414,7 +414,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	          Presenter main = new MainRegisterPresenter(userService, eventBus, new MainRegisterView());
 	          main.go(centerPanel);
       } else if (token.equals("registered")) {
-		      Presenter main = new MainPresenter(rpcService, bandService, eventBus, new MainTextView(), "Festival");
+		      Presenter main = new MainPresenter(rpcService, bandService, userService, eventBus, new MainTextView(), "PFestival", currentUser);
 		      main.go(centerPanel);
 		      Presenter logo = new LogoPresenter(rpcService, eventBus, new LogoView());
 		      logo.go(northPanel);
@@ -430,7 +430,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	  	     Presenter searchGenre = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Genre"), "Genre");
 	  	     searchGenre.go(westPanel);
      } else if (token.equals("addBand")){
-    	 	 Presenter addBand = new MainCreateBandPresenter(userService, eventBus, new MainCreateBandView()  );
+    	 	 Presenter addBand = new MainCreateBandPresenter(userService, eventBus, new MainCreateBandView());
     	 	 addBand.go(centerPanel);
      } else if (token.equals("bandAdded")){
     	 	Presenter bandAdded = new MainPresenter(rpcService, eventBus, new MainTextView());

@@ -71,11 +71,12 @@ public class MainSearchedPresenter implements Presenter{
 			  display.setFestivalData(festivalList);
 		  }
 		  else if(token == "Band"){
-			  if (bandList.isEmpty()){
-			    display.setButton();
+			  if(bandList.isEmpty()){
+				  display.setButton();
 			  } else {
-			    display.setBandData(bandList);
+			  display.setBandData(bandList);
 			  }
+			  
 		  }
 		  
 		  display.getAddBandButton().addClickHandler(new ClickHandler(){

@@ -57,8 +57,7 @@ public class MainCreateBandPresenter implements Presenter{
 					
 				}
 
-				public void onSuccess(Void result) {
-					
+				public void onSuccess(Void result) {					
 					eventBus.fireEvent(new AddBandEvent(band));
 				}
 	    		     		 	    		  
