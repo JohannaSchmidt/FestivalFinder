@@ -24,4 +24,6 @@ public interface UserServiceAsync {
   	
   	void setCurrentUser(User user, AsyncCallback<Void> callback);
 
+	void onAddBand(Band band, AsyncCallback<Void> asyncCallback);
+
 }

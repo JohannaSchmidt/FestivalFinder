@@ -3,6 +3,7 @@ package com.de.client.presenter;
 import java.util.ArrayList;
 
 import com.de.client.BandServiceAsync;
+import com.de.client.event.AddBandButtonEvent;
 import com.de.client.event.FestivalClickedEvent;
 import com.de.shared.Band;
 import com.de.shared.Festival;
@@ -11,14 +12,14 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
+import com.de.client.view.MainSearchedView;
 
 
 
 
-public class MainSearchedBandPresenter implements Presenter{
+public class MainSearchedPresenter implements Presenter{
 
 	
 	  ArrayList<Band> bandList;
@@ -30,7 +31,9 @@ public class MainSearchedBandPresenter implements Presenter{
 	    int getSelectedRow(ClickEvent event);
 	    void setBandData(ArrayList<Band> bands);
 	    void setFestivalData(ArrayList<Festival> festivals);
-	    Widget asWidget();
+	    Widget asWidget();		
+	    public void setButton();
+		HasClickHandlers getAddBandButton();
 	  }
 	  
 	  private final BandServiceAsync rpcService;
@@ -38,13 +41,13 @@ public class MainSearchedBandPresenter implements Presenter{
 	  private final Display display;
 	  private String token;
 	  
-	  public MainSearchedBandPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view) {
+	  public MainSearchedPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view) {
 	    this.rpcService = rpcService;
 	    this.eventBus = eventBus;
 	    this.display = view;
 	  }
 	  
-	  public MainSearchedBandPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view, ArrayList<Band> bands) {
+	  public MainSearchedPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view, ArrayList<Band> bands) {
 		    this.rpcService = rpcService;
 		    this.eventBus = eventBus;
 		    this.display = view;
@@ -52,7 +55,7 @@ public class MainSearchedBandPresenter implements Presenter{
 		    this.token = "Band";
 	  }
 	  
-	  public MainSearchedBandPresenter(BandServiceAsync rpcService, HandlerManager eventBus, ArrayList<Festival> festivals, Display view) {
+	  public MainSearchedPresenter(BandServiceAsync rpcService, HandlerManager eventBus, ArrayList<Festival> festivals, Display view) {
 		  	this.rpcService = rpcService;
 		    this.eventBus = eventBus;
 		    this.display = view;
@@ -68,8 +71,18 @@ public class MainSearchedBandPresenter implements Presenter{
 			  display.setFestivalData(festivalList);
 		  }
 		  else if(token == "Band"){
-			  display.setBandData(bandList);
+			  if (bandList.isEmpty()){
+			    display.setButton();
+			  } else {
+			    display.setBandData(bandList);
+			  }
 		  }
+		  
+		  display.getAddBandButton().addClickHandler(new ClickHandler(){
+			  public void onClick(ClickEvent event) {
+				  eventBus.fireEvent(new AddBandButtonEvent());
+			  }
+		  });
 
 		  display.getBandsTable().addClickHandler(new ClickHandler() {
 		        public void onClick(ClickEvent event) {

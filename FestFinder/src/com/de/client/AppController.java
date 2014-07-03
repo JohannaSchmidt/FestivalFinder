@@ -3,6 +3,10 @@ package com.de.client;
 
 import java.util.ArrayList;
 
+import com.de.client.event.AddBandButtonEvent;
+import com.de.client.event.AddBandButtonEventHandler;
+import com.de.client.event.AddBandEvent;
+import com.de.client.event.AddBandEventHandler;
 import com.de.client.event.AddBandToBandListEvent;
 import com.de.client.event.AddBandToBandListEventHandler;
 import com.de.client.event.BandListEvent;
@@ -29,19 +33,20 @@ import com.de.client.presenter.FestivalInfoPresenter;
 import com.de.client.presenter.LoggedInPresenter;
 import com.de.client.presenter.LoginPresenter;
 import com.de.client.presenter.LogoPresenter;
+import com.de.client.presenter.MainCreateBandPresenter;
 import com.de.client.presenter.MainPresenter;
 import com.de.client.presenter.MainRegisterPresenter;
-import com.de.client.presenter.MainSearchedBandPresenter;
+import com.de.client.presenter.MainSearchedPresenter;
 import com.de.client.presenter.MenuPresenter;
 import com.de.client.presenter.MenuSearchPresenter;
 import com.de.client.presenter.Presenter;
-import com.de.client.presenter.MainSearchedBandPresenter.Display;
 import com.de.client.view.FestivalInfoView;
 import com.de.client.view.LoggedInView;
 import com.de.client.view.LoginView;
 import com.de.client.view.LogoView;
+import com.de.client.view.MainCreateBandView;
 import com.de.client.view.MainRegisterView;
-import com.de.client.view.MainSearchedBandView;
+import com.de.client.view.MainSearchedView;
 import com.de.client.view.MainTextView;
 import com.de.client.view.MenuSearchView;
 import com.de.client.view.MenuView;
@@ -104,6 +109,27 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 			
 		}
      });
+    
+    
+    // Band Hinzufügen im MainView geklickt (Wenn keine Band gefunden wurde)
+    eventBus.addHandler(AddBandButtonEvent.TYPE,
+        new AddBandButtonEventHandler() {
+
+		public void onAddBandClicked(AddBandButtonEvent event) {
+			doChangeAddBand();
+		}
+     });
+    
+    
+    // Band zur Datenbank hinzufügen
+    eventBus.addHandler(AddBandEvent.TYPE,
+    	new AddBandEventHandler() {
+    	
+    	public void onBandAdded(AddBandEvent event) {
+    		doChangeBandAdded();
+    	}
+    	
+    });
     
     // Band gesucht nach Namen
     eventBus.addHandler(SearchedBandClickedEvent.TYPE,
@@ -300,20 +326,28 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	    History.newItem("register");
   }
   
+  private void doChangeAddBand(){
+	  History.newItem("addBand");
+  }
+  
   private void doChangeRegistered() {
 	    History.newItem("registered");
 }
   
+  private void doChangeBandAdded(){
+	  History.newItem("bandAdded");
+  }
+  
   private void doChangeSearchedBand(ArrayList<Band> bands){
 	  	History.newItem("searchedBand", false);
-	    Presenter searchedBand = new MainSearchedBandPresenter(bandService, eventBus, new MainSearchedBandView(), bands);
+	    Presenter searchedBand = new MainSearchedPresenter(bandService, eventBus, new MainSearchedView(), bands);
 	    searchedBand.go(centerPanel);
 	  	
   }
   
   private void doChangeSearchedFestival(ArrayList<Festival> festivals){
 	  	History.newItem("searchedFestival", false);
-	    Presenter searchedFestival = new MainSearchedBandPresenter(bandService, eventBus, festivals, new MainSearchedBandView());
+	    Presenter searchedFestival = new MainSearchedPresenter(bandService, eventBus, festivals, new MainSearchedView());
 	    searchedFestival.go(centerPanel);
 	  	
 }
@@ -387,15 +421,21 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 		      Presenter loggedIn = new LoggedInPresenter(userService, eventBus, new LoggedInView(currentUser));
 		      loggedIn.go(northPanel);      
       } else if (token.equals("searchBand")){
-    	  	Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Band"), "Band");
-    	  	searchBand.go(westPanel);
+    	  	 Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Band"), "Band");
+    	  	 searchBand.go(westPanel);
       } else if (token.equals("searchFestival")){
-  	  	Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Festival"), "Festival");
-  	  	searchBand.go(westPanel);
+  	  	     Presenter searchFest = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Festival"), "Festival");
+  	  	     searchFest.go(westPanel);
      } else if (token.equals("searchGenre")){
-	  	Presenter searchBand = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Genre"), "Genre");
-	  	searchBand.go(westPanel);
-  } 
+	  	     Presenter searchGenre = new MenuSearchPresenter(rpcService, bandService, eventBus, new MenuSearchView("Genre"), "Genre");
+	  	     searchGenre.go(westPanel);
+     } else if (token.equals("addBand")){
+    	 	 Presenter addBand = new MainCreateBandPresenter(userService, eventBus, new MainCreateBandView()  );
+    	 	 addBand.go(centerPanel);
+     } else if (token.equals("bandAdded")){
+    	 	Presenter bandAdded = new MainPresenter(rpcService, eventBus, new MainTextView());
+    	 	bandAdded.go(centerPanel);
+     }
       
     }
   }

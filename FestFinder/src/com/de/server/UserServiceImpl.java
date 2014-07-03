@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import com.de.client.UserService;
 import com.de.shared.Band;
 import com.de.shared.User;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
@@ -160,4 +161,17 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 		connect.close();
 		
 	}
+
+	public void onAddBand(Band band) throws Exception {
+		try {
+			connectDataBase();
+			statement.executeUpdate("Insert into Bands values('" + band.getName() + "','" + band.getGenre() + "','" + band.getJahr() + "','" + band.getWebsite() + "','" + "Marlena')");
+			Window.alert("Band erfolgreich hinzugefügt");
+			statement.close();
+			connect.close();
+		} catch (Exception ex){
+			ex.printStackTrace();
+		}
+	}
+
 }

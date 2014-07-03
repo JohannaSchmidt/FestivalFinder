@@ -2,7 +2,7 @@ package com.de.client.view;
 
 import java.util.ArrayList;
 
-import com.de.client.presenter.MainSearchedBandPresenter;
+import com.de.client.presenter.MainSearchedPresenter;
 import com.de.shared.Band;
 import com.de.shared.Festival;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -15,14 +15,18 @@ import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class MainSearchedBandView extends Composite implements MainSearchedBandPresenter.Display {
+public class MainSearchedView extends Composite implements MainSearchedPresenter.Display {
 	private FlexTable bandsTable;
+	private Button addBand;
+	private VerticalPanel vPanel;
 	
-	public MainSearchedBandView(){
-		VerticalPanel vPanel = new VerticalPanel();
+	
+	public MainSearchedView(){
+		vPanel = new VerticalPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
 			
+
 	    bandsTable = new FlexTable();
 	    bandsTable.setCellSpacing(0);
 	    bandsTable.setCellPadding(0);
@@ -45,7 +49,7 @@ public class MainSearchedBandView extends Composite implements MainSearchedBandP
 		    }
 		  }
 	 
-		public void setBandData(ArrayList<Band> data) {
+	 public void setBandData(ArrayList<Band> data) {
 			   bandsTable.removeAllRows();
 			    
 			    for (int i = 0; i < data.size(); ++i) {
@@ -70,8 +74,19 @@ public class MainSearchedBandView extends Composite implements MainSearchedBandP
 		    
 		    return selectedRow;
 		  }
-
-	
+	  
+	  public void setButton(){
+		//  bandsTable.removeAllRows();
+		  vPanel.remove(bandsTable);
+		  addBand = new Button("Band Hinzufuegen");
+		  vPanel.add(addBand);
+	  }
+	  
+	  public HasClickHandlers getAddBandButton(){
+		  return addBand;
+	  }
+	  
+	  
 	public Widget asWidget(){
 		return this;		
 	}
@@ -79,6 +94,7 @@ public class MainSearchedBandView extends Composite implements MainSearchedBandP
 	public HasClickHandlers getBandsTable() {
 		return bandsTable;
 	}
+
 
 
 
