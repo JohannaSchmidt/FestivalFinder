@@ -29,6 +29,8 @@ public class FestivalInfoPresenter implements Presenter {
     HasClickHandlers getAddButton();
     HasClickHandlers getTable();
     HasClickHandlers getABTFButton();
+    HasClickHandlers getWebButton();
+    String getUrl();
     void setOracle(ArrayList<Band> data);
     Cell getBandsTableCell(ClickEvent event);
     Band getcurrentBand();
@@ -115,6 +117,12 @@ public class FestivalInfoPresenter implements Presenter {
           });
         }
       });
+    
+    display.getWebButton().addClickHandler(new ClickHandler(){
+		public void onClick(ClickEvent event) {
+			Window.open(display.getUrl(), "Hurricane", null);			
+		} 	
+    });
 
     
     if(current != null){

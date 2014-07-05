@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.de.client.BandServiceAsync;
 import com.de.client.FestivalServiceAsync;
 import com.de.client.event.AddBandButtonEvent;
+import com.de.client.event.GetHomeEvent;
 import com.de.client.event.SearchClickedEvent;
 import com.de.client.event.SearchEvent;
 import com.de.client.event.SearchedBandClickedEvent;
@@ -12,11 +13,16 @@ import com.de.shared.Band;
 import com.de.shared.Festival;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class MenuPresenter implements Presenter {  
@@ -27,6 +33,8 @@ public class MenuPresenter implements Presenter {
 	    HasClickHandlers getSuchenButton();
 	    HasClickHandlers getAddFestivalButton();
 	    HasClickHandlers getAddBandButton();
+	    HasClickHandlers getHomeButton();
+	    TextBox getSucheBox();
 	    String getDropDown();
 	    HasClickHandlers getFestivalsButton();
 	    String getName();
@@ -55,10 +63,11 @@ public class MenuPresenter implements Presenter {
 	  
 	  display.getSuchenButton().addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event) {
+				//display.getSucheBox().setText("Suchbegriff eingeben");
 				bandList = null;
 				festivalList = null;
 				String name = display.getName();
-				if(display.getDropDown().equals("Bandname")){
+				if(display.getDropDown().equals("Band")){
 					bandService.getBands(name, new AsyncCallback<ArrayList<Band>>(){
 
 					public void onFailure(Throwable caught) {
@@ -134,6 +143,22 @@ public class MenuPresenter implements Presenter {
 	          eventBus.fireEvent(new SearchEvent("Band"));
 	        }
 	      });
+	    
+	    display.getHomeButton().addClickHandler(new ClickHandler(){
+
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new GetHomeEvent());			
+			}
+	    	
+	    });
+	    display.getSucheBox().addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event) {
+				display.getSucheBox().setText("");
+				
+			}	    	
+			
+	    });
+	    
 	  
 	  }
   

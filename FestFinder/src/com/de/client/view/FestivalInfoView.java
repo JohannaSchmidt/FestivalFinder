@@ -146,6 +146,13 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 		return bandsToAdd.getText();
 	}
 
+	public HasClickHandlers getWebButton(){
+		return web;
+	}
+	
+	public String getUrl(){
+		return web.getText();
+	}
 	
 	public Widget asWidget(){
 		return this;		

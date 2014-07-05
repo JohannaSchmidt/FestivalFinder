@@ -24,6 +24,7 @@ public class MainRegisterPresenter implements Presenter {
 	    String getName();
 	    String getMail();
 	    String getPwd();
+	    String getPwd2();
 	    Widget asWidget();
 	  }
 	  
@@ -43,34 +44,39 @@ public class MainRegisterPresenter implements Presenter {
 	    	  String name = display.getName();
 	    	  String email = display.getMail();
 	    	  String pwd = display.getPwd();
-	    	  final User user = new User(name, pwd, email, 1, "user");
-	    	  
-	    	  rpcService.onAddUser(user, new AsyncCallback<Void>(){
-
-				public void onFailure(Throwable caught) {
-					Window.alert("User anlegen fehlgeschlagen");
-					
-				}
-
-				public void onSuccess(Void result) {
-					rpcService.setCurrentUser(user, new AsyncCallback<Void>(){
-
-						public void onFailure(Throwable caught) {
-							Window.alert("Einloggen fehlgeschlagen");
-							
-						}
-
-						public void onSuccess(Void result) {
-					        eventBus.fireEvent(new RegisterEvent());
-						}
+	    	  String pwd2 = display.getPwd2();
+	    	  if(pwd.equals(pwd2)){
+		    	  final User user = new User(name, pwd, email, 1, "user");
+		    	  
+		    	  rpcService.onAddUser(user, new AsyncCallback<Void>(){
+	
+					public void onFailure(Throwable caught) {
+						Window.alert("User anlegen fehlgeschlagen");
 						
-					});
-			        
-					
-				}
-	    		     		 	    		  
-	    	  });
-	    	
+					}
+	
+					public void onSuccess(Void result) {
+						rpcService.setCurrentUser(user, new AsyncCallback<Void>(){
+	
+							public void onFailure(Throwable caught) {
+								Window.alert("Einloggen fehlgeschlagen");
+								
+							}
+	
+							public void onSuccess(Void result) {
+						        eventBus.fireEvent(new RegisterEvent());
+							}
+							
+						});
+				        
+						
+					}
+		    		     		 	    		  
+		    	  });
+		    	
+		      } else {
+		    	  Window.alert("Die Passwoerter stimmen nicht ueberein");
+		      }
 	      }
 	    });
 

@@ -15,10 +15,12 @@ public class MainRegisterView extends Composite  implements MainRegisterPresente
 	private TextBox name;
 	private TextBox email;
 	private PasswordTextBox pwd;
+	private PasswordTextBox pwd2;
 	private Button reg;
 	private Label nameLabel;
 	private Label emailLabel;
 	private Label pwdLabel;
+	private Label pwdLabel2;
 		
 	public MainRegisterView(){
 		FlowPanel vPanel = new FlowPanel();
@@ -34,6 +36,10 @@ public class MainRegisterView extends Composite  implements MainRegisterPresente
 		pwd = new PasswordTextBox();
 		pwdLabel = new Label ("Passwort:");
 		pwdLabel.setStyleName("text");
+		
+		pwd2 = new PasswordTextBox();
+		pwdLabel2 = new Label ("Passwort erneut eingeben");
+		pwdLabel2.setStyleName("text");
 
 		reg = new Button("Registrieren");
 		reg.setStyleName("clickbuttonseinloggen");
@@ -44,6 +50,8 @@ public class MainRegisterView extends Composite  implements MainRegisterPresente
 	    vPanel.add(email);
 	    vPanel.add(pwdLabel);
 	    vPanel.add(pwd);
+	    vPanel.add(pwdLabel2);
+	    vPanel.add(pwd2);
 	    vPanel.add(reg);
 		
 			
@@ -70,6 +78,13 @@ public class MainRegisterView extends Composite  implements MainRegisterPresente
 	 public String getPwd() {
 		 if(pwd.getText() !=null){
 			 return pwd.getText();
+		 }
+		 return null;
+	}
+	 
+	 public String getPwd2() {
+		 if(pwd2.getText() !=null){
+			 return pwd2.getText();
 		 }
 		 return null;
 	}

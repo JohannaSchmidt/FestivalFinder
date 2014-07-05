@@ -38,12 +38,12 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		
 		lblSuche = new Label("Suchen nach:");	
 		suche = new ListBox();
-		suche.addItem("Bandname");
+		suche.addItem("Band");
 		suche.addItem("Festival");
 		suche.addItem("Genre");
 		suche.setStyleName("buttons");
 		bandSuche = new TextBox();
-		bandSuche.setText("Name eingeben");
+		bandSuche.setText("Suchbegriff eingeben");
 		suchen = new Button("Suchen");
 		suchen.setStyleName("clickbuttons");
 		
@@ -94,8 +94,18 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 	}	 
 	 
 	public HasClickHandlers getFestivalsButton() {
-		    return festivals;
+		return festivals;
 	}
+		
+	public HasClickHandlers getHomeButton(){
+		return home;
+	}
+	
+	public TextBox getSucheBox(){
+		return bandSuche;
+	}
+	
+	
 		  
 	public HasClickHandlers getBandButton() {
 		    return bands;

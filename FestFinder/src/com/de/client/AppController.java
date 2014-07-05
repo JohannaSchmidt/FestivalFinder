@@ -13,6 +13,8 @@ import com.de.client.event.BandListEvent;
 import com.de.client.event.BandListEventHandler;
 import com.de.client.event.FestivalClickedEvent;
 import com.de.client.event.FestivalClickedEventHandler;
+import com.de.client.event.GetHomeEvent;
+import com.de.client.event.GetHomeEventHandler;
 import com.de.client.event.LoginEvent;
 import com.de.client.event.LoginEventHandler;
 import com.de.client.event.LogoutEvent;
@@ -300,6 +302,17 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 					}					
 				});
 			}
+			
+		}
+
+     });
+    
+   
+    // Auf Home geklickt
+    eventBus.addHandler(GetHomeEvent.TYPE,
+        new GetHomeEventHandler() {
+		public void onHomeClicked(GetHomeEvent event) {
+			doChangeBandAdded();
 			
 		}
 
