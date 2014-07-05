@@ -70,6 +70,8 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		
 		if(user != null){
 			if(user.getRolle().equals("Admin")){
+				addBand.setStyleName("clickbuttons");
+				addFestival.setStyleName("clickbuttons");
 				vPanel.add(addBand);
 				vPanel.add(addFestival);
 			}

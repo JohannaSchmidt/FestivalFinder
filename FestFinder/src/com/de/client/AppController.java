@@ -424,7 +424,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	 	 	Presenter addBand = new MainCreateBandPresenter(bandService, rpcService, eventBus, new MainCreateBandView("Festival"));
 	 	 	addBand.go(centerPanel);
      } else if (token.equals("festival")){
-	 		Presenter festival = new FestivalInfoPresenter(bandService, eventBus, new FestivalInfoView(clickedFestival), clickedFestival);
+	 		Presenter festival = new FestivalInfoPresenter(bandService, eventBus, new FestivalInfoView(clickedFestival), clickedFestival, currentUser);
 	 		festival.go(centerPanel);
      } else if(token.equals("band")){
 	 		Presenter band = new FestivalInfoPresenter(bandService, eventBus, new FestivalInfoView(clickedBand));

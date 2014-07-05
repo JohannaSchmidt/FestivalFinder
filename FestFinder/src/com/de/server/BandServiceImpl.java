@@ -186,6 +186,18 @@ public class BandServiceImpl extends RemoteServiceServlet implements
 		return bandListe;
 	}
 
+	public void onAddBandToFestival(String band, String festival) throws Exception {
+		try {
+			connectDataBase();
+			statement.executeUpdate("Insert into FestivalBandListe values('" + festival + "','" + band + "');");
+		} catch (Exception e) {
+			System.out.println("Keine Verbindung");
+		}
+		statement.close();
+		connect.close();
+		
+	}
+
 
 	
 }

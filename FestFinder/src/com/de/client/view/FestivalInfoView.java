@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.de.client.presenter.FestivalInfoPresenter;
 import com.de.shared.Band;
 import com.de.shared.Festival;
+import com.de.shared.User;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Anchor;
@@ -16,11 +17,14 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.HTMLTable.Cell;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class FestivalInfoView extends Composite  implements FestivalInfoPresenter.Display{
 
+	FlowPanel vPanel;
 	private Label name;
 	private Label ort;
 	private Label von;
@@ -30,13 +34,15 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 	
 	private FlexTable bands;
 	
+	private SuggestBox bandsToAdd;
+	private Button addBandsToFestival = new Button();
 	private Button add = new Button();
 	private Button zurueck;
 	
 
 		
 	public FestivalInfoView(Object object){
-		FlowPanel vPanel = new FlowPanel();
+		vPanel = new FlowPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
 			
@@ -49,6 +55,8 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			von = new Label(((Festival) object).getsDatum().toString());
 			bis = new Label(((Festival) object).geteDatum().toString());
 			web = new Anchor(((Festival) object).getWebsite());
+			
+			addBandsToFestival = new Button("Diese Band dem Festival zuordnen");
 		
 			bands = new FlexTable();
 			bands.setBorderWidth(1);
@@ -59,6 +67,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			vPanel.add(bis);
 			vPanel.add(web);			
 			vPanel.add(bands);
+
 			
 		} else if(object instanceof Band){
 			currentBand = (Band)object;
@@ -90,6 +99,16 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 		
 			
 	}
+	public void setOracle(ArrayList<Band> words){
+		addBandsToFestival.setStyleName("clickbuttons");
+		 MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();		    
+		    for (Band word : words) {
+		      oracle.add(word.getName());
+		    }
+		bandsToAdd = new SuggestBox(oracle);
+		vPanel.add(bandsToAdd);
+		vPanel.add(addBandsToFestival);		
+	}
 	
 	 public void setData(ArrayList<String> data) {
 		   bands.removeAllRows();
@@ -106,6 +125,10 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 		  return zurueck;
 	}
 	 
+	 public HasClickHandlers getABTFButton() {
+		  return addBandsToFestival;
+	}
+	 
 	 
 	 public HasClickHandlers getTable() {
 		  return bands;
@@ -119,6 +142,9 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 		return currentBand;
 	}
 	 
+	public String getBandName(){
+		return bandsToAdd.getText();
+	}
 
 	
 	public Widget asWidget(){

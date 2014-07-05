@@ -8,6 +8,7 @@ import com.de.client.event.FestivalClickedEvent;
 import com.de.client.event.ZurueckEvent;
 import com.de.shared.Band;
 import com.de.shared.Festival;
+import com.de.shared.User;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -27,9 +28,12 @@ public class FestivalInfoPresenter implements Presenter {
     HasClickHandlers getZurueck();
     HasClickHandlers getAddButton();
     HasClickHandlers getTable();
+    HasClickHandlers getABTFButton();
+    void setOracle(ArrayList<Band> data);
     Cell getBandsTableCell(ClickEvent event);
     Band getcurrentBand();
     void setData(ArrayList<String> bands);
+    String getBandName();
     Widget asWidget();
   }
   
@@ -37,18 +41,21 @@ public class FestivalInfoPresenter implements Presenter {
   private final HandlerManager eventBus;
   private final Display display;
   private Festival current;
+  private User user;
   
   public FestivalInfoPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view) {
     this.rpcService = rpcService;
     this.eventBus = eventBus;
     this.display = view;
+    this.user = null;
   }
   
-  public FestivalInfoPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view, Festival current) {
+  public FestivalInfoPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view, Festival current, User user) {
 	    this.rpcService = rpcService;
 	    this.eventBus = eventBus;
 	    this.display = view;
 	    this.current = current;
+	    this.user = user;
 	  }
   
   public void bind() {
@@ -69,7 +76,7 @@ public class FestivalInfoPresenter implements Presenter {
     display.getTable().addClickHandler(new ClickHandler() {   
         public void onClick(ClickEvent event) {
 	          Cell selected = display.getBandsTableCell(event);
-	          System.out.println("Click auf BAnd");
+	          System.out.println("Click auf Band");
 	          
 	         if (selected != null) {
 	        	 rpcService.getBands(bandList.get(selected.getRowIndex()), new AsyncCallback<ArrayList<Band>>(){
@@ -90,13 +97,48 @@ public class FestivalInfoPresenter implements Presenter {
 	         }
         }
     });
+    
+    display.getABTFButton().addClickHandler(new ClickHandler() {   
+        public void onClick(ClickEvent event) {
+          rpcService.onAddBandToFestival(display.getBandName(), current.getfestId(), new AsyncCallback<Void>(){
+
+			public void onFailure(Throwable caught) {
+				caught.printStackTrace();
+				
+			}
+
+			public void onSuccess(Void result) {
+				getAllFestivalsBands();
+				
+			}
+        	  
+          });
+        }
+      });
 
     
     if(current != null){
 		getAllFestivalsBands();
     }
+    if(user != null){
+    	rpcService.getAllBands(new AsyncCallback<ArrayList<Band>>(){
+
+			public void onFailure(Throwable caught) {
+				caught.printStackTrace();
+				
+			}
+
+			public void onSuccess(ArrayList<Band> result) {
+				display.setOracle(result);
+				
+			}
+    		
+    		
+    		
+    	});
+    	}
+    }
   
-  }
   
   protected void getAllFestivalsBands() {
 	rpcService.getAllFestivalBands(current , new AsyncCallback<ArrayList<String>>() {
