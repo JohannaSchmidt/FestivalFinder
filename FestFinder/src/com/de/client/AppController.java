@@ -355,11 +355,6 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     } 
   }
  
-//  
-//  private void doContactUpdated() {
-//    History.newItem("list");
-//  }
-//  
   public void go(final HasWidgets container) {
     this.container = container;
     if ("".equals(History.getToken())) {

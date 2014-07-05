@@ -17,6 +17,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.HTMLTable.Cell;
 
 public class FestivalInfoPresenter implements Presenter {  
 
@@ -26,7 +27,7 @@ public class FestivalInfoPresenter implements Presenter {
     HasClickHandlers getZurueck();
     HasClickHandlers getAddButton();
     HasClickHandlers getTable();
-    int getSelectedRow(ClickEvent event);
+    Cell getBandsTableCell(ClickEvent event);
     Band getcurrentBand();
     void setData(ArrayList<String> bands);
     Widget asWidget();
@@ -67,16 +68,29 @@ public class FestivalInfoPresenter implements Presenter {
 
     display.getTable().addClickHandler(new ClickHandler() {   
         public void onClick(ClickEvent event) {
-	          int selectedRow = display.getSelectedRow(event);
+	          Cell selected = display.getBandsTableCell(event);
+	          System.out.println("Click auf BAnd");
 	          
-	          if (selectedRow >= 0) {
-	        		 eventBus.fireEvent(new FestivalClickedEvent(bandList.get(selectedRow)));
+	         if (selected != null) {
+	        	 rpcService.getBands(bandList.get(selected.getRowIndex()), new AsyncCallback<ArrayList<Band>>(){
+
+					public void onFailure(Throwable caught) {
+						caught.printStackTrace();
+						
+					}
+
+					public void onSuccess(ArrayList<Band> result) {
+		        		 eventBus.fireEvent(new FestivalClickedEvent(result.get(0)));
+						
+					}
+	        		 
+	        	 });
+
 	        	 
-	          }
+	         }
+        }
+    });
 
-	      }
-
-	  });
     
     if(current != null){
 		getAllFestivalsBands();

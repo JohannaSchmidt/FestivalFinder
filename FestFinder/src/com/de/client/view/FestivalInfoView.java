@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLTable;
+import com.google.gwt.user.client.ui.HTMLTable.Cell;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -56,8 +57,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			vPanel.add(ort);
 			vPanel.add(von);
 			vPanel.add(bis);
-			vPanel.add(web);
-			
+			vPanel.add(web);			
 			vPanel.add(bands);
 			
 		} else if(object instanceof Band){
@@ -98,21 +98,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 		      bands.setText(i, 0, data.get(i));
 		    }
 		  }
-	  public int getSelectedRow(ClickEvent event) {
-		    int selectedRow = -1;
-		    HTMLTable.Cell cell = bands.getCellForEvent(event);
-		    
-		    if (cell != null) {
-		      // Suppress clicks if the user is actually selecting the 
-		      //  check box
-		      //
-		      if (cell.getCellIndex() > 0) {
-		        selectedRow = cell.getRowIndex();
-		      }
-		    }
-		    
-		    return selectedRow;
-		  }
+
 
 
 	 
@@ -137,6 +123,10 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 	
 	public Widget asWidget(){
 		return this;		
+	}
+
+	public Cell getBandsTableCell(ClickEvent event) {
+		return bands.getCellForEvent(event);
 	}
 
 		

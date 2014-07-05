@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.HTMLTable.Cell;
 
 public class MainSearchedView extends Composite implements MainSearchedPresenter.Display {
 	private FlexTable bandsTable;
@@ -51,8 +52,7 @@ public class MainSearchedView extends Composite implements MainSearchedPresenter
 		   bandsTable.removeAllRows();
 		    
 		    for (int i = 0; i < data.size(); ++i) {
-		        bandsTable.setWidget(i, 0, new CheckBox());
-		        bandsTable.setText(i, 1, data.get(i).getName());
+		        bandsTable.setText(i, 0, data.get(i).getName());
 		    }
 		  }
 	 
@@ -60,27 +60,9 @@ public class MainSearchedView extends Composite implements MainSearchedPresenter
 			   bandsTable.removeAllRows();
 			    
 			    for (int i = 0; i < data.size(); ++i) {
-			        bandsTable.setWidget(i, 0, new CheckBox());
-			        bandsTable.setText(i, 1, data.get(i).getName());
+			        bandsTable.setText(i, 0, data.get(i).getName());
 			    }
 			 }
-
-	 
-	  public int getSelectedRow(ClickEvent event) {
-		    int selectedRow = -1;
-		    HTMLTable.Cell cell = bandsTable.getCellForEvent(event);
-		    
-		    if (cell != null) {
-		      // Suppress clicks if the user is actually selecting the 
-		      //  check box
-		      //
-		      if (cell.getCellIndex() > 0) {
-		        selectedRow = cell.getRowIndex();
-		      }
-		    }
-		    
-		    return selectedRow;
-		  }
 	  
 	  public void setButton(){
 		  addBand.setVisible(true);
@@ -98,6 +80,10 @@ public class MainSearchedView extends Composite implements MainSearchedPresenter
 
 	public HasClickHandlers getBandsTable() {
 		return bandsTable;
+	}
+
+	public Cell getBandsTableCell(ClickEvent event) {
+		return bandsTable.getCellForEvent(event);
 	}
 
 }

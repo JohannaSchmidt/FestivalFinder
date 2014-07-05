@@ -11,9 +11,9 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.HTMLTable.Cell;
 
 public class MainSearchedPresenter implements Presenter{
 
@@ -23,8 +23,8 @@ public class MainSearchedPresenter implements Presenter{
 	  Band currentBand;
 	
 	  public interface Display {
+		Cell getBandsTableCell(ClickEvent event);
 	    HasClickHandlers getBandsTable();
-	    int getSelectedRow(ClickEvent event);
 	    void setBandData(ArrayList<Band> bands);
 	    void setFestivalData(ArrayList<Festival> festivals);
 	    Widget asWidget();		
@@ -83,13 +83,13 @@ public class MainSearchedPresenter implements Presenter{
 
 		  display.getBandsTable().addClickHandler(new ClickHandler() {
 		        public void onClick(ClickEvent event) {
-		          int selectedRow = display.getSelectedRow(event);
+		          Cell selected = display.getBandsTableCell(event);
 		          
-		          if (selectedRow >= 0) {
+		          if (selected != null) {
 		        	 if(token == "Festival"){
-		        		 eventBus.fireEvent(new FestivalClickedEvent(festivalList.get(selectedRow)));
+		        		 eventBus.fireEvent(new FestivalClickedEvent(festivalList.get(selected.getRowIndex())));
 		        	 } else if(token == "Band"){
-		        		 eventBus.fireEvent(new FestivalClickedEvent(bandList.get(selectedRow)));
+		        		 eventBus.fireEvent(new FestivalClickedEvent(bandList.get(selected.getRowIndex())));
 		        	 }
 		        }
 
