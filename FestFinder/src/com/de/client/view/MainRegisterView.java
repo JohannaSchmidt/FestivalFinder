@@ -5,6 +5,8 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -12,9 +14,11 @@ import com.google.gwt.user.client.ui.Widget;
 public class MainRegisterView extends Composite  implements MainRegisterPresenter.Display{
 	private TextBox name;
 	private TextBox email;
-	private TextBox pwd;
+	private PasswordTextBox pwd;
 	private Button reg;
-
+	private Label nameLabel;
+	private Label emailLabel;
+	private Label pwdLabel;
 		
 	public MainRegisterView(){
 		FlowPanel vPanel = new FlowPanel();
@@ -22,13 +26,23 @@ public class MainRegisterView extends Composite  implements MainRegisterPresente
 		vPanel.setStyleName("seite");
 		
 		name = new TextBox();
+		nameLabel = new Label("Username:");
+		nameLabel.setStyleName("text");
 		email = new TextBox();
-		pwd = new TextBox();
+		emailLabel = new Label ("email:");
+		emailLabel.setStyleName("text");
+		pwd = new PasswordTextBox();
+		pwdLabel = new Label ("Passwort:");
+		pwdLabel.setStyleName("text");
 
 		reg = new Button("Registrieren");
+		reg.setStyleName("clickbuttons");
 			
+		vPanel.add(nameLabel);
 	    vPanel.add(name);
+	    vPanel.add(emailLabel);	    
 	    vPanel.add(email);
+	    vPanel.add(pwdLabel);
 	    vPanel.add(pwd);
 	    vPanel.add(reg);
 		

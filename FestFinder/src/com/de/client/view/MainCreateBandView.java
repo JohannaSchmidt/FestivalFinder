@@ -40,6 +40,7 @@ public class MainCreateBandView extends Composite implements MainCreateBandPrese
 
 
 		addBand = new Button("Band Hinzufuegen");
+		addBand.setStyleName("clickbuttons");
 			
 		vPanel.add(lblBandName);
 	    vPanel.add(bandName);

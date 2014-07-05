@@ -38,6 +38,7 @@ public class MainSearchedView extends Composite implements MainSearchedPresenter
 	    bandsTable.getColumnFormatter().setWidth(0, "15px");
 	    
 		addBand = new Button("Band Hinzufuegen");
+		addBand.setStyleName("clickbuttons");
 		vPanel.add(addBand);
 		addBand.setVisible(false);
 

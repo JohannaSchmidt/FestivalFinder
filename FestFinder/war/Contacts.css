@@ -21,7 +21,7 @@ th, td {
 }
   
 td.add-contact-label {
-  text-align: left;
+  /*text-align: left;*/
 }
 
 add-contact-input {
@@ -67,7 +67,7 @@ td.contacts-ListName {
 
 .gwt-TextBox {
   width: 140px;
-  align: center;
+  /*align: center;*/
   margin-left:15px;
 }
 
@@ -81,18 +81,17 @@ td.contacts-ListName {
 }
 
 .gwt-DecoratorPanel .middleCenter {
-   height: 100%;
-   width: 100%;
+   /*height: 100%;
+   width: 100%;*/
  }
  			.rootPanel {
 				min-width: 1020px;
 				position: static;
 				background-image: url(images/background.jpg);
-				background-color: #f8e9b6;
-				background-repeat: no-repeat;
 				background-position: center top;
-				background-attachment:fixed;
-
+				background-repeat: no-repeat;
+				background-color: #f8e9b6;
+				cursor: auto;
 			}
 			a:link {
 			   color: #7654bn;
@@ -103,7 +102,7 @@ td.contacts-ListName {
 			.frame {
 				background-position: center top;
 				width: 900px;
-				height:900px;
+				height: 850px;
 				margin-left: auto;
 				margin-right: auto;
 				font-family: Verdana, Geneva, sans-serif;
@@ -130,40 +129,61 @@ td.contacts-ListName {
 				padding-left: 10px;
 				padding-right: 10px;
 				padding-bottom: 10px;
+				font-family: Calibri;
 			}
 			.suche {
 				background-color: #f2d79c;
 				width: 230px;
 				color: #383838;
-				height:600px;
+				height: 600px;
 				margin-left: 30px;
-				float: left;
 				font-family: Verdana, Geneva, sans-serif;
 				font-size: 16px;
-			    box-sizing: padding-box;
+			    /*box-sizing: padding-box;*/
 				padding: 10px;
+				font-family: Calibri;
 				text-align: center;
+				
 			}
 			.buttons {
 				background-color: #d4d499;
 				text-align: center;
 				padding-top: 5px;
 				padding-bottom: 5px;
-				padding-left: 10px;
-			    margin-left: 30px;
+			    margin-left: 10px;
+			    margin-right: 10px;
+			    margin-top: 10px;
+			   	color: #383838;
+			}
+			.clickbuttons {
+				display: block;
+				background-color: #d4d499;
+				padding-top: 5px;
+				width: 110px;
+				padding-bottom: 5px;				
+				text-align: center;
+				margin-left: 35px;
+				color: #383838;
+			}
+			.headlines {
+				font-size: 30px;
+				font-family: Calibri;
+				color: #383838;
+			}
+			.text {
+				background-color: #d4d499;
+				padding: 10px;
 			}
 			.seite{
 				background-color: #d4d499;
-				color: #383838;
 				width: 600px;
-				height:600px;
+				height: 600px;
+				/*height: 600px;
 				margin-right: 30px;
 				float: right;
 				overflow: auto;
 				box-sizing: padding-box;
-				padding-top: -10px;
-				padding-left: 10px;
-				padding-right: 10px;
-				padding-bottom: 10px;
+				padding: 40px;
+				font-family: Webdings;*/
 			}
  

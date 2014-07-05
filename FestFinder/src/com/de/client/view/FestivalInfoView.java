@@ -43,6 +43,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			
 			
 			name = new Label(((Festival) object).getName());
+			name.addStyleName("headlines");
 			ort = new Label(((Festival) object).getOrt());
 			von = new Label(((Festival) object).getsDatum().toString());
 			bis = new Label(((Festival) object).geteDatum().toString());
@@ -62,6 +63,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 		} else if(object instanceof Band){
 			currentBand = (Band)object;
 			name = new Label(((Band) object).getName());
+			name.addStyleName("headlines");
 			ort = new Label(((Band) object).getGenre());
 			von = new Label(String.valueOf(((Band) object).getJahr()));
 			web = new Anchor(((Band) object).getWebsite());
@@ -75,11 +77,13 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			vPanel.add(web);	
 			
 			add = new Button("Zur Bandliste hinzufuegen");
+			add.setStyleName("clickbuttons");
 			vPanel.add(add);
 			
 		}
 		
 		zurueck = new Button("Zurück");
+		zurueck.setStyleName("clickbuttons");
 		vPanel.add(zurueck);
 
 

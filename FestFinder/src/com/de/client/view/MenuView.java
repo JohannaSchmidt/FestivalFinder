@@ -31,13 +31,17 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		vPanel.setStyleName("suche");
 		
 		lblSuche = new Label("Suchen nach:");
+		lblSuche.setStyleName("buttons");		
 		suche = new ListBox();
 		suche.addItem("Bandname");
 		suche.addItem("Festival");
 		suche.addItem("Genre");
+		suche.setStyleName("buttons");
 		bandSuche = new TextBox();
 		bandSuche.setText("Name eingeben");
+		bandSuche.setStyleName("buttons");
 		suchen = new Button("Suchen");
+		suchen.setStyleName("buttons");
 		festivals = new PushButton(new Image("images/Festivals.png"));
 		festivals.setStyleName("buttons");
 		festivals.getElement().getStyle().setCursor(Cursor.POINTER); 
