@@ -23,18 +23,19 @@ public class LoggedInView extends Composite implements LoggedInPresenter.Display
 		vPanel.setStyleName("einloggen");
 
 		userName = new Label("Hallo " + user.getName());
+		userName.setStyleName("hallo");
 		vPanel.add(userName);
 		
 		email = new Label(user.getMail());
 		vPanel.add(email);
 		
-		logout = new Button("ausloggen");
-		logout.setStyleName("clickbuttons");
+		logout = new Button("Ausloggen");
+		logout.setStyleName("clickbuttonseinloggen");
 		vPanel.add(logout);
 		
 		
 		bandList = new Button("persönliche Bandliste");			
-		bandList.setStyleName("clickbuttons");
+		bandList.setStyleName("clickbuttonseinloggen");
 		vPanel.add(bandList);
 		
 			

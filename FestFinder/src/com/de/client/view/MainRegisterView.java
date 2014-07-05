@@ -36,7 +36,7 @@ public class MainRegisterView extends Composite  implements MainRegisterPresente
 		pwdLabel.setStyleName("text");
 
 		reg = new Button("Registrieren");
-		reg.setStyleName("clickbuttons");
+		reg.setStyleName("clickbuttonseinloggen");
 			
 		vPanel.add(nameLabel);
 	    vPanel.add(name);

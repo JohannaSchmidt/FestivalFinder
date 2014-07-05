@@ -91,7 +91,9 @@ td.contacts-ListName {
 				background-position: center top;
 				background-repeat: no-repeat;
 				background-color: #f8e9b6;
-				cursor: auto;
+				font-size: 20px;
+				font-family: Calibri;
+				color: #383838;
 			}
 			a:link {
 			   color: #7654bn;
@@ -105,7 +107,6 @@ td.contacts-ListName {
 				height: 850px;
 				margin-left: auto;
 				margin-right: auto;
-				font-family: Verdana, Geneva, sans-serif;
 			}
 			.header {
 				background-image: url(images/header2.jpg);
@@ -125,33 +126,33 @@ td.contacts-ListName {
 				height:220px;
 				margin-top: 10px;
 				margin-right: 20px;
-				box-sizing: padding-box;
-				padding-right: 0px;
-				padding-bottom: 0px;
+				font-size: 20px;
 				font-family: Calibri;
+				color: #383838;
 			}
+			.einbuttons {
+				padding-left: 25px;
+			}
+			
 			.suche {
 				background-color: #f2d79c;
 				width: 230px;
 				color: #383838;
 				height: 600px;
 				margin-left: 30px;
-				font-family: Verdana, Geneva, sans-serif;
-				font-size: 16px;
-			    /*box-sizing: padding-box;*/
 				padding: 10px;
+				font-size: 20px;
 				font-family: Calibri;
-				text-align: center;
+				color: #383838;
 				
 			}
 			.suchpanel {
 				background-color: #d4d499;
 				position: center;
-				color: #383838;
 			    margin-left: 10px;
 			    margin-right: 10px;
-				text-align: center;
-			   	padding: 10px;
+				padding: 10px;
+				
 			}
 			.buttons {
 				background-color: #d4d499;
@@ -161,26 +162,57 @@ td.contacts-ListName {
 			    margin-left: 10px;
 			    margin-right: 10px;
 			    margin-top: 10px;
-			   	color: #383838;
 			}
 			.clickbuttons {
 				display: block;
 				background-color: #d4d499;
 				padding-top: 5px;
-				width: 110px;
 				padding-bottom: 5px;				
 				text-align: center;
-				margin-left: 35px;
+				margin-left: 0px;
+				font-size: 16px;
+				font-family: Calibri;
+				color: #383838;
+			}
+			
+			.clickbuttonseinloggen {
+				display: block;
+				background-color: #d4d499;
+				padding-top: 5px;
+				width: 100px;
+				padding-bottom: 5px;				
+				text-align: center;
+				margin-left: 40px;
+				margin-top: 10px;
+				font-size: 16px;
+				font-family: Calibri;
 				color: #383838;
 			}
 			.headlines {
 				font-size: 30px;
 				font-family: Calibri;
 				color: #383838;
+				padding-left: -30px;
+			}
+			.hallo {
+				font-size: 30px;
+				font-family: Calibri;
+				color: #383838;
+				margin-left: 5px;
+				text-align: center;
+			}
+			
+			.list {
+				font-size: 20px;
+				font-family: Calibri;
+				color: #383838;
 			}
 			.text {
 				background-color: #d4d499;
 				padding: 10px;
+				font-size: 20px;
+				font-family: Calibri;
+				color: #383838;
 			}
 			.seite{
 				background-color: #d4d499;

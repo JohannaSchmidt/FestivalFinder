@@ -42,7 +42,8 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		bandSuche = new TextBox();
 		bandSuche.setText("Name eingeben");
 		suchen = new Button("Suchen");
-		suchen.setStyleName("buttons");
+		suchen.setStyleName("clickbuttons");
+		
 		home = new PushButton(new Image("images/Home.png"));
 		home.setStyleName("buttons");
 		home.getElement().getStyle().setCursor(Cursor.POINTER);
