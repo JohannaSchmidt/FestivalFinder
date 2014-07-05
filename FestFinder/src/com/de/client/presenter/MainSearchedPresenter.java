@@ -77,10 +77,10 @@ public class MainSearchedPresenter implements Presenter{
 		  
 		  display.getAddBandButton().addClickHandler(new ClickHandler(){
 			  public void onClick(ClickEvent event) {
-				  eventBus.fireEvent(new AddBandButtonEvent());
+				  eventBus.fireEvent(new AddBandButtonEvent("Band"));
 			  }
 		  });
-
+		  
 		  display.getBandsTable().addClickHandler(new ClickHandler() {
 		        public void onClick(ClickEvent event) {
 		          Cell selected = display.getBandsTableCell(event);

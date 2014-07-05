@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.de.client.BandServiceAsync;
 import com.de.client.FestivalServiceAsync;
+import com.de.client.event.AddBandButtonEvent;
 import com.de.client.event.SearchClickedEvent;
 import com.de.client.event.SearchEvent;
 import com.de.client.event.SearchedBandClickedEvent;
@@ -23,12 +24,14 @@ public class MenuPresenter implements Presenter {
 	ArrayList<Festival> festivalList;
 
   public interface Display {
-    HasClickHandlers getSuchenButton();
-    String getDropDown();
-    HasClickHandlers getFestivalsButton();
-    String getName();
-    HasClickHandlers getBandButton();  
-    Widget asWidget();
+	    HasClickHandlers getSuchenButton();
+	    HasClickHandlers getAddFestivalButton();
+	    HasClickHandlers getAddBandButton();
+	    String getDropDown();
+	    HasClickHandlers getFestivalsButton();
+	    String getName();
+	    HasClickHandlers getBandButton();  
+	    Widget asWidget();
   }
   
   private final FestivalServiceAsync rpcService;
@@ -51,71 +54,88 @@ public class MenuPresenter implements Presenter {
   public void bind() {
 	  
 	  display.getSuchenButton().addClickHandler(new ClickHandler(){
-		public void onClick(ClickEvent event) {
-			String name = display.getName();
-			if(display.getDropDown().equals("Bandname")){
-				bandService.getBands(name, new AsyncCallback<ArrayList<Band>>(){
+			public void onClick(ClickEvent event) {
+				bandList = null;
+				festivalList = null;
+				String name = display.getName();
+				if(display.getDropDown().equals("Bandname")){
+					bandService.getBands(name, new AsyncCallback<ArrayList<Band>>(){
 
-				public void onFailure(Throwable caught) {
-					caught.printStackTrace();
-					
-				}
-	
-				public void onSuccess(ArrayList<Band> result) {
-					bandList = result;
-		    		eventBus.fireEvent(new SearchedBandClickedEvent(bandList, "Band"));
-				}
-	    		
-				}); 
-			
-			} else if (display.getDropDown().equals("Festival")){
-	      	rpcService.getFestivals(name, new AsyncCallback<ArrayList<Festival>>(){
+					public void onFailure(Throwable caught) {
+						caught.printStackTrace();
+						
+					}
+		
+					public void onSuccess(ArrayList<Band> result) {
+						bandList = result;
+			    		eventBus.fireEvent(new SearchedBandClickedEvent(bandList, "Band"));
+					}
+		    		
+					}); 
+				
+				} else if (display.getDropDown().equals("Festival")){
+		      	rpcService.getFestivals(name, new AsyncCallback<ArrayList<Festival>>(){
 
-				public void onSuccess(ArrayList<Festival> result) {
-	  				festivalList = result;
-	  	      		eventBus.fireEvent(new SearchedBandClickedEvent(festivalList));
-				}
+					public void onSuccess(ArrayList<Festival> result) {
+		  				festivalList = result;
+		  	      		eventBus.fireEvent(new SearchedBandClickedEvent("Festival",festivalList));
+					}
 
-				public void onFailure(Throwable caught) {
-					caught.printStackTrace();
-					
-				}
-	      		
-	      	}); 
+					public void onFailure(Throwable caught) {
+						caught.printStackTrace();
+						
+					}
+		      		
+		      	}); 
 
-	      } else if (display.getDropDown().equals("Genre")){
-	      	bandService.getGenreBands(name, new AsyncCallback<ArrayList<Band>>(){
+		      } else if (display.getDropDown().equals("Genre")){
+		      	bandService.getGenreBands(name, new AsyncCallback<ArrayList<Band>>(){
 
-	  			public void onFailure(Throwable caught) {
-	  				caught.printStackTrace();
-	  				
-	  			}
+		  			public void onFailure(Throwable caught) {
+		  				caught.printStackTrace();
+		  				
+		  			}
 
-	  			public void onSuccess(ArrayList<Band> result) {
-	  				bandList = result;
-	  	      		eventBus.fireEvent(new SearchedBandClickedEvent(bandList, "Band"));
-	  				
-	  			}
-	      		
-	      	}); 
+		  			public void onSuccess(ArrayList<Band> result) {
+		  				bandList = result;
+		  	      		eventBus.fireEvent(new SearchedBandClickedEvent(bandList, "Band"));
+		  				
+		  			}
+		      		
+		      	}); 
 
-	      }
-	      }
-	    });
+		      }
+		      }
+		    });
+		  
+		  display.getAddFestivalButton().addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new AddBandButtonEvent("Festival"));
+				
+			}
+			  
+		  });
 
-    display.getFestivalsButton().addClickHandler(new ClickHandler() {   
-        public void onClick(ClickEvent event) {    
-            eventBus.fireEvent(new SearchEvent("Festival"));
-          }
-        });
-    
-    display.getBandButton().addClickHandler(new ClickHandler() {
-      public void onClick(ClickEvent event) {
-          eventBus.fireEvent(new SearchEvent("Band"));
-        }
-      });
-  
-  }
+		  display.getAddBandButton().addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new AddBandButtonEvent("Band"));
+				
+			}
+			  
+		  });
+	    display.getFestivalsButton().addClickHandler(new ClickHandler() {   
+	        public void onClick(ClickEvent event) {    
+	            eventBus.fireEvent(new SearchEvent("Festival"));
+	          }
+	        });
+	    
+	    display.getBandButton().addClickHandler(new ClickHandler() {
+	      public void onClick(ClickEvent event) {
+	          eventBus.fireEvent(new SearchEvent("Band"));
+	        }
+	      });
+	  
+	  }
   
   
   

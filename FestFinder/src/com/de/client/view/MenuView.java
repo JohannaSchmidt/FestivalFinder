@@ -1,6 +1,7 @@
 package com.de.client.view;
 
 import com.de.client.presenter.MenuPresenter;
+import com.de.shared.User;
 import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
@@ -24,9 +25,11 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 	private PushButton festivals;
 	private PushButton bands;
 	private ListBox suche;
+	private Button addFestival;
+	private Button addBand;
 
 		
-	public MenuView(){
+	public MenuView(User user){
 		FlowPanel vPanel = new FlowPanel();
 		FlowPanel suchPanel = new FlowPanel();
 		initWidget(vPanel);
@@ -53,6 +56,8 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		bands = new PushButton(new Image("images/Bands.png"));
 		bands.setStyleName("buttons");
 		bands.getElement().getStyle().setCursor(Cursor.POINTER); 
+		addFestival = new Button("Festival anlegen");
+		addBand = new Button("Band anlegen");
 
 		suchPanel.add(lblSuche);
 		suchPanel.add(bandSuche);
@@ -62,8 +67,16 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		vPanel.add(home);
 		vPanel.add(festivals);
 		vPanel.add(bands);
-
+		
+		if(user != null){
+			if(user.getRolle().equals("Admin")){
+				vPanel.add(addBand);
+				vPanel.add(addFestival);
+			}
+		}
 	}
+
+	
 	public String getDropDown(){
 		return suche.getItemText(suche.getSelectedIndex());
 	}
@@ -71,6 +84,12 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 	public HasClickHandlers getSuchenButton() {
 		  return suchen;
 	}
+	public HasClickHandlers getAddFestivalButton() {
+		  return addFestival;
+	}
+	public HasClickHandlers getAddBandButton() {
+		  return addBand;
+	}	 
 	 
 	public HasClickHandlers getFestivalsButton() {
 		    return festivals;

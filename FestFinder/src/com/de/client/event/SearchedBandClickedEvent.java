@@ -10,22 +10,34 @@ public class SearchedBandClickedEvent extends GwtEvent<SearchedBandClickedEventH
 	  public static Type<SearchedBandClickedEventHandler> TYPE = new Type<SearchedBandClickedEventHandler>();
 	  private ArrayList <Band> bands = null;
 	  private ArrayList <Festival> festivals = null;
+	  String token;
 	  
 	 public SearchedBandClickedEvent(ArrayList<Band> bandlist, String token) {
-		    this.bands = bandlist;
+		 bands = null;
+		 festivals = null;
+		 this.token = token;
+		 this.bands = bandlist;
 	}
 	 
-	 public SearchedBandClickedEvent(ArrayList<Festival> festivallist) {
-		    this.festivals = festivallist;
+	 public SearchedBandClickedEvent(String token, ArrayList<Festival> festivallist) {
+		 bands = null;
+		 festivals = null;
+		 this.token = token;
+		 this.festivals = festivallist;
 	}
 		  
-    public ArrayList<Band> getSearchedBands() { 
-    	return bands; 
-    }
-    
-    public ArrayList<Festival> getSearchedFestivals() { 
-    	return festivals; 
-    }
+  public ArrayList<Band> getSearchedBands() { 
+  	return bands; 
+  }
+  
+  public ArrayList<Festival> getSearchedFestivals() { 
+  	return festivals; 
+  }
+  
+  public String getToken(){
+  	return token;
+  }
+  		
 	  
 	  @Override
 	  public Type<SearchedBandClickedEventHandler> getAssociatedType() {

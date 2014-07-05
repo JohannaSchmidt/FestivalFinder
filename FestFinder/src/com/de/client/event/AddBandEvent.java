@@ -6,13 +6,13 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 
 public class AddBandEvent extends GwtEvent<AddBandEventHandler> {
 	  public static Type<AddBandEventHandler> TYPE = new Type<AddBandEventHandler>();
-	  Band current;
+	  Object current;
 	  
-	  public AddBandEvent(Band current){
+	  public AddBandEvent(Object current){
 		  this.current = current;
 	  }
 	  
-	  public Band getBand(){
+	  public Object getCurrent(){
 		  return current;
 	  }
 	  
