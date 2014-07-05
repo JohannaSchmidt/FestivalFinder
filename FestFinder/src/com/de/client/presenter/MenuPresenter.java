@@ -52,9 +52,8 @@ public class MenuPresenter implements Presenter {
 	  
 	  display.getSuchenButton().addClickHandler(new ClickHandler(){
 		public void onClick(ClickEvent event) {
-			System.out.println("Klick auf Suche");
 			String name = display.getName();
-			if(display.getDropDown() == "Bandname"){
+			if(display.getDropDown().equals("Bandname")){
 				bandService.getBands(name, new AsyncCallback<ArrayList<Band>>(){
 
 				public void onFailure(Throwable caught) {
@@ -69,7 +68,7 @@ public class MenuPresenter implements Presenter {
 	    		
 				}); 
 			
-			} else if (display.getDropDown() == "Festival"){
+			} else if (display.getDropDown().equals("Festival")){
 	      	rpcService.getFestivals(name, new AsyncCallback<ArrayList<Festival>>(){
 
 				public void onSuccess(ArrayList<Festival> result) {
@@ -84,7 +83,7 @@ public class MenuPresenter implements Presenter {
 	      		
 	      	}); 
 
-	      } else if (display.getDropDown() == "Genre"){
+	      } else if (display.getDropDown().equals("Genre")){
 	      	bandService.getGenreBands(name, new AsyncCallback<ArrayList<Band>>(){
 
 	  			public void onFailure(Throwable caught) {

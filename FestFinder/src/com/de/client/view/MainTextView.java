@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -20,11 +21,11 @@ import com.google.gwt.user.client.ui.Widget;
 public class MainTextView extends Composite  implements MainPresenter.Display{
 
 	private FlexTable festivalsTable;
-	VerticalPanel vPanel;
+	FlowPanel vPanel;
 	private Button delete;
 		
 	public MainTextView(){
-		vPanel = new VerticalPanel();
+		vPanel = new FlowPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
 			

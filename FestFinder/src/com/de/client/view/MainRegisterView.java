@@ -4,6 +4,7 @@ import com.de.client.presenter.MainRegisterPresenter;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -16,7 +17,7 @@ public class MainRegisterView extends Composite  implements MainRegisterPresente
 
 		
 	public MainRegisterView(){
-		VerticalPanel vPanel = new VerticalPanel();
+		FlowPanel vPanel = new FlowPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
 		
@@ -26,7 +27,6 @@ public class MainRegisterView extends Composite  implements MainRegisterPresente
 
 		reg = new Button("Registrieren");
 			
-
 	    vPanel.add(name);
 	    vPanel.add(email);
 	    vPanel.add(pwd);

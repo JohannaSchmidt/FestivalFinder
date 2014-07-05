@@ -5,6 +5,7 @@ import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
@@ -23,10 +24,9 @@ public class LoginView extends Composite implements LoginPresenter.Display{
 	Button reg;
 		
 	public LoginView(){
-		VerticalPanel vPanel = new VerticalPanel();
+		FlowPanel vPanel = new FlowPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("einloggen");
-		vPanel.setSpacing(3);
 		
 		lblName = new Label("Username:");
 		vPanel.add(lblName);

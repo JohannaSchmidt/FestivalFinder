@@ -3,6 +3,7 @@ package com.de.client.view;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -24,7 +25,7 @@ public class MainCreateBandView extends Composite implements MainCreateBandPrese
 
 		
 	public MainCreateBandView(){
-		VerticalPanel vPanel = new VerticalPanel();
+		FlowPanel vPanel = new FlowPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
 		

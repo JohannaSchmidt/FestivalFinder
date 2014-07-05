@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.Label;
@@ -34,7 +35,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 
 		
 	public FestivalInfoView(Object object){
-		VerticalPanel vPanel = new VerticalPanel();
+		FlowPanel vPanel = new FlowPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
 			

@@ -5,6 +5,7 @@ import com.de.shared.User;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -17,10 +18,9 @@ public class LoggedInView extends Composite implements LoggedInPresenter.Display
 	Button bandList;
 		
 	public LoggedInView(User user){
-		VerticalPanel vPanel = new VerticalPanel();
+		FlowPanel vPanel = new FlowPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("einloggen");
-		vPanel.setSpacing(3);
 
 		userName = new Label("Hallo " + user.getName());
 		vPanel.add(userName);
