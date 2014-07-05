@@ -33,12 +33,14 @@ public class LoginView extends Composite implements LoginPresenter.Display{
 		
 		name = 	new TextBox();
 		name.setName("Nutzername");
+		name.setStyleName("px");
 		vPanel.add(name);
 		
 		lblPw = new Label("Passwort:");
 		vPanel.add(lblPw);
 		
 		pwd = new PasswordTextBox();
+		pwd.setStyleName("px");
 		vPanel.add(pwd);
 		
 		login = new Button("Einloggen");

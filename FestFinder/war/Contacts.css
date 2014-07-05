@@ -149,8 +149,8 @@ td.contacts-ListName {
 			.suchpanel {
 				background-color: #d4d499;
 				position: center;
-			    margin-left: 10px;
-			    margin-right: 10px;
+			    margin-left: 0px;
+			    margin-right: 0px;
 				padding: 10px;
 				
 			}
@@ -159,8 +159,8 @@ td.contacts-ListName {
 				text-align: center;
 				padding-top: 5px;
 				padding-bottom: 5px;
-			    margin-left: 10px;
-			    margin-right: 10px;
+			    margin-left: 0px;
+			    margin-right: 0px;
 			    margin-top: 10px;
 			}
 			.clickbuttons {
@@ -224,5 +224,8 @@ td.contacts-ListName {
 				box-sizing: padding-box;
 				padding: 40px;
 				font-family: Webdings;*/
+			}
+			.px{
+			margin-left: 18px;
 			}
  
