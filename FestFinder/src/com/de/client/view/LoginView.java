@@ -1,6 +1,7 @@
 package com.de.client.view;
 
 import com.de.client.presenter.LoginPresenter;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -42,6 +43,7 @@ public class LoginView extends Composite implements LoginPresenter.Display{
 		
 		login = new Button("Einloggen");
 		login.setStyleName("buttons");
+		login.getElement().getStyle().setCursor(Cursor.POINTER); 
 		vPanel.add(login);
 		
 		reg = new Button("Registrieren");

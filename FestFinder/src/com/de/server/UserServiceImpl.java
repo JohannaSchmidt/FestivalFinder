@@ -165,18 +165,5 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 		
 	}
 
-	public void onAddBand(Band band) throws Exception {
-		System.out.println("Jooop");
-		try {
-			connectDataBase();
-			statement.executeUpdate("Insert into Bands values('" + band.getName() + "','" + band.getGenre() + "','" + band.getJahr() + "','" + band.getWebsite() + "','" + "Marlena')");
-
-		} catch (Exception ex){
-			ex.printStackTrace();
-		}
-
-		statement.close();
-		connect.close();
-	}
 
 }

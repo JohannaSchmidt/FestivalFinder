@@ -4,6 +4,7 @@ package com.de.client.presenter;
 
 import java.util.ArrayList;
 
+import com.de.client.BandServiceAsync;
 import com.de.client.UserServiceAsync;
 import com.de.client.event.AddBandEvent;
 import com.de.client.event.RegisterEvent;
@@ -30,11 +31,11 @@ public class MainCreateBandPresenter implements Presenter{
 	    Widget asWidget();
 	  }
 	  
-	  private final UserServiceAsync rpcService;
+	  private final BandServiceAsync rpcService;
 	  private final HandlerManager eventBus;
 	  private final Display display;
 	  
-	  public MainCreateBandPresenter(UserServiceAsync rpcService, HandlerManager eventBus, Display view) {
+	  public MainCreateBandPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view) {
 	    this.rpcService = rpcService;
 	    this.eventBus = eventBus;
 	    this.display = view;

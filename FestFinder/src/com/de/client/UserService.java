@@ -27,6 +27,4 @@ public interface UserService extends RemoteService {
   
   void setCurrentUser(User user) throws Exception;
 
-  void onAddBand(Band band) throws Exception;
-
 }

@@ -1,5 +1,6 @@
 package com.de.client.view;
 
+
 import java.util.ArrayList;
 
 import com.de.client.presenter.MainSearchedPresenter;
@@ -34,13 +35,8 @@ public class MainSearchedView extends Composite implements MainSearchedPresenter
 	    bandsTable.setWidth("100%");
 	    bandsTable.addStyleName("contacts-ListContents");
 	    bandsTable.getColumnFormatter().setWidth(0, "15px");
-	    
-	    addBand = new Button("Band Hinzufuegen");
-	    
 
 	    vPanel.add(bandsTable);
-	    vPanel.add(addBand);
-	    addBand.setVisible(false);
 		
 			
 	}
@@ -81,8 +77,10 @@ public class MainSearchedView extends Composite implements MainSearchedPresenter
 		  }
 	  
 	  public void setButton(){
+		//  bandsTable.removeAllRows();
 		  vPanel.remove(bandsTable);
-		  addBand.setVisible(true);
+		  addBand = new Button("Band Hinzufuegen");
+		  vPanel.add(addBand);
 	  }
 	  
 	  public HasClickHandlers getAddBandButton(){
@@ -97,9 +95,5 @@ public class MainSearchedView extends Composite implements MainSearchedPresenter
 	public HasClickHandlers getBandsTable() {
 		return bandsTable;
 	}
-
-
-
-
 
 }
