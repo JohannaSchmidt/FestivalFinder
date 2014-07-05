@@ -16,6 +16,7 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTMLTable.Cell;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -28,9 +29,9 @@ public class MainPresenter  implements Presenter {
 	  User current;
 	
 	  public interface Display {
+	    Cell getFestivalTableCell(ClickEvent event);
 	    HasClickHandlers getFestivalTable();
 	    HasClickHandlers getDeleteButton();
-	    int getSelectedRow(ClickEvent event);
 	    void setFestivalData(ArrayList<Festival> festivals);
 	    void setBandData(ArrayList<Band> bands);
 	    List<Integer> getSelectedRows();
@@ -73,21 +74,19 @@ public class MainPresenter  implements Presenter {
 		  
 		  display.getFestivalTable().addClickHandler(new ClickHandler() {
 		        public void onClick(ClickEvent event) {
-		          int selectedRow = display.getSelectedRow(event);
-		          
-		          if (selectedRow >= 0) {
+		          Cell selected = display.getFestivalTableCell(event);
+
+		          if (selected != null) {
 		        	 if(token == "Festival"){
-		        		 eventBus.fireEvent(new FestivalClickedEvent(festivalList.get(selectedRow)));
+		        		 eventBus.fireEvent(new FestivalClickedEvent(festivalList.get(selected.getRowIndex())));
 		        	 } else if(token == "Band"){
-		        		 eventBus.fireEvent(new FestivalClickedEvent(bandList.get(selectedRow)));
+		        		 eventBus.fireEvent(new FestivalClickedEvent(bandList.get(selected.getRowIndex())));
 		        	 } else if(token == "PFestival"){
-		        		 eventBus.fireEvent(new FestivalClickedEvent(festivalList.get(selectedRow)));
+		        		 eventBus.fireEvent(new FestivalClickedEvent(festivalList.get(selected.getRowIndex())));
 		        	 }
 		        }
 
 		      }
-		  
-
 	  
 		  });
 		  

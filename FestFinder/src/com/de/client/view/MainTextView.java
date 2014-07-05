@@ -6,6 +6,7 @@ import java.util.List;
 import com.de.client.presenter.MainPresenter;
 import com.de.shared.Band;
 import com.de.shared.Festival;
+import com.de.shared.User;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
@@ -13,9 +14,7 @@ import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTMLTable;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.HTMLTable.Cell;
 import com.google.gwt.user.client.ui.Widget;
 
 public class MainTextView extends Composite  implements MainPresenter.Display{
@@ -23,8 +22,10 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	private FlexTable festivalsTable;
 	FlowPanel vPanel;
 	private Button delete;
+	private User current;
 		
-	public MainTextView(){
+	public MainTextView(User current){
+		this.current = current;
 		vPanel = new FlowPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
@@ -39,7 +40,7 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	    delete = new Button("Bands aus Bandliste loeschen");
 	    
 	    vPanel.add(festivalsTable);
-		
+
 			
 	}
 	
@@ -49,8 +50,7 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 
 		    } else {
 			    for (int i = 0; i < data.size(); ++i) {
-			        festivalsTable.setWidget(i, 0, new CheckBox());
-			        festivalsTable.setText(i, 1, data.get(i).getName());
+			        festivalsTable.setText(i, 0, data.get(i).getName());
 			    }
 		    }
 		  }
@@ -59,28 +59,16 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 			   festivalsTable.removeAllRows();
 
 				    for (int i = 0; i < data.size(); ++i) {
-				        festivalsTable.setWidget(i, 0, new CheckBox());
-				        festivalsTable.setText(i, 1, data.get(i).getName());
-				        vPanel.add(delete);
-				    }
-			    
+				        if(current != null){
+					        festivalsTable.setText(i, 1, data.get(i).getName());
+					        festivalsTable.setWidget(i, 0, new CheckBox());
+					        vPanel.add(delete);
+				        } else {
+					        festivalsTable.setText(i, 0, data.get(i).getName());
+				        }
+				    }			    
+				        
 			 }
-	 
-		  public int getSelectedRow(ClickEvent event) {
-			    int selectedRow = -1;
-			    HTMLTable.Cell cell = festivalsTable.getCellForEvent(event);
-			    
-			    if (cell != null) {
-			      // Suppress clicks if the user is actually selecting the 
-			      //  check box
-			      //
-			      if (cell.getCellIndex() > 0) {
-			        selectedRow = cell.getRowIndex();
-			      }
-			    }
-			    
-			    return selectedRow;
-			  }
 		  
 		public List<Integer> getSelectedRows() {
 			    List<Integer> selectedRows = new ArrayList<Integer>();
@@ -104,6 +92,9 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 
 	public HasClickHandlers getFestivalTable() {
 		return festivalsTable;
+	}
+	public Cell getFestivalTableCell(ClickEvent event) {
+		return festivalsTable.getCellForEvent(event);
 	}
 
 	public HasClickHandlers getDeleteButton() {

@@ -345,12 +345,12 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
   private void doChangeMain(String token) {
 	if(token == "BandList"){
 	    History.newItem("bandList");
-        Presenter presenter = new MainPresenter(rpcService, bandService, userService, eventBus, new MainTextView(), token, currentUser);
+        Presenter presenter = new MainPresenter(rpcService, bandService, userService, eventBus, new MainTextView(currentUser), token, currentUser);
         presenter.go(centerPanel);
 	} else {
 		
 		History.newItem("main");
-        Presenter presenter = new MainPresenter(rpcService, bandService, eventBus, new MainTextView(), token);
+        Presenter presenter = new MainPresenter(rpcService, bandService, eventBus, new MainTextView(null), token);
         presenter.go(centerPanel);
     } 
   }
@@ -376,7 +376,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
     if (token != null) {
 
       if (token.equals("home")) {
-	          Presenter presenter = new MainPresenter(rpcService, bandService, eventBus, new MainTextView(), "Festival");
+	          Presenter presenter = new MainPresenter(rpcService, bandService, eventBus, new MainTextView(null), "Festival");
 	          presenter.go(centerPanel);
 	          Presenter menu = new MenuPresenter(rpcService, bandService, eventBus, new MenuView());
 	          menu.go(westPanel);
@@ -388,7 +388,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	          Presenter main = new MainRegisterPresenter(userService, eventBus, new MainRegisterView());
 	          main.go(centerPanel);
       } else if (token.equals("registered")) {
-		      Presenter main = new MainPresenter(rpcService, bandService, userService, eventBus, new MainTextView(), "PFestival", currentUser);
+		      Presenter main = new MainPresenter(rpcService, bandService, userService, eventBus, new MainTextView(null), "PFestival", currentUser);
 		      main.go(centerPanel);
 		      Presenter logo = new LogoPresenter(rpcService, eventBus, new LogoView());
 		      logo.go(northPanel);
