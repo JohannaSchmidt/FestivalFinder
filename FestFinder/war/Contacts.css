@@ -112,23 +112,22 @@ td.contacts-ListName {
 				background-color: #f8e9b6;
 				width: 660px;
 				height:220px;
-				margin-top: 12px;
+				margin-top: 10px;
 				margin-left: 30px;
+				margin-bottom: 10px;
 				float: left;
 			}
 			.einloggen {
 				background-image: url(images/einloggen.jpg);
 				background-color: #f8e9b6;
 				color: #383838;
-				width: 170px;
+				width: 180px;
 				height:220px;
-				margin-top: 12px;
-				margin-right: 30px;
-				float: right;
+				margin-top: 10px;
+				margin-right: 20px;
 				box-sizing: padding-box;
-				padding-left: 10px;
-				padding-right: 10px;
-				padding-bottom: 10px;
+				padding-right: 0px;
+				padding-bottom: 0px;
 				font-family: Calibri;
 			}
 			.suche {
@@ -144,6 +143,15 @@ td.contacts-ListName {
 				font-family: Calibri;
 				text-align: center;
 				
+			}
+			.suchpanel {
+				background-color: #d4d499;
+				position: center;
+				color: #383838;
+			    margin-left: 10px;
+			    margin-right: 10px;
+				text-align: center;
+			   	padding: 10px;
 			}
 			.buttons {
 				background-color: #d4d499;
@@ -176,10 +184,9 @@ td.contacts-ListName {
 			}
 			.seite{
 				background-color: #d4d499;
-				width: 600px;
+				width: 580px;
 				height: 600px;
-				/*height: 600px;
-				margin-right: 30px;
+				/*margin-right: 30px;
 				float: right;
 				overflow: auto;
 				box-sizing: padding-box;

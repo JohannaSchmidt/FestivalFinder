@@ -20,6 +20,7 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 	private Label lblSuche;
 	private TextBox bandSuche;
 	private Button suchen;
+	private PushButton home;
 	private PushButton festivals;
 	private PushButton bands;
 	private ListBox suche;
@@ -27,11 +28,12 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		
 	public MenuView(){
 		FlowPanel vPanel = new FlowPanel();
+		FlowPanel suchPanel = new FlowPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("suche");
+		suchPanel.setStyleName("suchpanel");
 		
-		lblSuche = new Label("Suchen nach:");
-		lblSuche.setStyleName("buttons");		
+		lblSuche = new Label("Suchen nach:");	
 		suche = new ListBox();
 		suche.addItem("Bandname");
 		suche.addItem("Festival");
@@ -39,9 +41,11 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		suche.setStyleName("buttons");
 		bandSuche = new TextBox();
 		bandSuche.setText("Name eingeben");
-		bandSuche.setStyleName("buttons");
 		suchen = new Button("Suchen");
 		suchen.setStyleName("buttons");
+		home = new PushButton(new Image("images/Home.png"));
+		home.setStyleName("buttons");
+		home.getElement().getStyle().setCursor(Cursor.POINTER);
 		festivals = new PushButton(new Image("images/Festivals.png"));
 		festivals.setStyleName("buttons");
 		festivals.getElement().getStyle().setCursor(Cursor.POINTER); 
@@ -49,10 +53,12 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		bands.setStyleName("buttons");
 		bands.getElement().getStyle().setCursor(Cursor.POINTER); 
 
-		vPanel.add(lblSuche);
-		vPanel.add(bandSuche);
-		vPanel.add(suche);
-		vPanel.add(suchen);
+		suchPanel.add(lblSuche);
+		suchPanel.add(bandSuche);
+		suchPanel.add(suche);
+		suchPanel.add(suchen);
+		vPanel.add(suchPanel);
+		vPanel.add(home);
 		vPanel.add(festivals);
 		vPanel.add(bands);
 
