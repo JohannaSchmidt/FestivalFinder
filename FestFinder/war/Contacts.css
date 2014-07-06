@@ -118,7 +118,7 @@ td.contacts-ListName {
 				margin-bottom: 10px;
 				float: left;
 			}
-			.einloggen {
+			.einloggen { /*Panel*/
 				background-image: url(images/einloggen.jpg);
 				background-color: #f8e9b6;
 				color: #383838;
@@ -134,7 +134,7 @@ td.contacts-ListName {
 				padding-left: 25px;
 			}
 			
-			.suche {
+			.suche { /*Panel*/
 				background-color: #f2d79c;
 				width: 230px;
 				color: #383838;
@@ -146,7 +146,7 @@ td.contacts-ListName {
 				color: #383838;
 				
 			}
-			.suchpanel {
+			.suchpanel { /*panel*/
 				background-color: #d4d499;
 				position: center;
 			    margin-left: 0px;
@@ -154,17 +154,51 @@ td.contacts-ListName {
 				padding: 10px;
 				
 			}
-			.buttons {
+			.buttons { /*?*/
 				background-color: #d4d499;
 				text-align: center;
 				padding-top: 5px;
 				padding-bottom: 5px;
-			    margin-left: 0px;
-			    margin-right: 0px;
 			    margin-top: 10px;
 			}
+			.suchenbutton { /*4*/
+				background-color: #d4d499;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				margin-left: 20px;				
+				text-align: center;
+				margin-left: 0px;
+				font-size: 16px;
+				font-family: Calibri;
+				color: #383838;
+				width: 100px;
+			}
+			.eingabeFeld { /*2*/
+				font-family: Calibri;
+				color: #d4d499;
+				font-size: 16px;
+				margin-left: 11px;
+				text-align: center;
+				font-style:italic;
+				margin-bottom: 5px;
+			}
+			.suchentext{ /*1*/
+				background-color: #d4d499;
+				font-size: 20px;
+				font-family: Calibri;
+				color: #383838;
+				margin-bottom: 5px;
+				margin-left: 45px;
+			}
+			.suchenfeld{ /*3*/
+				margin-left: 15px;
+				background-color: #d4d499;				
+				padding-top: 5px;
+				padding-bottom: 5px;
+				margin-right: 5px;
+			    margin-top: 5px;
+			}
 			.clickbuttons {
-				display: block;
 				background-color: #d4d499;
 				padding-top: 5px;
 				padding-bottom: 5px;				
@@ -174,8 +208,7 @@ td.contacts-ListName {
 				font-family: Calibri;
 				color: #383838;
 			}
-			
-			.clickbuttonseinloggen {
+			.clickbuttonseinloggen { /*Main Panel und einloggen*/
 				display: block;
 				background-color: #d4d499;
 				padding-top: 5px;
@@ -188,13 +221,13 @@ td.contacts-ListName {
 				font-family: Calibri;
 				color: #383838;
 			}
-			.headlines {
+			.headlines { /*Main*/
 				font-size: 30px;
 				font-family: Calibri;
 				color: #383838;
 				padding-left: -30px;
 			}
-			.hallo {
+			.hallo { /*LoggedInView*/
 				font-size: 30px;
 				font-family: Calibri;
 				color: #383838;
@@ -202,7 +235,7 @@ td.contacts-ListName {
 				text-align: center;
 				padding-top:10px;
 			}
-			.email {
+			.email { /*LoggedInView*/
 				font-size: 14px;
 				font-family: Calibri;
 				color: #383838;		
