@@ -22,13 +22,13 @@ import com.google.gwt.user.client.ui.Widget;
 public class MainTextView extends Composite  implements MainPresenter.Display{
 
 	private FlexTable festivalsTable;
-	ScrollPanel vPanel;
+	FlowPanel vPanel;
 	private Button delete;
 	private User current;
 		
 	public MainTextView(User current){
 		this.current = current;
-		vPanel = new ScrollPanel();
+		vPanel = new FlowPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
 			
@@ -63,13 +63,14 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 		public void setBandData(ArrayList<Band> data) {
 			   festivalsTable.removeAllRows();
 
-				    for (int i = 0; i < data.size(); ++i) {
+				    for (int i = 0; i < data.size(); i++) {
 				        if(current != null){
 					        festivalsTable.setText(i, 1, data.get(i).getName());
 					        festivalsTable.setWidget(i, 0, new CheckBox());
 					        vPanel.add(delete);
 				        } else {
 					        festivalsTable.setText(i, 0, data.get(i).getName());
+
 				        }
 				    }			    
 				        

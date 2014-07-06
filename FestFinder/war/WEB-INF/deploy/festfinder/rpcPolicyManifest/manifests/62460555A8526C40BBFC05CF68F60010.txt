@@ -1,2 +1,0 @@
-serviceClass: com.de.client.UserService
-path: 10DD7F5E1C67A4B6C79284A50AACDD4C.gwt.rpc

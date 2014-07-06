@@ -136,6 +136,7 @@ public class BandServiceImpl extends RemoteServiceServlet implements
 			resultSet = statement.executeQuery("Select bName from FestivalBandListe where festivalID = '" + festival.getfestId() + "'");
 			bandListe = writeFestivalBandResultSet(resultSet);
 		} catch (Exception ex){
+			ex.printStackTrace();
 			System.out.println("Keine Verbindung");
 		}
 		resultSet.close();
@@ -185,6 +186,7 @@ public class BandServiceImpl extends RemoteServiceServlet implements
 			connectDataBase();
 			statement.executeUpdate("Insert into FestivalBandListe values('" + festival + "','" + band + "');");
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Keine Verbindung");
 		}
 		statement.close();

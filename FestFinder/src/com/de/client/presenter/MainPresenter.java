@@ -1,5 +1,6 @@
 package com.de.client.presenter;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -144,18 +145,16 @@ public class MainPresenter  implements Presenter {
 					for(String bands : userbands){
 						bandService.getBands(bands, new AsyncCallback<ArrayList<Band>>(){
 
-							public void onFailure(Throwable caught) {
-								caught.printStackTrace();
-								
-							}
-
 							public void onSuccess(ArrayList<Band> result) {
 								bandList.add(result.get(0));
 								display.setBandData(bandList);
 								
-							}						
-							
-							
+							}	
+
+							public void onFailure(Throwable caught) {
+								caught.printStackTrace();
+								
+							}							
 							
 						});
 					}
@@ -205,7 +204,7 @@ public class MainPresenter  implements Presenter {
 					}
 
 					public void onSuccess(ArrayList<Festival> result) {
-						if(result != null || !result.isEmpty()){
+						if(!result.isEmpty()){
 							for(int i = 0; i < festivalList.size(); i ++){
 								if(festivalList.get(0).getName().equals(result.get(0).getName())){
 									festivalList.remove(i);

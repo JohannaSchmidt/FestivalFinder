@@ -32,6 +32,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 	private Label bis;
 	private Anchor web;
 	private Band currentBand;
+	private Label bestBands;
 	
 	private FlexTable bands;
 	
@@ -52,14 +53,15 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			
 			name = new Label(((Festival) object).getName());
 			name.addStyleName("headlines");
-			ort = new Label(((Festival) object).getOrt());
-			von = new Label(((Festival) object).getsDatum().toString());
-			bis = new Label(((Festival) object).geteDatum().toString());
+			ort = new Label("in "+ ((Festival) object).getOrt());
+			von = new Label("von " + ((Festival) object).getsDatum().toString());
+			bis = new Label("bis " + ((Festival) object).geteDatum().toString());
 			web = new Anchor(((Festival) object).getWebsite());
 			
 			addBandsToFestival = new Button("Diese Band dem Festival zuordnen");
 			addBandsToFestival.getElement().getStyle().setCursor(Cursor.POINTER);
 
+			bestBands = new Label("Bestätige Bands : ");
 			bands = new FlexTable();
 			bands.getElement().getStyle().setCursor(Cursor.POINTER);
 			
@@ -67,7 +69,8 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			vPanel.add(ort);
 			vPanel.add(von);
 			vPanel.add(bis);
-			vPanel.add(web);			
+			vPanel.add(web);
+			vPanel.add(bestBands);
 			vPanel.add(bands);
 
 			
