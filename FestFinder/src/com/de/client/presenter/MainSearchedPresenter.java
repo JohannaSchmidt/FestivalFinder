@@ -7,10 +7,12 @@ import com.de.client.event.AddBandButtonEvent;
 import com.de.client.event.FestivalClickedEvent;
 import com.de.shared.Band;
 import com.de.shared.Festival;
+import com.de.shared.User;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.HTMLTable.Cell;
@@ -36,27 +38,31 @@ public class MainSearchedPresenter implements Presenter{
 	  private final HandlerManager eventBus;
 	  private final Display display;
 	  private String token;
+	  private User current;
 	  
-	  public MainSearchedPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view) {
+	  public MainSearchedPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view, User current) {
 	    this.rpcService = rpcService;
 	    this.eventBus = eventBus;
 	    this.display = view;
+	    this.current = current;
 	  }
 	  
-	  public MainSearchedPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view, ArrayList<Band> bands) {
+	  public MainSearchedPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view, ArrayList<Band> bands, User current) {
 		    this.rpcService = rpcService;
 		    this.eventBus = eventBus;
 		    this.display = view;
 		    this.bandList = bands;
 		    this.token = "Band";
+		    this.current = current;
 	  }
 	  
-	  public MainSearchedPresenter(BandServiceAsync rpcService, HandlerManager eventBus, ArrayList<Festival> festivals, Display view) {
+	  public MainSearchedPresenter(BandServiceAsync rpcService, HandlerManager eventBus, ArrayList<Festival> festivals, Display view, User current) {
 		  	this.rpcService = rpcService;
 		    this.eventBus = eventBus;
 		    this.display = view;
 		    this.festivalList = festivals;
 		    this.token = "Festival";
+		    this.current = current;
 	  }
 
 	  
@@ -77,7 +83,11 @@ public class MainSearchedPresenter implements Presenter{
 		  
 		  display.getAddBandButton().addClickHandler(new ClickHandler(){
 			  public void onClick(ClickEvent event) {
-				  eventBus.fireEvent(new AddBandButtonEvent("Band"));
+				  if(current != null){
+					  eventBus.fireEvent(new AddBandButtonEvent("Band"));
+				  } else {
+			    	  Window.alert("Du musst dich zuerst einloggen!");
+				  }
 			  }
 		  });
 		  

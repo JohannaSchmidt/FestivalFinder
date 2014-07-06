@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.de.client.presenter.MainSearchedPresenter;
 import com.de.shared.Band;
 import com.de.shared.Festival;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
@@ -33,10 +34,11 @@ public class MainSearchedView extends Composite implements MainSearchedPresenter
 	    bandsTable = new FlexTable();
 	    bandsTable.setCellSpacing(0);
 	    bandsTable.setCellPadding(0);
-	    bandsTable.setBorderWidth(1);
 	    bandsTable.setWidth("100%");
 	    bandsTable.addStyleName("contacts-ListContents");
 	    bandsTable.getColumnFormatter().setWidth(0, "15px");
+	    bandsTable.getElement().getStyle().setCursor(Cursor.POINTER);
+
 	    
 		addBand = new Button("Band Hinzufuegen");
 		addBand.setStyleName("clickbuttons");

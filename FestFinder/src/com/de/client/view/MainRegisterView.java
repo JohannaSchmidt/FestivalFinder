@@ -1,6 +1,7 @@
 package com.de.client.view;
 
 import com.de.client.presenter.MainRegisterPresenter;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -43,6 +44,8 @@ public class MainRegisterView extends Composite  implements MainRegisterPresente
 
 		reg = new Button("Registrieren");
 		reg.setStyleName("clickbuttonseinloggen");
+		reg.getElement().getStyle().setCursor(Cursor.POINTER);
+
 			
 		vPanel.add(nameLabel);
 	    vPanel.add(name);

@@ -32,6 +32,8 @@ public class MenuPresenter implements Presenter {
   public interface Display {
 	    HasClickHandlers getSuchenButton();
 	    HasClickHandlers getAddFestivalButton();
+	    HasClickHandlers getDeleteBandButton();
+	    HasClickHandlers getDeleteFestivalButton();
 	    HasClickHandlers getAddBandButton();
 	    HasClickHandlers getHomeButton();
 	    TextBox getSucheBox();
@@ -132,6 +134,22 @@ public class MenuPresenter implements Presenter {
 			}
 			  
 		  });
+		  
+		  display.getDeleteFestivalButton().addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new AddBandButtonEvent("DeleteFestival"));
+				
+			}
+			  
+		  });
+
+		  display.getDeleteBandButton().addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event) {
+				eventBus.fireEvent(new AddBandButtonEvent("DeleteBand"));
+				
+			}
+		  });
+		  
 	    display.getFestivalsButton().addClickHandler(new ClickHandler() {   
 	        public void onClick(ClickEvent event) {    
 	            eventBus.fireEvent(new SearchEvent("Festival"));

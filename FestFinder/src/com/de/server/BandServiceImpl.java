@@ -41,12 +41,6 @@ public class BandServiceImpl extends RemoteServiceServlet implements
 				   
 				   Band band = new Band(bName, genre, gJahr, website, nutzer);
 				   bands.add(band);
-				   
-				   System.out.println("Band: " + bName);
-				   System.out.println("Genre: " + genre);
-				   System.out.println("Gründungsjahr: " + gJahr);
-				   System.out.println("Website: " + website);
-				   System.out.println("Nutzer: " + nutzer);
 
 			   }
 		} catch (Exception e) {

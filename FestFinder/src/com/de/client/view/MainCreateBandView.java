@@ -1,14 +1,21 @@
 package com.de.client.view;
 
+import java.util.ArrayList;
+
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.de.client.presenter.MainCreateBandPresenter;
+import com.de.shared.Band;
+import com.de.shared.Festival;
 
 public class MainCreateBandView extends Composite implements MainCreateBandPresenter.Display{
 
@@ -19,6 +26,9 @@ public class MainCreateBandView extends Composite implements MainCreateBandPrese
 	private TextBox gJahr;
 	private TextBox webSite;
 	private Button addBand;
+	private SuggestBox thingsToDelete;
+	private Button deleteBand;
+	private Button deleteFestival;
 	
 	private TextBox festId;
 	private TextBox fName;
@@ -40,17 +50,28 @@ public class MainCreateBandView extends Composite implements MainCreateBandPrese
 	private Label leDatum;
 	private Label lort;
 	private Label lfWeb;
+	FlowPanel vPanel;
+	String token;
 
 		
 	public MainCreateBandView(String token){
-		FlowPanel vPanel = new FlowPanel();
+		this.token = token;
+		vPanel = new FlowPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
 		
 		addBand = new Button("Band Hinzufuegen");
 		addBand.setStyleName("clickbuttons");
+		addBand.getElement().getStyle().setCursor(Cursor.POINTER);
+		deleteBand = new Button("Loeschen");
+		deleteBand.setStyleName("clickbuttons");
+		deleteBand.getElement().getStyle().setCursor(Cursor.POINTER);
+		deleteFestival = new Button("Loeschen");
+		deleteFestival.setStyleName("clickbuttons");
+		deleteFestival.getElement().getStyle().setCursor(Cursor.POINTER);
 		addFestival = new Button("Festival Hinzufuegen");
 		addFestival.setStyleName("clickbuttons");
+		addFestival.getElement().getStyle().setCursor(Cursor.POINTER);
 		
 		if(token == "Band"){
 			
@@ -111,86 +132,120 @@ public class MainCreateBandView extends Composite implements MainCreateBandPrese
 			
 	}
 	
-	 public HasClickHandlers getAddBandButton() {
-		  return addBand;
+	public void setOracleBand(ArrayList<Band> words){
+		deleteBand.setStyleName("clickbuttons");
+		 MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();		    
+		    for (Band word : words) {
+		      oracle.add(word.getName());
+		    }
+		thingsToDelete = new SuggestBox(oracle);
+		vPanel.add(thingsToDelete);
+		vPanel.add(deleteBand);		
+}
+
+public void setOracleFestival(ArrayList<Festival> words){
+	deleteFestival.setStyleName("clickbuttons");
+	 MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();		    
+	    for (Festival word : words) {
+	      oracle.add(word.getName());
+	    }
+	thingsToDelete = new SuggestBox(oracle);
+	vPanel.add(thingsToDelete);
+	vPanel.add(deleteFestival);		
+}
+ public HasClickHandlers getAddBandButton() {
+	  return addBand;
+}
+ 
+ public HasClickHandlers getDeleteBandButton() {
+	  return deleteBand;
+}
+ public HasClickHandlers getDeleteFestivalButton() {
+	  return deleteFestival;
+}
+	public String getDeleteName(){
+		return thingsToDelete.getText();
 	}
-	 
-	 public HasClickHandlers getAddFestivalButton() {
-		  return addFestival;
-	}
-		
-	 public String getName() {
-		 if(bandName.getText() !=null){
-			 return bandName.getText();
-		 }
-		 return null;
-	}
-	 
-	 public String getGenre() {
-		 if(genre.getText() !=null){
-			 return genre.getText();
-		 }
-		 return null;
-	}
-	 
-	 public String getGJahr() {
-		 if(gJahr.getText() !=null){
-			 return gJahr.getText();
-		 }
-		 return null;
-	}
-	 
-	 public String getSite() {
-		 if(webSite.getText() !=null){
-			 return webSite.getText();
-		 }
-		 return null;
-	}
-	 
-	 public String getfId() {
-		 if(festId.getText() !=null){
-			 return festId.getText();
-		 }
-		 return null;
-	}
-	 public String getfName() {
-		 if(fName.getText() !=null){
-			 return fName.getText();
-		 }
-		 return null;
-	}
-	 
-	 public String getfsDatum() {
-		 if(sDatum.getText() !=null){
-			 return sDatum.getText();
-		 }
-		 return null;
-	}
-	 public String getfeDatum() {
-		 if(eDatum.getText() !=null){
-			 return eDatum.getText();
-		 }
-		 return null;
-	}
-	 
-	 public String getOrt() {
-		 if(ort.getText() !=null){
-			 return ort.getText();
-		 }
-		 return null;
-	}
-	 
-	 public String getfWeb() {
-		 if(fWeb.getText() !=null){
-			 return fWeb.getText();
-		 }
-		 return null;
-	}
+ 
+ public HasClickHandlers getAddFestivalButton() {
+	  return addFestival;
+}
+ public String getToken(){
+	 return token;
+ }
 	
-	public Widget asWidget(){
-		return this;		
-	}
+ public String getName() {
+	 if(bandName.getText() !=null){
+		 return bandName.getText();
+	 }
+	 return null;
+}
+ 
+ public String getGenre() {
+	 if(genre.getText() !=null){
+		 return genre.getText();
+	 }
+	 return null;
+}
+ 
+ public String getGJahr() {
+	 if(gJahr.getText() !=null){
+		 return gJahr.getText();
+	 }
+	 return null;
+}
+ 
+ public String getSite() {
+	 if(webSite.getText() !=null){
+		 return webSite.getText();
+	 }
+	 return null;
+}
+ 
+ public String getfId() {
+	 if(festId.getText() !=null){
+		 return festId.getText();
+	 }
+	 return null;
+}
+ public String getfName() {
+	 if(fName.getText() !=null){
+		 return fName.getText();
+	 }
+	 return null;
+}
+ 
+ public String getfsDatum() {
+	 if(sDatum.getText() !=null){
+		 return sDatum.getText();
+	 }
+	 return null;
+}
+ public String getfeDatum() {
+	 if(eDatum.getText() !=null){
+		 return eDatum.getText();
+	 }
+	 return null;
+}
+ 
+ public String getOrt() {
+	 if(ort.getText() !=null){
+		 return ort.getText();
+	 }
+	 return null;
+}
+ 
+ public String getfWeb() {
+	 if(fWeb.getText() !=null){
+		 return fWeb.getText();
+	 }
+	 return null;
+}
+
+public Widget asWidget(){
+	return this;		
+}
+
 
 	
-		
 }

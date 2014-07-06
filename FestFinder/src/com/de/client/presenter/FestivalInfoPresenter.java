@@ -120,7 +120,7 @@ public class FestivalInfoPresenter implements Presenter {
     
     display.getWebButton().addClickHandler(new ClickHandler(){
 		public void onClick(ClickEvent event) {
-			Window.open(display.getUrl(), "Hurricane", null);			
+			Window.open(display.getUrl(), null, null);			
 		} 	
     });
 

@@ -5,6 +5,7 @@ package com.de.client.presenter;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import com.de.client.BandService;
 import com.de.client.BandServiceAsync;
 import com.de.client.FestivalServiceAsync;
 import com.de.client.UserServiceAsync;
@@ -28,6 +29,12 @@ public class MainCreateBandPresenter implements Presenter{
 	  public interface Display {
 		    HasClickHandlers getAddBandButton();
 		    HasClickHandlers getAddFestivalButton();
+		    HasClickHandlers getDeleteBandButton();
+		    HasClickHandlers getDeleteFestivalButton();
+		    void setOracleFestival(ArrayList<Festival> words);
+		    void setOracleBand(ArrayList<Band> words);
+		    String getToken();
+		    String getDeleteName();
 		    String getName();
 		    String getGenre();
 		    String getGJahr();
@@ -47,37 +54,40 @@ public class MainCreateBandPresenter implements Presenter{
 	  private final HandlerManager eventBus;
 	  private final Display display;
 	  public  Festival festival;
+	  public Band band;
+	  private final User current;
 	  
-	  public MainCreateBandPresenter(BandServiceAsync rpcService, FestivalServiceAsync festivalService, HandlerManager eventBus, Display view) {
+	  public MainCreateBandPresenter(BandServiceAsync rpcService, FestivalServiceAsync festivalService, HandlerManager eventBus, Display view, User current) {
 		    this.rpcService = rpcService;
 		    this.festivalService = festivalService;
 		    this.eventBus = eventBus;
 		    this.display = view;
+		    this.current = current;
 		  }
 	  
 	  public void bind() {
 	    display.getAddBandButton().addClickHandler(new ClickHandler() {   
 	      public void onClick(ClickEvent event) {
-	    	  String name = display.getName();
-	    	  String genre = display.getGenre();
-	    	  String gJahr = display.getGJahr();
-	    	  int jahr = Integer.parseInt(gJahr);  
-	    	  String site = display.getSite();
-	    	  final Band band = new Band(name, genre, jahr, site, "user");
-	    	  
-	    	  rpcService.onAddBand(band, new AsyncCallback<Void>() {
+		    	  String name = display.getName();
+		    	  String genre = display.getGenre();
+		    	  String gJahr = display.getGJahr();
+		    	  int jahr = Integer.parseInt(gJahr);  
+		    	  String site = display.getSite();
+		    	  band = new Band(name, genre, jahr, site, current.getName());
+		    	  
+		    	  rpcService.onAddBand(band, new AsyncCallback<Void>() {
+	
+					public void onFailure(Throwable caught) {
+						caught.printStackTrace();
+						
+					}
+	
+					public void onSuccess(Void result) {					
+						eventBus.fireEvent(new AddBandEvent(band));
+					}
+		    		     		 	    		  
+		    	  });
 
-				public void onFailure(Throwable caught) {
-					caught.printStackTrace();
-					
-				}
-
-				public void onSuccess(Void result) {					
-					eventBus.fireEvent(new AddBandEvent(band));
-				}
-	    		     		 	    		  
-	    	  });
-	    	
 	      }
 	    });
 	    display.getAddFestivalButton().addClickHandler(new ClickHandler() {   
@@ -107,6 +117,76 @@ public class MainCreateBandPresenter implements Presenter{
 			        });
 		      }
 	    });
+	    
+	    display.getDeleteBandButton().addClickHandler(new ClickHandler() {   
+		      public void onClick(ClickEvent event) {
+		    	 String bandName =  display.getDeleteName();
+		    	 rpcService.onDeleteBand(bandName, new AsyncCallback<Void>(){
+
+					public void onFailure(Throwable caught) {
+						caught.printStackTrace();
+						
+					}
+
+					public void onSuccess(Void result) {
+						Window.alert("Band wurde geloescht");
+						
+					}
+		    		 
+		    	 });
+		      }
+	    });
+	    
+	    display.getDeleteFestivalButton().addClickHandler(new ClickHandler() {   
+		      public void onClick(ClickEvent event) {
+		    	 String festivalName =  display.getDeleteName();
+		    	festivalService.onDeleteFestival(festivalName, new AsyncCallback<Void>(){;
+
+					public void onFailure(Throwable caught) {
+						caught.printStackTrace();
+						
+					}
+
+					public void onSuccess(Void result) {
+						Window.alert("Festival wurde geloescht");
+						
+					}
+		      });
+		    		 
+	    	}
+	    });
+	    
+	    if(display.getToken().equals("DeleteFestival")){
+	    	festivalService.getAllFestivals(new AsyncCallback<ArrayList<Festival>>(){
+
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				public void onSuccess(ArrayList<Festival> result) {
+					display.setOracleFestival(result);
+					
+				}
+	    		
+	    	});
+	    	
+	    } else if(display.getToken().equals("DeleteBand")){
+	    	rpcService.getAllBands(new AsyncCallback<ArrayList<Band>>(){
+
+				public void onFailure(Throwable caught) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				public void onSuccess(ArrayList<Band> result) {
+					display.setOracleBand(result);
+					
+				}
+	    		
+	    	});
+	    }
+	    
 
 	  }
 	

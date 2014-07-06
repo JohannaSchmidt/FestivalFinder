@@ -16,7 +16,7 @@ public interface FestivalServiceAsync {
   void getFestivals(String name, AsyncCallback<ArrayList<Festival>> callback)
   	  throws IllegalArgumentException;
   
-  void getAllFestivalsBands(String bName, AsyncCallback<ArrayList<String>> callback);
+  void getFestivalByBandName(String bName, AsyncCallback<ArrayList<Festival>> callback);
   
   void getFestivalById(String id, AsyncCallback<ArrayList<Festival>> callback);
   

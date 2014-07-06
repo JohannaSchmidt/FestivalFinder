@@ -16,7 +16,7 @@ public interface FestivalService extends RemoteService {
   
   ArrayList<Festival> getFestivals(String name) throws Exception;
   
-  ArrayList<String> getAllFestivalsBands(String bName) throws Exception;
+  ArrayList<Festival> getFestivalByBandName(String bName) throws Exception;
   
   ArrayList<Festival> getFestivalById(String id) throws Exception;
   

@@ -27,6 +27,8 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 	private ListBox suche;
 	private Button addFestival;
 	private Button addBand;
+	private Button deleteFestival;
+	private Button deleteBand;
 
 		
 	public MenuView(User user){
@@ -42,10 +44,13 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		suche.addItem("Festival");
 		suche.addItem("Genre");
 		suche.setStyleName("buttons");
+		suche.getElement().getStyle().setCursor(Cursor.POINTER);
 		bandSuche = new TextBox();
 		bandSuche.setText("Suchbegriff eingeben");
 		suchen = new Button("Suchen");
 		suchen.setStyleName("clickbuttons");
+		suchen.getElement().getStyle().setCursor(Cursor.POINTER);
+
 		
 		home = new PushButton(new Image("images/Home.png"));
 		home.setStyleName("buttons");
@@ -58,6 +63,8 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		bands.getElement().getStyle().setCursor(Cursor.POINTER); 
 		addFestival = new Button("Festival anlegen");
 		addBand = new Button("Band anlegen");
+		deleteFestival = new Button("Festival löschen");
+		deleteBand = new Button("Band löschen");
 
 		suchPanel.add(lblSuche);
 		suchPanel.add(bandSuche);
@@ -71,9 +78,17 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		if(user != null){
 			if(user.getRolle().equals("Admin")){
 				addBand.setStyleName("clickbuttons");
+				addBand.getElement().getStyle().setCursor(Cursor.POINTER);
 				addFestival.setStyleName("clickbuttons");
+				addFestival.getElement().getStyle().setCursor(Cursor.POINTER);
+				deleteFestival.setStyleName("clickbuttons");
+				deleteFestival.getElement().getStyle().setCursor(Cursor.POINTER);
+				deleteBand.setStyleName("clickbuttons");
+				deleteBand.getElement().getStyle().setCursor(Cursor.POINTER);
 				vPanel.add(addBand);
+				vPanel.add(deleteBand);
 				vPanel.add(addFestival);
+				vPanel.add(deleteFestival);
 			}
 		}
 	}
@@ -91,7 +106,13 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 	}
 	public HasClickHandlers getAddBandButton() {
 		  return addBand;
-	}	 
+	}
+	public HasClickHandlers getDeleteFestivalButton() {
+		  return deleteFestival;
+	}
+	public HasClickHandlers getDeleteBandButton() {
+		  return deleteBand;
+	}	
 	 
 	public HasClickHandlers getFestivalsButton() {
 		return festivals;

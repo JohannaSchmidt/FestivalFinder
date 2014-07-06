@@ -7,6 +7,7 @@ import com.de.client.presenter.MainPresenter;
 import com.de.shared.Band;
 import com.de.shared.Festival;
 import com.de.shared.User;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
@@ -15,25 +16,25 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLTable.Cell;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class MainTextView extends Composite  implements MainPresenter.Display{
 
 	private FlexTable festivalsTable;
-	FlowPanel vPanel;
+	ScrollPanel vPanel;
 	private Button delete;
 	private User current;
 		
 	public MainTextView(User current){
 		this.current = current;
-		vPanel = new FlowPanel();
+		vPanel = new ScrollPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
 			
 	    festivalsTable = new FlexTable();
 	    festivalsTable.setCellSpacing(0);
 	    festivalsTable.setCellPadding(0);
-	    festivalsTable.setBorderWidth(1);
 	    festivalsTable.setWidth("100%");
 	    festivalsTable.addStyleName("contacts-ListContents");
 	    festivalsTable.getColumnFormatter().setWidth(0, "15px");
@@ -41,6 +42,8 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	    delete = new Button("Bands aus Bandliste löschen");
 	    delete.setStyleName("clickbuttons");
 	    
+	    festivalsTable.getElement().getStyle().setCursor(Cursor.POINTER);
+
 	    vPanel.add(festivalsTable);
 
 			

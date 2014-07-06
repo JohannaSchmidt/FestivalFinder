@@ -2,6 +2,7 @@ package com.de.client.view;
 
 import com.de.client.presenter.LoggedInPresenter;
 import com.de.shared.User;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -37,6 +38,7 @@ public class LoggedInView extends Composite implements LoggedInPresenter.Display
 		
 		bandList = new Button("persönliche Bandliste");			
 		bandList.setStyleName("clickbuttonseinloggen");
+		bandList.getElement().getStyle().setCursor(Cursor.POINTER);
 		vPanel.add(bandList);
 		
 			

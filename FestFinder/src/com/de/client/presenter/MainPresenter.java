@@ -166,57 +166,8 @@ public class MainPresenter  implements Presenter {
 					  
 			  });
 			  } else if (token == "PFestival") {
-				  festivalList = new ArrayList<Festival>();
-				  userService.getBandList(current, new AsyncCallback<ArrayList<String>>(){
-
-					public void onFailure(Throwable caught) {
-						caught.printStackTrace();
-						
-					}
-
-					public void onSuccess(ArrayList<String> result) {
-						userbands = result;
-						for(String band : userbands){
-							rpcService.getAllFestivalsBands(band, new AsyncCallback<ArrayList<String>>(){
-
-								public void onFailure(Throwable caught) {
-									caught.printStackTrace();
-									
-								}
-
-								public void onSuccess(ArrayList<String> result) {
-									if(!result.isEmpty()){
-										for(String festival : result){
-											rpcService.getFestivalById(festival, new AsyncCallback<ArrayList<Festival>>(){
-										
-												public void onFailure(Throwable caught) {
-													caught.printStackTrace();
-												
-												}
-	
-												public void onSuccess(ArrayList<Festival> result) {
-													Festival festival = result.get(0);
-														festivalList.add(festival);
-														//festivalList = sortList(festivalList);
-														display.setFestivalData(festivalList);
-												}
-																							
-											});
-										}
-									} else {
-										display.setFestivalData(festivalList);
-									}
-								}
-								
-							});
-
-						}
-					} 				  
-				  });
-				  
-				  
-			 
-			  
+				  persBandList();
+				  		  
 			  }
 			  
 			  
@@ -224,6 +175,56 @@ public class MainPresenter  implements Presenter {
 		
 	}
 	  
+	  private void persBandList(){
+		  userService.getBandList(current, new AsyncCallback<ArrayList<String>>(){
+
+				public void onFailure(Throwable caught) {
+					caught.printStackTrace();
+					
+				}
+	
+				public void onSuccess(ArrayList<String> result) {
+					  getFestivalForBand(result);
+
+					  
+				} 				  
+		  });
+
+	  }
+	  
+	  
+	  private void getFestivalForBand(ArrayList<String> result){
+		  festivalList = new ArrayList<Festival>();
+		  userbands = result;
+			for(final String band : userbands){
+				rpcService.getFestivalByBandName(band, new AsyncCallback<ArrayList<Festival>>(){
+
+					public void onFailure(Throwable caught) {
+						caught.printStackTrace();
+						
+					}
+
+					public void onSuccess(ArrayList<Festival> result) {
+						if(result != null || !result.isEmpty()){
+							for(int i = 0; i < festivalList.size(); i ++){
+								if(festivalList.get(0).getName().equals(result.get(0).getName())){
+									festivalList.remove(i);
+									festivalList.add(0, result.get(0));
+									
+								}
+							}
+							festivalList.add(result.get(0));
+							display.setFestivalData(festivalList);
+
+						} else {
+							  display.setFestivalData(festivalList);
+						}
+					}
+					
+				});
+
+			}
+	  }
 
 	  private void deleteSelectedBands() {
 	List<Integer> selectedRows = display.getSelectedRows();
