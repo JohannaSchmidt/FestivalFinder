@@ -37,12 +37,12 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 		vPanel.setStyleName("seite");
 			
 	    festivalsTable = new FlexTable();
-	    festivalsTable.setCellSpacing(0);
+	    /*festivalsTable.setCellSpacing(0);
 	    festivalsTable.setCellPadding(0);
 	    festivalsTable.setWidth("100%");
 	    festivalsTable.addStyleName("contacts-ListContents");
-	    festivalsTable.getColumnFormatter().setWidth(0, "15px");
-	    festivalsTable.setStyleName("list");
+	    festivalsTable.getColumnFormatter().setWidth(0, "15px");*/
+	    festivalsTable.setStyleName("flexTable");
 	    delete = new Button("Bands aus Bandliste löschen");
 	    delete.setStyleName("clickbuttonseinloggen");
 	    
@@ -61,7 +61,7 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 		    if(data.isEmpty()){
 
 		    } else {
-			    for (int i = 0; i < data.size(); ++i) {
+			    for (int i = 0; i < data.size(); i++) {
 			        festivalsTable.setText(i, 0, data.get(i).getName());
 			    }
 		    }

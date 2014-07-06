@@ -33,13 +33,14 @@ public class MainSearchedView extends Composite implements MainSearchedPresenter
 			
 
 	    bandsTable = new FlexTable();
-	    bandsTable.setCellSpacing(0);
+	    /*bandsTable.setCellSpacing(0);
 	    bandsTable.setCellPadding(0);
 	    bandsTable.setWidth("100%");
 	    bandsTable.addStyleName("contacts-ListContents");
-	    bandsTable.getColumnFormatter().setWidth(0, "15px");
+	    bandsTable.getColumnFormatter().setWidth(0, "15px");*/
+	    bandsTable.setStyleName("flexTable");
+		
 	    bandsTable.getElement().getStyle().setCursor(Cursor.POINTER);
-
 	    
 		addBand = new Button("Band Hinzufuegen");
 		addBand.setStyleName("clickbuttonseinloggen");

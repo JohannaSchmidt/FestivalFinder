@@ -175,11 +175,10 @@ td.contacts-ListName {
 			}
 			.eingabeFeld { /*2*/
 				font-family: Calibri;
-				color: #d4d499;
+				color: #383838;
 				font-size: 16px;
 				margin-left: 11px;
 				text-align: center;
-				font-style:italic;
 				margin-bottom: 5px;
 			}
 			.suchentext{ /*1*/
@@ -225,7 +224,6 @@ td.contacts-ListName {
 				font-size: 30px;
 				font-family: Calibri;
 				color: #383838;
-				padding-left: -30px;
 			}
 			.hallo { /*LoggedInView*/
 				font-size: 30px;
@@ -261,8 +259,9 @@ td.contacts-ListName {
 			}
 			.seite{
 				background-color: #d4d499;
-				width: 580px;
-				height: 600px;
+				width: 570px;
+				min-height: 600px;
+				padding: 5px;
 				/*margin-right: 30px;
 				float: right;
 				overflow: auto;
@@ -273,5 +272,21 @@ td.contacts-ListName {
 			.px{
 				margin-left: 18px;
 			}
-
+			.flexTable td {
+				font-size: 20px;
+				font-family: Calibri;
+				color: #383838;
+				padding: 2px;
+			}
+			
+			.textLine{
+				width: 300px;
+				border-top: 1px solid #383838;
+				font-size: 20px;
+				font-family: Calibri;
+				color: #383838;
+				margin-top: 15px;
+				margin-bottom: 10px;
+				padding: 2px;
+			}
  

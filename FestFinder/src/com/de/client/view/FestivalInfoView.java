@@ -54,15 +54,23 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			name = new Label(((Festival) object).getName());
 			name.addStyleName("headlines");
 			ort = new Label("in "+ ((Festival) object).getOrt());
+			ort.setStyleName("text");
 			von = new Label("von " + ((Festival) object).getsDatum().toString());
+			von.setStyleName("text");
 			bis = new Label("bis " + ((Festival) object).geteDatum().toString());
+			bis.setStyleName("text");
 			web = new Anchor(((Festival) object).getWebsite());
+			web.setStyleName("text");
 			
 			addBandsToFestival = new Button("Diese Band dem Festival zuordnen");
+			addBandsToFestival.setStyleName("clickbuttonseinloggen");
 			addBandsToFestival.getElement().getStyle().setCursor(Cursor.POINTER);
 
-			bestBands = new Label("Bestätige Bands : ");
+			bestBands = new Label("Bestätige Bands: ");
+			bestBands.setStyleName("textLine");
+			
 			bands = new FlexTable();
+			bands.setStyleName("flexTable");
 			bands.getElement().getStyle().setCursor(Cursor.POINTER);
 			
 			vPanel.add(name);
@@ -79,8 +87,11 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			name = new Label(((Band) object).getName());
 			name.addStyleName("headlines");
 			ort = new Label(((Band) object).getGenre());
-			von = new Label("Gründungsjahr " + String.valueOf(((Band) object).getJahr()));
+			ort.setStyleName("text");
+			von = new Label("Gründungsjahr: " + String.valueOf(((Band) object).getJahr()));
+			von.setStyleName("text");
 			web = new Anchor(((Band) object).getWebsite());
+			web.setStyleName("text");
 		
 			bands = new FlexTable();
 			bands.getElement().getStyle().setCursor(Cursor.POINTER);
@@ -91,14 +102,14 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			vPanel.add(web);	
 			
 			add = new Button("Zur Bandliste hinzufügen");
-			add.setStyleName("clickbuttons");
+			add.setStyleName("clickbuttonseinloggen");
 			add.getElement().getStyle().setCursor(Cursor.POINTER);
 			vPanel.add(add);
 			
 		}
 		
 		zurueck = new Button("Zurück");
-		zurueck.setStyleName("clickbuttons");
+		zurueck.setStyleName("clickbuttonseinloggen");
 		zurueck.getElement().getStyle().setCursor(Cursor.POINTER);
 		vPanel.add(zurueck);
 
@@ -107,7 +118,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			
 	}
 	public void setOracle(ArrayList<Band> words){
-		addBandsToFestival.setStyleName("clickbuttons");
+		addBandsToFestival.setStyleName("clickbuttonseinloggen");
 		 MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();		    
 		    for (Band word : words) {
 		      oracle.add(word.getName());
