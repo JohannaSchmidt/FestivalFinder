@@ -1,2 +1,5 @@
 # Module festfinder
 # RPC service class, partial path of RPC policy file
+com.de.client.BandService, D2E638F913F3ADC635ED0BC1B4ED57FC.gwt.rpc
+com.de.client.FestivalService, C82A269B306C58DAB351917F51EB1984.gwt.rpc
+com.de.client.UserService, EC0EA110A8317DD0FA321BD4B979ECD5.gwt.rpc

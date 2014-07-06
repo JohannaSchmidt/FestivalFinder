@@ -164,95 +164,96 @@ public class MainPresenter  implements Presenter {
 					  
 					  
 			  });
-			  } else if (token == "PFestival") {
-				  persBandList();
-				  		  
-			  }
-			  
-			  
-		  
-		
-	}
-	  
-	  private void persBandList(){
-		  userService.getBandList(current, new AsyncCallback<ArrayList<String>>(){
+		  } else if (token == "PFestival") {
+			  festivalList = new ArrayList<Festival>();
+			  userService.getBandList(current, new AsyncCallback<ArrayList<String>>(){
 
 				public void onFailure(Throwable caught) {
 					caught.printStackTrace();
 					
 				}
-	
+
 				public void onSuccess(ArrayList<String> result) {
-					  getFestivalForBand(result);
+					userbands = result;
+					for(String band : userbands){
+						rpcService.getFestivalByBandName(band, new AsyncCallback<ArrayList<Festival>>(){
 
-					  
-				} 				  
-		  });
-
-	  }
-	  
-	  
-	  private void getFestivalForBand(ArrayList<String> result){
-		  festivalList = new ArrayList<Festival>();
-		  userbands = result;
-			for(final String band : userbands){
-				rpcService.getFestivalByBandName(band, new AsyncCallback<ArrayList<Festival>>(){
-
-					public void onFailure(Throwable caught) {
-						caught.printStackTrace();
-						
-					}
-
-					public void onSuccess(ArrayList<Festival> result) {
-						if(result != null){
-							for(int i = 0; i < festivalList.size(); i ++){
+							public void onFailure(Throwable caught) {
+								caught.printStackTrace();
 								
-							festivalList.add(result.get(0));
-							display.setFestivalData(festivalList);
 							}
 
-						} else {
-							  display.setFestivalData(festivalList);
-						}
+							public void onSuccess(ArrayList<Festival> result) {
+								if(!result.isEmpty()){
+									for(Festival festival : result){
+										rpcService.getFestivalById(festival.getfestId(), new AsyncCallback<ArrayList<Festival>>(){
+									
+											public void onFailure(Throwable caught) {
+												caught.printStackTrace();
+											
+											}
+
+											public void onSuccess(ArrayList<Festival> result) {
+												Festival festival = result.get(0);
+													festivalList.add(festival);
+													//festivalList = sortList(festivalList);
+													display.setFestivalData(festivalList);
+											}
+																						
+										});
+									}
+								} else {
+									display.setFestivalData(festivalList);
+								}
+							}
+							
+						});
+
 					}
-					
-					
-				});
-
-			}
-
-	  }
-
-	 private void deleteSelectedBands() {
-	List<Integer> selectedRows = display.getSelectedRows();
-	    
-	    for (int i = 0; i < selectedRows.size(); ++i) {
-	    	Band band = bandList.get(selectedRows.get(i));
-	    	bandList.remove(band);
-	    	userService.removeFromBandList(current, band, new AsyncCallback<Void>(){
-
-			public void onFailure(Throwable caught) {
-				caught.printStackTrace();
-				
-			}
-
-			public void onSuccess(Void result) {
-				display.setBandData(bandList);
-				
-			}
-	    	
-	    });
-	        
-	      }
-	    
-	  }
-
-	
-	public void go(final HasWidgets container) {
-		   bind();
-		   container.clear();
-		   container.add(display.asWidget());
-	}
+				} 				  
+			  });
+			  
+			  
+		 
+		  
+		  }
+		  
+		  
+	  
 	
 }
-	
+  
+
+  private void deleteSelectedBands() {
+List<Integer> selectedRows = display.getSelectedRows();
+    
+    for (int i = 0; i < selectedRows.size(); ++i) {
+    	Band band = bandList.get(selectedRows.get(i));
+    	bandList.remove(band);
+    	userService.removeFromBandList(current, band, new AsyncCallback<Void>(){
+
+		public void onFailure(Throwable caught) {
+			caught.printStackTrace();
+			
+		}
+
+		public void onSuccess(Void result) {
+			display.setBandData(bandList);
+			
+		}
+    	
+    });
+        
+      }
+    
+  }
+
+
+public void go(final HasWidgets container) {
+	   bind();
+	   container.clear();
+	   container.add(display.asWidget());
+}
+
+}
+

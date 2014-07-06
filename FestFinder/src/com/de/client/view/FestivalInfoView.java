@@ -61,7 +61,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			addBandsToFestival = new Button("Diese Band dem Festival zuordnen");
 			addBandsToFestival.getElement().getStyle().setCursor(Cursor.POINTER);
 
-			bestBands = new Label("Best�tige Bands : ");
+			bestBands = new Label("Bestätige Bands : ");
 			bands = new FlexTable();
 			bands.getElement().getStyle().setCursor(Cursor.POINTER);
 			
@@ -79,7 +79,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			name = new Label(((Band) object).getName());
 			name.addStyleName("headlines");
 			ort = new Label(((Band) object).getGenre());
-			von = new Label(String.valueOf(((Band) object).getJahr()));
+			von = new Label("Gründungsjahr " + String.valueOf(((Band) object).getJahr()));
 			web = new Anchor(((Band) object).getWebsite());
 		
 			bands = new FlexTable();

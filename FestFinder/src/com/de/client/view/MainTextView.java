@@ -24,13 +24,16 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 
 	private FlexTable festivalsTable;
 	FlowPanel vPanel;
+	ScrollPanel scroll;
 	private Button delete;
 	private User current;
 		
 	public MainTextView(User current){
 		this.current = current;
 		vPanel = new FlowPanel();
-		initWidget(vPanel);
+		scroll = new ScrollPanel();
+		initWidget(scroll);
+		scroll.setStyleName("seite");
 		vPanel.setStyleName("seite");
 			
 	    festivalsTable = new FlexTable();
@@ -46,7 +49,7 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	    festivalsTable.getElement().getStyle().setCursor(Cursor.POINTER);
 
 	    vPanel.add(festivalsTable);
-
+	    scroll.add(vPanel);
 			
 	}
 	

@@ -53,7 +53,13 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		suchen.setStyleName("suchenbutton");
 		suchen.getElement().getStyle().setCursor(Cursor.POINTER);
 
-		
+		addFestival = new PushButton(new Image("images/Festivalanlegen.png"));
+		addBand = new PushButton(new Image("images/Bandanlegen.png"));
+		deleteFestival = new PushButton(new Image("images/Festivalloeschen.png"));
+		deleteBand = new PushButton(new Image("images/Bandloeschen.png"));
+
+
+
 		home = new PushButton(new Image("images/Home.png"));
 		home.setStyleName("buttons");
 		home.getElement().getStyle().setCursor(Cursor.POINTER);
@@ -78,19 +84,15 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		
 		if(user != null){
 			if(user.getRolle().equals("Admin")){
-				addFestival = new PushButton(new Image("images/Festivalanlegen.png"));
 				addFestival.setStyleName("buttons");
 				addFestival.getElement().getStyle().setCursor(Cursor.POINTER);
 				
-				addBand = new PushButton(new Image("images/Bandanlegen.png"));
 				addBand.setStyleName("buttons");
 				addBand.getElement().getStyle().setCursor(Cursor.POINTER); 
 				
-				deleteFestival = new PushButton(new Image("images/Festivalloeschen.png"));
 				deleteFestival.setStyleName("buttons");
 				deleteFestival.getElement().getStyle().setCursor(Cursor.POINTER); 
 				
-				deleteBand = new PushButton(new Image("images/Bandloeschen.png"));
 				deleteBand.setStyleName("buttons");
 				deleteBand.getElement().getStyle().setCursor(Cursor.POINTER); 
 				
