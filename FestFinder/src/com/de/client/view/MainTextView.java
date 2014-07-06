@@ -41,7 +41,7 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	    festivalsTable.getColumnFormatter().setWidth(0, "15px");
 	    festivalsTable.setStyleName("list");
 	    delete = new Button("Bands aus Bandliste löschen");
-	    delete.setStyleName("clickbuttons");
+	    delete.setStyleName("clickbuttonseinloggen");
 	    
 	    festivalsTable.getElement().getStyle().setCursor(Cursor.POINTER);
 

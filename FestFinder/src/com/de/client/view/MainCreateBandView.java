@@ -60,28 +60,32 @@ public class MainCreateBandView extends Composite implements MainCreateBandPrese
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
 		
-		addBand = new Button("Band Hinzufuegen");
-		addBand.setStyleName("clickbuttons");
+		addBand = new Button("Band Hinzufügen");
+		addBand.setStyleName("clickbuttonseinloggen");
 		addBand.getElement().getStyle().setCursor(Cursor.POINTER);
-		deleteBand = new Button("Loeschen");
-		deleteBand.setStyleName("clickbuttons");
+		deleteBand = new Button("Löschen");
+		deleteBand.setStyleName("clickbuttonseinloggen");
 		deleteBand.getElement().getStyle().setCursor(Cursor.POINTER);
-		deleteFestival = new Button("Loeschen");
-		deleteFestival.setStyleName("clickbuttons");
+		deleteFestival = new Button("Löschen");
+		deleteFestival.setStyleName("clickbuttonseinloggen");
 		deleteFestival.getElement().getStyle().setCursor(Cursor.POINTER);
-		addFestival = new Button("Festival Hinzufuegen");
-		addFestival.setStyleName("clickbuttons");
+		addFestival = new Button("Festival Hinzufügen");
+		addFestival.setStyleName("clickbuttonseinloggen");
 		addFestival.getElement().getStyle().setCursor(Cursor.POINTER);
 		
 		if(token == "Band"){
 			
-		lblBandName = new Label("Bandname:");		
+		lblBandName = new Label("Bandname:");	
+		lblBandName.setStyleName("text");
 		bandName = new TextBox();
 		lblGnr = new Label("Genre:");
+		lblGnr.setStyleName("text");
 		genre = new TextBox();
 		lblGJahr = new Label("Gruendungsjahr:");
+		lblGJahr.setStyleName("text");
 		gJahr = new TextBox();
 		lblWebsite = new Label("Website:");
+		lblWebsite.setStyleName("text");
 		webSite = new TextBox();
 
 			
@@ -97,21 +101,28 @@ public class MainCreateBandView extends Composite implements MainCreateBandPrese
 	    
 		} else if(token == "Festival"){
 			lfestId = new Label("FestivalID:");		
+			lfestId.setStyleName("text");
 			festId = new TextBox();
 			lfName = new Label("Festivalname:");
+			lfName.setStyleName("text");
 			fName = new TextBox();
 			lsDatum = new Label("Startdatum: yyyy-mm-dd:");
+			lsDatum.setStyleName("text");
 			sDatum = new TextBox();
 			leDatum = new Label("Enddatum: yyyy-mm-dd:");
+			leDatum.setStyleName("text");
 			eDatum = new TextBox();
 			lort = new Label("Ort:");
+			lort.setStyleName("text");
 			ort = new TextBox();
 			lfWeb = new Label("Website:");
+			lfWeb.setStyleName("text");
 			fWeb = new TextBox();
 
 
 			addFestival = new Button("Festival Hinzufuegen");
-			addBand.setStyleName("clickbuttons");
+			addFestival.setStyleName("clickbuttonseinloggen");
+			addBand.setStyleName("clickbuttonseinloggen");
 				
 			vPanel.add(lfestId);
 		    vPanel.add(festId);

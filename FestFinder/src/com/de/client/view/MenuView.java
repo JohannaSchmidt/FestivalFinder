@@ -25,10 +25,10 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 	private PushButton festivals;
 	private PushButton bands;
 	private ListBox suche;
-	private Button addFestival;
-	private Button addBand;
-	private Button deleteFestival;
-	private Button deleteBand;
+	private PushButton addFestival;
+	private PushButton addBand;
+	private PushButton deleteFestival;
+	private PushButton deleteBand;
 
 		
 	public MenuView(User user){
@@ -39,33 +39,33 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		suchPanel.setStyleName("suchpanel");
 		
 		lblSuche = new Label("Suchen nach:");	
+		lblSuche.setStyleName("suchentext");
 		suche = new ListBox();
 		suche.addItem("Band");
 		suche.addItem("Festival");
 		suche.addItem("Genre");
-		suche.setStyleName("buttons");
+		suche.setStyleName("suchenfeld");
 		suche.getElement().getStyle().setCursor(Cursor.POINTER);
 		bandSuche = new TextBox();
 		bandSuche.setText("Suchbegriff eingeben");
+		bandSuche.setStyleName("eingabeFeld");
 		suchen = new Button("Suchen");
-		suchen.setStyleName("clickbuttons");
+		suchen.setStyleName("suchenbutton");
 		suchen.getElement().getStyle().setCursor(Cursor.POINTER);
 
 		
 		home = new PushButton(new Image("images/Home.png"));
 		home.setStyleName("buttons");
 		home.getElement().getStyle().setCursor(Cursor.POINTER);
+		
 		festivals = new PushButton(new Image("images/Festivals.png"));
 		festivals.setStyleName("buttons");
 		festivals.getElement().getStyle().setCursor(Cursor.POINTER); 
+		
 		bands = new PushButton(new Image("images/Bands.png"));
 		bands.setStyleName("buttons");
 		bands.getElement().getStyle().setCursor(Cursor.POINTER); 
-		addFestival = new Button("Festival anlegen");
-		addBand = new Button("Band anlegen");
-		deleteFestival = new Button("Festival löschen");
-		deleteBand = new Button("Band löschen");
-
+		
 		suchPanel.add(lblSuche);
 		suchPanel.add(bandSuche);
 		suchPanel.add(suche);
@@ -74,17 +74,26 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		vPanel.add(home);
 		vPanel.add(festivals);
 		vPanel.add(bands);
+
 		
 		if(user != null){
 			if(user.getRolle().equals("Admin")){
-				addBand.setStyleName("clickbuttons");
-				addBand.getElement().getStyle().setCursor(Cursor.POINTER);
-				addFestival.setStyleName("clickbuttons");
+				addFestival = new PushButton(new Image("images/Festivalanlegen.png"));
+				addFestival.setStyleName("buttons");
 				addFestival.getElement().getStyle().setCursor(Cursor.POINTER);
-				deleteFestival.setStyleName("clickbuttons");
-				deleteFestival.getElement().getStyle().setCursor(Cursor.POINTER);
-				deleteBand.setStyleName("clickbuttons");
-				deleteBand.getElement().getStyle().setCursor(Cursor.POINTER);
+				
+				addBand = new PushButton(new Image("images/Bandanlegen.png"));
+				addBand.setStyleName("buttons");
+				addBand.getElement().getStyle().setCursor(Cursor.POINTER); 
+				
+				deleteFestival = new PushButton(new Image("images/Festivalloeschen.png"));
+				deleteFestival.setStyleName("buttons");
+				deleteFestival.getElement().getStyle().setCursor(Cursor.POINTER); 
+				
+				deleteBand = new PushButton(new Image("images/Bandloeschen.png"));
+				deleteBand.setStyleName("buttons");
+				deleteBand.getElement().getStyle().setCursor(Cursor.POINTER); 
+				
 				vPanel.add(addBand);
 				vPanel.add(deleteBand);
 				vPanel.add(addFestival);

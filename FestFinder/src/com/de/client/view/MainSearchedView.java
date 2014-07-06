@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -21,12 +22,12 @@ import com.google.gwt.user.client.ui.HTMLTable.Cell;
 public class MainSearchedView extends Composite implements MainSearchedPresenter.Display {
 	private FlexTable bandsTable;
 	private Button addBand;
-	private VerticalPanel vPanel;
+	private FlowPanel vPanel;
 
 	
 	
 	public MainSearchedView(){
-		vPanel = new VerticalPanel();
+		vPanel = new FlowPanel();
 		initWidget(vPanel);
 		vPanel.setStyleName("seite");
 			
@@ -41,7 +42,7 @@ public class MainSearchedView extends Composite implements MainSearchedPresenter
 
 	    
 		addBand = new Button("Band Hinzufuegen");
-		addBand.setStyleName("clickbuttons");
+		addBand.setStyleName("clickbuttonseinloggen");
 		vPanel.add(addBand);
 		addBand.setVisible(false);
 
