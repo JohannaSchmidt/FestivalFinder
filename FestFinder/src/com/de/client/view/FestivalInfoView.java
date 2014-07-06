@@ -90,7 +90,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			vPanel.add(von);
 			vPanel.add(web);	
 			
-			add = new Button("Zur Bandliste hinzufuegen");
+			add = new Button("Zur Bandliste hinzufügen");
 			add.setStyleName("clickbuttons");
 			add.getElement().getStyle().setCursor(Cursor.POINTER);
 			vPanel.add(add);

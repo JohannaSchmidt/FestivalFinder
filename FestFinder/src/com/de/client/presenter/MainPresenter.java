@@ -204,28 +204,26 @@ public class MainPresenter  implements Presenter {
 					}
 
 					public void onSuccess(ArrayList<Festival> result) {
-						if(!result.isEmpty()){
+						if(result != null){
 							for(int i = 0; i < festivalList.size(); i ++){
-								if(festivalList.get(0).getName().equals(result.get(0).getName())){
-									festivalList.remove(i);
-									festivalList.add(0, result.get(0));
-									
-								}
-							}
+								
 							festivalList.add(result.get(0));
 							display.setFestivalData(festivalList);
+							}
 
 						} else {
 							  display.setFestivalData(festivalList);
 						}
 					}
 					
+					
 				});
 
 			}
+
 	  }
 
-	  private void deleteSelectedBands() {
+	 private void deleteSelectedBands() {
 	List<Integer> selectedRows = display.getSelectedRows();
 	    
 	    for (int i = 0; i < selectedRows.size(); ++i) {

@@ -45,7 +45,7 @@ public class FestivalInfoPresenter implements Presenter {
   private Festival current;
   private User user;
   
-  public FestivalInfoPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view) {
+  public FestivalInfoPresenter(BandServiceAsync rpcService, HandlerManager eventBus, Display view, User user) {
     this.rpcService = rpcService;
     this.eventBus = eventBus;
     this.display = view;
@@ -128,7 +128,7 @@ public class FestivalInfoPresenter implements Presenter {
     if(current != null){
 		getAllFestivalsBands();
     }
-    if(user != null){
+    if(user != null && user.getRolle().equals("Admin")){
     	rpcService.getAllBands(new AsyncCallback<ArrayList<Band>>(){
 
 			public void onFailure(Throwable caught) {

@@ -63,8 +63,8 @@ public class MenuView extends Composite implements MenuPresenter.Display{
 		bands.getElement().getStyle().setCursor(Cursor.POINTER); 
 		addFestival = new Button("Festival anlegen");
 		addBand = new Button("Band anlegen");
-		deleteFestival = new Button("Festival löschen");
-		deleteBand = new Button("Band löschen");
+		deleteFestival = new Button("Festival lÃ¶schen");
+		deleteBand = new Button("Band lÃ¶schen");
 
 		suchPanel.add(lblSuche);
 		suchPanel.add(bandSuche);

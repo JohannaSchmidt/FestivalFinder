@@ -1,6 +1,7 @@
 package com.de.client.view;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import com.de.client.presenter.MainPresenter;
@@ -51,6 +52,9 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	
 	 public void setFestivalData(ArrayList<Festival> data) {
 		   festivalsTable.removeAllRows();
+		    HashSet<Festival> hashSet = new HashSet<Festival>(data);
+		    data.clear();
+		    data.addAll(hashSet);
 		    if(data.isEmpty()){
 
 		    } else {
@@ -62,7 +66,9 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	 
 		public void setBandData(ArrayList<Band> data) {
 			   festivalsTable.removeAllRows();
-
+			    HashSet<Band> hashSet = new HashSet<Band>(data);
+			    data.clear();
+			    data.addAll(hashSet);
 				    for (int i = 0; i < data.size(); i++) {
 				        if(current != null){
 					        festivalsTable.setText(i, 1, data.get(i).getName());
