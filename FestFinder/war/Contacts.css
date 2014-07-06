@@ -220,9 +220,11 @@ td.contacts-ListName {
 			.text {
 				background-color: #d4d499;
 				padding: 10px;
+				padding-left: 20px;
 				font-size: 20px;
 				font-family: Calibri;
 				color: #383838;
+				
 			}
 			.seite{
 				background-color: #d4d499;
@@ -236,6 +238,7 @@ td.contacts-ListName {
 				font-family: Webdings;*/
 			}
 			.px{
-			margin-left: 18px;
+				margin-left: 18px;
 			}
+
  

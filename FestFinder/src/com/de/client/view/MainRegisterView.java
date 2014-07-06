@@ -38,7 +38,7 @@ public class MainRegisterView extends Composite  implements MainRegisterPresente
 		pwdLabel.setStyleName("text");
 		
 		pwd2 = new PasswordTextBox();
-		pwdLabel2 = new Label ("Passwort erneut eingeben");
+		pwdLabel2 = new Label ("Passwort wiederholen:");
 		pwdLabel2.setStyleName("text");
 
 		reg = new Button("Registrieren");
