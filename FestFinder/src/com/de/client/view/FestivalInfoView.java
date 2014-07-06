@@ -91,7 +91,7 @@ public class FestivalInfoView extends Composite  implements FestivalInfoPresente
 			
 		}
 		
-		zurueck = new Button("Zurück");
+		zurueck = new Button("ZurÃ¼ck");
 		zurueck.setStyleName("clickbuttons");
 		vPanel.add(zurueck);
 

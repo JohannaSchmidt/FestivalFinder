@@ -38,7 +38,7 @@ public class MainTextView extends Composite  implements MainPresenter.Display{
 	    festivalsTable.addStyleName("contacts-ListContents");
 	    festivalsTable.getColumnFormatter().setWidth(0, "15px");
 	    festivalsTable.setStyleName("list");
-	    delete = new Button("Bands aus Bandliste loeschen");
+	    delete = new Button("Bands aus Bandliste löschen");
 	    delete.setStyleName("clickbuttons");
 	    
 	    vPanel.add(festivalsTable);
